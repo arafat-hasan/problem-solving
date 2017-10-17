@@ -1,13 +1,13 @@
 # ACM 
 ACM type problems solved by me
 
-
+<br><br>
 
 **Arafat Hasan Jenin** *<arafathasanjenin[at]gmail[dot]com>*  
 Mawlana Bhashani Science and Technology University  
 Santosh, Tangail
 
-
+<br><br>
 
 #### My IDs in commpetitive programming platforms
 Codeforce: [arafat_hasan](http://codeforces.com/profile/arafat_hasan/)  

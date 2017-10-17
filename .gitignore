@@ -29,7 +29,7 @@
 *.app
 
 # Working directories
-/media/Softwares/Programming/ACM/UVa/NC/
-/media/Softwares/Programming/ACM/UVa/Not\ enim/
-/media/Softwares/Programming/ACM/UVa/Problems/
-/media/Softwares/Programming/ACM/UVa/yc/
+/UVa/NC/
+/UVa/Not\ enim/
+/UVa/Problems/
+/UVa/yc/

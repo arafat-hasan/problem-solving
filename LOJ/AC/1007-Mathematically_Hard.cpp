@@ -1,0 +1,122 @@
+/*
+ * FILE: 1007-Mathematically_Hard.cpp
+ *
+ * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
+ *
+ * LINK:
+ *
+ * DATE CREATED: 02-11-17 16:20:04 (+06)
+ * LAST MODIFIED: 02-11-17 16:57:35 (+06)
+ *
+ * DESCRIPTION:
+ *
+ * DEVELOPMENT HISTORY:
+ * Date         Version     Description
+ * --------------------------------------------------------------------
+ * 02-11-17     1.0         {{File Created}}
+ *
+ *
+ *                 ██╗███████╗███╗   ██╗██╗███╗   ██╗
+ *                 ██║██╔════╝████╗  ██║██║████╗  ██║
+ *                 ██║█████╗  ██╔██╗ ██║██║██╔██╗ ██║
+ *            ██   ██║██╔══╝  ██║╚██╗██║██║██║╚██╗██║
+ *            ╚█████╔╝███████╗██║ ╚████║██║██║ ╚████║
+ *             ╚════╝ ╚══════╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝
+ */
+
+///////////////////////////////////////////////////////////////////////
+
+#include <iostream>
+#include <climits>
+#include <cmath>
+#include <cstring>
+#include <cctype>
+#include <cstdio>
+#include <cstdlib>
+#include <iomanip>
+#include <utility>
+#include <sstream>
+#include <algorithm>
+#include <stack>
+#include <set>
+#include <list>
+#include <map>
+//#include <unordered_map> // -std=c++11 is not set in LOJ
+#include <queue>
+#include <deque>
+#include <vector>
+#include <stdint.h> //uint32_t
+#include <functional>
+#include <bitset>
+
+using namespace std;
+
+typedef long long           ll;
+typedef double              lf;
+typedef unsigned long long  ull;
+typedef pair<int, int>      pii;
+typedef vector<pii>         vpii;
+typedef vector<int>         vi;
+
+#define __FastIO        ios_base::sync_with_stdio(false); cin.tie(0)
+
+#define forr(i, a, b)   for (__typeof (a) i=a; i<=b; i++)
+#define rof(i, b, a)    for (__typeof (a) i=b; i>=a; i--)
+#define rep(i, n)       for (__typeof (n) i=0; i<n; i++)
+#define forit(i, s)     for (__typeof ((s).end ()) i = (s).begin (); i != (s).end (); ++i)
+#define all(ar)         ar.begin(), ar.end()
+#define fill(ar, val)   memset(ar, val, sizeof(ar))
+#define clr(a)          memset(a, 0, sizeof(a))
+
+#define nl              cout << '\n';
+#define sp              cout << ' ';
+#define ckk             cout << "##########\n"
+#define pb              push_back
+#define debug1(x)       cerr << #x << ": " << x << endl
+#define debug2(x, y)    cerr << #x << ": " << x << '\t' << #y << ": " << y << endl
+#define debug3(x, y, z) cerr << #x << ": " << x << '\t' << #y << ": " << y << '\t' << #z << ": " << z << endl
+
+#define PI              acos(-1.0)
+#define INF             0x7fffffff
+#define MOD             1000000007
+#define EPS             1e-7
+#define MAX             5000006 // 10^6 * 5 + 6
+
+////////////////////////// START HERE //////////////////////////
+
+ull dp[MAX + 4];
+
+void computeTotient(ull n) {
+
+    for (ull i = 1; i <= n; i++) {
+        dp[i] = i;
+    }
+
+    for (ull p = 2; p <= n; p++) {
+        if (dp[p] ==  p) {
+            for (ull i = p; i <= n; i += p) {
+                //dp[i] = (dp[i] / p) * (p - 1);
+                dp[i] = dp[i] / p;
+                dp[i] *= (p - 1);
+            }
+        }
+    }
+}
+
+
+int main() {
+    __FastIO;
+    ull tc, a, b, cs = 0;
+    computeTotient(MAX);
+    for (ull i = 2; i < MAX; i++) {
+        dp[i] = dp[i - 1] + dp[i] * dp[i];
+    }
+
+    cin >> tc;
+    while (tc--) {
+        cin >> a >> b;
+        cout << "Case " << ++cs << ": " << dp[b] - dp[a - 1] << '\n';
+    }
+    return 0;
+}
+

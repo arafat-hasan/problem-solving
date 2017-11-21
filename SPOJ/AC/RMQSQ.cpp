@@ -1,5 +1,5 @@
 /*
- * FILE: Range_Minimum_Query-RMQSQ.cpp
+ * FILE: RMQSQ.cpp
  *
  * @author: Md. Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *

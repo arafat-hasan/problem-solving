@@ -1,5 +1,5 @@
 /*
- * FILE: LPS - Longest Palindromic Substring.cpp
+ * FILE: LPS.cpp
  *
  * @author: Md. Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *

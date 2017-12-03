@@ -216,8 +216,8 @@ class BFS_DIJKSTRA {
 
 };
 
-////////////////////////// MST //////////////////////////
-class MST {
+////////////////////////// UNION FIND //////////////////////////
+class UNION_FIND {
     int parent[26];
 
     void Make_Set(int x) {
@@ -238,7 +238,7 @@ class MST {
     //     Union(x, y);
     // }
 };
-////////////////////////// MST END //////////////////////////
+////////////////////////// UNION FIND END //////////////////////////
 
 
 ////////////////////////// DFS //////////////////////////
@@ -584,6 +584,17 @@ int lcm2(int a, int b) {
         temp++;
     }
     return temp;
+}
+
+template <class T>
+int numDigits(T number) {
+    int digits = 0;
+    if (number < 0) digits = 1;
+    while (number) {
+        number /= 10;
+        digits++;
+    }
+    return digits;
 }
 
 
@@ -1278,10 +1289,14 @@ class Subsecuence {
         return length;
     }
 
-////////////////////////// LIS END //////////////////////////
+//////////////////////////////////// LIS END /////////////////////////////////
+
 };
 
-////////////////////////// KADANE'S ALGO IN 1D //////////////////////////
+////////////////////////// IS SUBSECUENCE //////////////////////////
+
+
+//////////////////////////// KADANE'S ALGO IN 1D /////////////////////////////
 
 // Implementation of Kadane's algorithm for 1D array. The function
 // returns the maximum sum and stores starting and ending indexes of the
@@ -1330,7 +1345,7 @@ int kadane(int *arr, int *start, int *finish, int n) {
 ////////////////////////// KADANE'S ALGO IN 1D END //////////////////////////
 
 
-////////////////////////// KADANE'S ALGO IN 2D //////////////////////////
+//////////////////////////// KADANE'S ALGO IN 2D ////////////////////////////
 
 // The main function that finds maximum sum rectangle in M[][]
 // use Kadane's algo in 1D, descripted avobe
@@ -1422,10 +1437,10 @@ string to_roman(int value) {
     return result;
 }
 
-//////////////////////// INTEGER TO ROMAN NUMERAL END /////////////////////////
+//////////////////////// INTEGER TO ROMAN NUMERAL END ////////////////////////
 
 
-////////////////////////// SLIDING WINDOW //////////////////////////
+/////////////////////////////// SLIDING WINDOW ///////////////////////////////
 // Returns maximum sum in a subarray of size k.
 int maxSum(int arr[], int n, int k) {
     // k must be greater
@@ -1451,7 +1466,7 @@ int maxSum(int arr[], int n, int k) {
 }
 ////////////////////////// SLIDING WINDOW END //////////////////////////
 
-/////////////////// Maximum of all subarrays of size k ///////////////////
+/////////////////// MAXIMUM OF ALL SUBARRAYS OF SIZE K ///////////////////
 // A Dequeue (Double ended queue) based method for printing maixmum element of
 // all subarrays of size k
 vector<int> maxofallKsubarray(int arr[], int n, int k) {
@@ -1499,9 +1514,9 @@ vector<int> maxofallKsubarray(int arr[], int n, int k) {
     return v;
 }
 
-/////////////////// Maximum of all subarrays of size k ///////////////////
+/////////////////// MAXIMUM OF ALL SUBARRAYS OF SIZE K ///////////////////
 
-/////////////////// Minimum of all subarrays of size k ///////////////////
+/////////////////// MINIMUM OF ALL SUBARRAYS OF SIZE K ///////////////////
 // A Dequeue (Double ended queue) based method for printing maixmum element of
 // all subarrays of size k
 vector<int> minofallKsubarray(int arr[], int n, int k) {
@@ -1548,7 +1563,7 @@ vector<int> minofallKsubarray(int arr[], int n, int k) {
     v.push_back(arr[Qi.front()]);
     return v;
 }
-/////////////////// Minimum of all subarrays of size k ///////////////////
+/////////////////// MINIMUM OF ALL SUBARRAYS OF SIZE K ///////////////////
 
 //////////////////////////////// FACTORIAL ///////////////////////////////
 long long factorial(int n) {
@@ -1694,6 +1709,349 @@ void KMPSearch(char *pat, char *txt) {
 
 /////////////////////////// STRING MATHCING ///////////////////////////
 
+
+/////////////////////////// N QUEEN ///////////////////////////
+
+class N_Queen {
+    int mat[1000][1000];
+    int n_queen_board_size = 0;
+    bool is_poss;
+
+    bool isSafe(int row, int col) {
+        int i, j;
+
+        for (i = 0; i < col; i++)
+            if (mat[row][i])
+                return false;
+
+        for (i = row, j = col; i >= 0 && j >= 0; i--, j--)
+            if (mat[i][j])
+                return false;
+
+        for (i = row, j = col; j >= 0 && i < n_queen_board_size; i++, j--)
+            if (mat[i][j])
+                return false;
+
+        return true;
+    }
+
+    bool n_queen(int col) {
+        if (col >= n_queen_board_size)
+            return true;
+
+        for (int i = 0; i < n_queen_board_size; i++) {
+            if ( isSafe(i, col) ) {
+                mat[i][col] = 1;
+
+                if ( n_queen(col + 1) )
+                    return true;
+
+                mat[i][col] = 0; // BACKTRACK
+            }
+        }
+
+        return false;
+    }
+
+public:
+    N_Queen();
+    N_Queen(int n) {
+        n_queen_board_size = n;
+        memset(mat, 0, sizeof(mat));
+        is_poss = n_queen(0);
+    }
+
+    bool solve(int n) {
+        n_queen_board_size = n;
+        memset(mat, 0, sizeof(mat));
+        is_poss = n_queen(0);
+        return is_poss;
+    }
+
+    bool print(void) {
+        if (!has_sol()) {
+            cout << "No solution found\n";
+            return false;
+        }
+        for (int i = 0; i < n_queen_board_size; i++) {
+            for (int j = 0; j < n_queen_board_size; j++) {
+                cout << mat[i][j] << ' ';
+            }
+            cout << endl;
+        }
+        return true;
+    }
+    bool has_sol(void) {
+        return is_poss;
+    }
+
+};
+
+///////////////////////////////// N QUEEN ////////////////////////////////////
+
+///////////////////////////// TRAVELLING SALESMAN ///////////////////////////
+class TSP {
+public:
+    int dist[15][15];
+    int dp[(1 << 12) + 5][12];
+
+    int tsp(int n) {
+
+        int p, ans;
+        // Run Floyd–Warshall to remove Triangle-Inequality
+        // It is not necessary for TSP
+        //for (k = 0; k < n; k++) {
+        //    for (i = 0; i < n; i++) {
+        //        for (j = 0; j < n; j++) {
+        //            if (i != j && i != k && j != k)
+        //                dist[i][j] = min(dist[i][k] + dist[k][j], dist[i][j]);
+        //        }
+        //    }
+        //}
+
+        memset(dp, -1, sizeof(dp));
+        dp[1][0] = 0;
+
+        for (int i = 1; i < (1 << n); i++) {
+
+            for (int j = 0; j < n; j++) {
+
+                if (dp[i][j] == -1) continue;
+                for (int k = 1; k < n; k++) {
+
+                    if ((i & (1 << k)) != 0) continue; // check either kth bit of i is 0 : 1
+                    p = (i | (1 << k)); // ON kth bit of i and store it p
+                    if (dp[p][k] == -1) dp[p][k] = dp[i][j] + dist[j][k];
+                    dp[p][k] = min(dp[p][k], dp[i][j] + dist[j][k]);
+                }
+            }
+        }
+
+        ans = INF;
+        for (int i = 1; i < n; i++) {
+
+            if (dp[(1 << n) - 1][i] > 0) ans = min(ans, dp[(1 << n) - 1][i] + dist[i][0]);
+        }
+        return ans;
+    }
+};
+///////////////////////////// TRAVELLING SALESMAN ///////////////////////////
+
+
+////////////////////////// CONVEX HULL GRAHAM SCAN /////////////////////////
+struct Point {
+    int x, y;
+};
+
+vector<Point> points;
+
+void get_points(int x, int y) {
+    points.push_back({x, y});
+}
+
+Point p0;
+
+Point nextToTop(stack<Point> &S) {
+    Point p = S.top();
+    S.pop();
+    Point res = S.top();
+    S.push(p);
+    return res;
+}
+
+int distSq(Point p1, Point p2) {
+    return (p1.x - p2.x) * (p1.x - p2.x) +
+           (p1.y - p2.y) * (p1.y - p2.y);
+}
+
+int orientation(Point p, Point q, Point r) {
+    int val = (q.y - p.y) * (r.x - q.x) -
+              (q.x - p.x) * (r.y - q.y);
+
+    if (val == 0) return 0;
+    return (val > 0) ? 1 : 2;
+}
+
+int compare(const void *vp1, const void *vp2) {
+    Point *p1 = (Point *)vp1;
+    Point *p2 = (Point *)vp2;
+
+    int o = orientation(p0, *p1, *p2);
+    if (o == 0)
+        return (distSq(p0, *p2) >= distSq(p0, *p1)) ? -1 : 1;
+
+    return (o == 2) ? -1 : 1;
+}
+
+void convexHull() {
+    int n = (int) points.size();
+    int ymin = points[0].y, min = 0;
+    for (int i = 1; i < n; i++) {
+        int y = points[i].y;
+
+        if ((y < ymin) || (ymin == y &&
+                           points[i].x < points[min].x))
+            ymin = points[i].y, min = i;
+    }
+
+    swap(points[0], points[min]);
+
+    p0 = points[0];
+    qsort(&points[1], n - 1, sizeof(Point), compare);
+
+    int m = 1;
+    for (int i = 1; i < n; i++) {
+        while (i < n - 1 && orientation(p0, points[i],
+                                        points[i + 1]) == 0)
+            i++;
+
+        points[m] = points[i];
+        m++;
+    }
+
+    if (m < 3) return;
+
+    stack<Point> S;
+    S.push(points[0]);
+    S.push(points[1]);
+    S.push(points[2]);
+
+    for (int i = 3; i < m; i++) {
+        while (orientation(nextToTop(S), S.top(), points[i]) != 2)
+            S.pop();
+        S.push(points[i]);
+    }
+
+    while (!S.empty()) {
+        Point p = S.top();
+        cout << "(" << p.x << ", " << p.y << ")" << endl;
+        S.pop();
+    }
+}
+
+////////////////////////// CONVEX HULL GRAHAM SCAN /////////////////////////
+
+
+/////////////////////////////// MAGIC SQUARE //////////////////////////////
+
+class Magic_Square {
+public:
+    int mat[1000][1000];
+
+    void print(int n) {
+        int rowsum, corner = 0;
+        vi v(n);
+        rep(i, n) corner += mat[i][i];
+        cout << "\nCalculated magic number is: " << (n * n * n + n) / 2 << endl;
+        cout << "Magic square of order " << n << ":\n\n";
+        rep(i, n) {
+            rowsum = 0;
+            rep(j, n) {
+                cout << mat[i][j] << '\t';
+                rowsum += mat[i][j];
+                v[i] += mat[i][j];
+            }
+            cout << "|" << rowsum << endl;
+        }
+
+        rep(i, n) cout << "________";
+        cout << "|_____" << endl;
+        rep(i, n) cout << v[i] << '\t';
+        cout << "|" << corner;
+        cout << endl << endl;
+    }
+
+    void magic_single(int n) {
+        cout << "I have found no pattern for order " << n << " :-(\n";
+    }
+
+    void magic_double(int n) {
+        int mn = n / 4;
+        for (int i = 0, revY = n - 1; i < n; i++, revY--) {
+            for (int j = 0, revX = n - 1; j < n; j++, revX--) {
+                if (j < mn or j >= (n - mn)) {
+                    if (i < mn or i >= (n - mn)) mat[i][j] = (i * n) +  (j + 1);
+                    else mat[i][j] = (revY * n) + (revX + 1);
+                } else {
+                    if (i >= mn and i < (n - mn)) mat[i][j] = (i * n) +  (j + 1);
+                    else mat[i][j] = (revY * n) + (revX + 1);
+                }
+                //debug3(i, j, mat[i][j]);
+            }
+        }
+    }
+
+    void magic_odd(int n) {
+        int blocks = (n * n), preX = n / 2, preY = 0;
+        for (int i = 1, x = n / 2, y = 0; i <= blocks; i++, x++, y--) {
+            if (x == n and y == -1) x--, y += 2;
+            else if (x == n) x = 0;
+            else if (y == -1 ) y = n - 1;
+            if (mat[y][x]) x = preX, y = preY + 1;
+            mat[y][x] = i;
+            preX = x, preY = y;
+            //debug3(x, y, mat[y][x]);
+        }
+
+    }
+};
+/////////////////////////////// MAGIC SQUARE //////////////////////////////
+
+
+/////////////////////////////// PALINDROMES //////////////////////////////
+
+class Palindrome {
+
+public:
+    int isPalindrome(int n) {
+        // Find reverse of n
+        int rev = 0;
+        for (int i = n; i > 0; i /= 10)
+            rev = rev * 10 + i % 10;
+
+        // If n and rev are same, then n is palindrome
+        return (n == rev);
+    }
+
+    // A utility for creating palindrome
+    int createPalindrome(int input, int b, bool isOdd) {
+        int n = input;
+        int palin = input;
+
+        // checks if number of digits is odd or even
+        // if odd then neglect the last digit of input in
+        // finding reverse as in case of odd number of
+        // digits middle element occur once
+        if (isOdd)
+            n /= b;
+
+        // Creates palindrome by just appending reverse
+        // of number to itself
+        while (n > 0) {
+            palin = palin * b + (n % b);
+            n /= b;
+        }
+        return palin;
+    }
+
+// Fruition to print decimal palindromic number
+    void generatePaldindromes(int n) {
+        int number;
+
+        // Run two times for odd and even length palindromes
+        for (int j = 0; j < 2; j++) {
+            // Creates palindrome numbers with first half as i.
+            // Value of j decided whether we need an odd length
+            // of even length palindrome.
+            int i = 1;
+            while ((number = createPalindrome(i, 10, j % 2)) < n) {
+                cout << number << " ";
+                i++;
+            }
+        }
+    }
+};
+/////////////////////////////// PALINDROMES //////////////////////////////
 
 int main() {
     __FastIO;

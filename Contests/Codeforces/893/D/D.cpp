@@ -1,11 +1,11 @@
 /*
- * FILE: 140A.cpp
+ * FILE: D.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 03-11-17 20:27:25 (+06)
+ * DATE CREATED: 23-11-17 23:00:19 (+06)
  * LAST MODIFIED: __last_modified
  *
  * DESCRIPTION:
@@ -13,15 +13,14 @@
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 03-11-17     1.0         {{File Created}}
+ * 23-11-17     1.0         {{File Created}}
  *
  *
- *                 ██╗███████╗███╗   ██╗██╗███╗   ██╗
- *                 ██║██╔════╝████╗  ██║██║████╗  ██║
- *                 ██║█████╗  ██╔██╗ ██║██║██╔██╗ ██║
- *            ██   ██║██╔══╝  ██║╚██╗██║██║██║╚██╗██║
- *            ╚█████╔╝███████╗██║ ╚████║██║██║ ╚████║
- *             ╚════╝ ╚══════╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝
+ *                 _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
+ *                _/  _/        _/_/    _/    _/    _/_/    _/
+ *               _/  _/_/_/    _/  _/  _/    _/    _/  _/  _/
+ *        _/    _/  _/        _/    _/_/    _/    _/    _/_/
+ *         _/_/    _/_/_/_/  _/      _/  _/_/_/  _/      _/
  */
 
 ///////////////////////////////////////////////////////////////////////
@@ -87,11 +86,17 @@ typedef vector<int>         vi;
 
 int main() {
     __FastIO;
-    double n, R, r;
-    cin >> n >> R >> r;
-    double theta = asin(r / R);
-    debug2(theta, (PI / theta));
-    //cout << (2 * PI) / theta * 2 << endl;
+    int n, m, arr[100005];
+    cin >> n >> m;
+    ll sum = 0;
+    rep(i, n) cin >> arr[i], sum += arr[i];
+    debug1(sum);
+    if (sum < 0) return !(cout << "-1\n");
+    sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += arr[i];
+        if (sum >= 0) return !(cout << i-1 << endl);
+    }
     return 0;
 }
 

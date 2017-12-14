@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: 546B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 11-12-17 20:09:04 (+06)
+ * LAST MODIFIED: 11-12-17 20:41:16 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 11-12-17     1.0         File Created, Accepted
  *
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
@@ -88,6 +88,22 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
+    int n;
+    cin >> n;
+    vi v (n);
+    rep (i, n) cin >> v[i];
+    int need = 0;
+    sort (all (v) );
+
+    for (int i = 1; i < n; i++) {
+        if (v[i] <= v[i - 1]) {
+            need += v[i - 1] - v[i] + 1;
+            v[i] += v[i - 1] - v[i] + 1 ;
+        }
+    }
+
+    cout << need << endl;
     return 0;
 }
+
 

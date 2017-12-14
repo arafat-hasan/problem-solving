@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: C.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 12-12-17 21:25:27 (+06)
+ * LAST MODIFIED: 12-12-17 22:05:24 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 12-12-17     1.0         {{File Created}}
  *
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
@@ -85,9 +85,35 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
+int mark[5002];
 
 int main() {
     __FastIO;
+    int n;
+    cin >> n;
+    vi v (n);
+    rep (i, n) {
+        cin >> v[i];
+    }
+    sort (all (v) );
+    int cnt = 0;
+
+    for (int j = 0; j < n; j++) {
+        if (mark[j] == 1) continue;
+
+        cnt++;
+        int last = -1;
+
+        for (int i = j; i < n; i++) {
+            if (last < v[i] and mark[i] != 1) {
+                last = v[i];
+                mark[i] = 1;
+            }
+        }
+    }
+
+    cout << cnt << endl;
     return 0;
 }
+
 

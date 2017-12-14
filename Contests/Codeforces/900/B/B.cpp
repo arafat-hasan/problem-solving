@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 11-12-17 22:15:31 (+06)
+ * LAST MODIFIED: 11-12-17 23:34:00 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 11-12-17     1.0         {{File Created}}
  *
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
@@ -81,13 +81,50 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             10000007 //10e7
+#define MAX             10000007 //10e5
 
 ////////////////////////// START HERE //////////////////////////
 
 
 int main() {
     __FastIO;
+    int a, b, tmp, c;
+    cin >> a >> b >> c;
+    int curr = a;
+
+    for (int i = 0; i < MAX; i++) {
+        if (curr  == 0) {
+            if (c == 0) return ! (cout << i + 1 << endl);
+
+            break;
+        }
+
+        if (curr * 10 < b) {
+            while (curr < b) {
+                curr *= 10;
+                //cout << '0';
+
+                if (c == 0)
+                    return ! (cout << i + 1 << endl);
+
+                i++;
+            }
+
+            i--;
+
+        } else curr *= 10;
+
+        tmp = (curr / b);
+        //cout << tmp;
+
+        if (tmp == c)
+            return ! (cout << i + 1 << endl);
+
+        curr = curr - tmp * b;
+    }
+
+    cout << "-1\n";
     return 0;
 }
+
 

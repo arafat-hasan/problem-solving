@@ -6,7 +6,7 @@
  * LINK:
  *
  * DATE CREATED: 02-12-17 21:29:45 (+06)
- * LAST MODIFIED: 03-12-17 01:54:16 (+06)
+ * LAST MODIFIED: 08-12-17 16:56:02 (+06)
  *
  * DESCRIPTION:
  *
@@ -83,58 +83,32 @@ typedef vector<int>         vi;
 
 ////////////////////////// START HERE //////////////////////////
 
-string str("What are you doing at the end of the world? Are you busy? Will you save us?");
-string f = "What are you doing while sending ";
-string l = "? Are you busy? Will you send ";
-int FH = (int) f.size();
-int LH = (int) l.size();
+string base ("What are you doing at the end of the world? Are you busy? Will you save us?");
+string firstS = "What are you doing while sending ";
+string lastS = "? Are you busy? Will you send ";
 
-ll presize(ll n) {
-    //debug2("## ", n);
-    if (n < 0) return 0;
-    if (n == 0) return (ll) str.size();
-    return presize(n - 1) * 2 + (ll) f.size() + (ll)l.size();
-}
+int fsize = (int) firstS.size();
+int lsize = (int) lastS.size();
 
-char fun(ll n, ll k) {
+char fun (ll n, ll k) {
+    if (n == 0) return base[k];
 
-    ll prvsz = presize(n - 1);
-    //debug3(n, k, prvsz);
-    if (n == 0) return str[k];
-
-    if (k < FH) {
-        return f[k];
-    } else if (k == FH) {
-        return '\"';
-    } else if (k > FH and k < prvsz + FH + 1) {
-        return fun(n - 1, k - FH - 1 );
-    } else if (k == prvsz + FH + 1) {
-        return '\"';
-    } else if (k > prvsz + FH + 1 and k < FH + prvsz + LH + 2) {
-        return l[k - FH - prvsz - 2];
-    } else if (k == FH + prvsz + LH + 2) {
-        return '\"';
-    } else if (k > FH + prvsz + LH  + 2 and k < FH + prvsz + LH + prvsz + 3) {
-        return fun(n - 1, k - (FH + prvsz + LH + 3));
-    } else if (k == FH + prvsz + LH + prvsz + 3) {
-        return '\"';
-    } else {
-        return '.';
+    if (k < fsize)
+        return firstS[k];
+    else if (k
+             else return '.';
     }
-}
 
 int main() {
-    //__FastIO;
-
+    __FastIO;
     ll q, n, k;
-    char ch;
     cin >> q;
-    rep(i, q) {
+
+    while (q--) {
         cin >> n >> k; k--;
-        ch = fun(n, k);
-        //debug2(k + 1, ch);
-        cout << ch;
+        cout << fun (n, k);
     }
+
     cout << endl;
     return 0;
 }

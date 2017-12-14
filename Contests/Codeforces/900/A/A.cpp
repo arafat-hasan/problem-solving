@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 11-12-17 22:09:10 (+06)
+ * LAST MODIFIED: 11-12-17 22:15:19 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 11-12-17     1.0         {{File Created}}
  *
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
@@ -88,6 +88,23 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
+    int n, left = 0, right = 0, x, y;
+    cin >> n;
+    rep (i, n) {
+        cin >> x >> y;
+
+        if (x < 0) {
+            left++;
+
+        } else {
+            right++;
+        }
+    }
+
+    if (left <= 1 or right <= 1) cout << "Yes\n";
+    else cout << "No\n";
+
     return 0;
 }
+
 

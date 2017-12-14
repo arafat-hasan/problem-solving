@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 12-12-17 21:07:43 (+06)
+ * LAST MODIFIED: 12-12-17 21:12:36 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 12-12-17     1.0         {{File Created}}
  *
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
@@ -88,6 +88,27 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
+    int n, x;
+    bool fl;
+    cin >> n;
+    rep (i, n) {
+        cin >> x;
+        fl = false;
+
+        for (int s = 0; s < 50; s++) {
+            for (int l = 0; l < 50; l++) {
+                if (s * 3 + l * 7 == x) {
+                    fl = true;
+                    break;
+                }
+            }
+
+            if (fl) break;
+        }
+
+        cout << (fl ? "YES\n" : "NO\n");
+    }
     return 0;
 }
+
 

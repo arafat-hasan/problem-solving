@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 12-12-17 22:05:45 (+06)
+ * LAST MODIFIED: 14-12-17 00:42:50 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 12-12-17     1.0         File Created, Accepted
  *
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
@@ -81,13 +81,33 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             10000007 //10e7
+#define MAX             100007 //10e7
 
 ////////////////////////// START HERE //////////////////////////
 
-
 int main() {
     __FastIO;
+    int h1, h2, a1, a2, c1;
+    vector<string> v;
+    cin >> h1 >> a1 >> c1 >> h2 >> a2;
+
+    while (h2 > 0) {
+        if (h1 - a2 > 0 or h2 - a1 <= 0) {
+            v.pb ("STRIKE");
+            h2 -= a1;
+        } else {
+            v.pb ("HEAL");
+            h1 += c1;
+        }
+
+        h1 -= a2;
+    }
+
+    cout << v.size() << endl;
+
+    for (auto && i : v) cout << i << endl;
+
     return 0;
 }
+
 

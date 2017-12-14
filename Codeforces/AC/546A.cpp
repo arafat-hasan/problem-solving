@@ -1,11 +1,11 @@
 /*
- * FILE: {{untitled}}
+ * FILE: 546A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
+ * DATE CREATED: 11-12-17 19:19:22 (+06)
  * LAST MODIFIED: __last_modified
  *
  * DESCRIPTION:
@@ -13,7 +13,7 @@
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 11-12-17     1.0         File Created, Accepted
  *
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
@@ -88,6 +88,10 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
+    int k, n, w;
+    cin >> k >> n >> w;
+    cout << max ( ( (k * (w * (w + 1) / 2) ) - n), 0) << endl;
     return 0;
 }
+
 

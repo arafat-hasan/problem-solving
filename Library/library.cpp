@@ -107,6 +107,11 @@ typedef vector<int>         vi;
 // Set ith bit to x (x is bool, 1 or 0) of the integer n
 #define bit_setx(n, x, i)   n = (n ^ ((-(x) ^ n) & (1 << (i))))
 
+/// int month[]={-1,31,28,31,30,31,30,31,31,30,31,30,31}; //Not Leap Year
+/// int dx[]= {1,0,-1,0};int dy[]= {0,1,0,-1}; //4 Direction
+/// int dx[]={1,1,0,-1,-1,-1,0,1};int dy[]={0,1,1,1,0,-1,-1,-1};//8 Direction
+/// int dx[]= {2,1,-1,-2,-2,-1,1,2};int dy[]= {1,2,2,1,-1,-2,-2,-1}; //Knight Direction
+
 #define PI              acos(-1.0)
 #define INF             0x7fffffff
 #define MOD             1000000007
@@ -295,7 +300,7 @@ class Topsort {
                 for (i = 1; i <= size; i++) {
                     if (indegree[i] == 0) {
                         tops.push_back (i);
-                        v = adj[i].size();
+                        v = (int) adj[i].size();
 
                         for (int j = 0; j < v; j++) {
                             indegree[adj[i][j]]--;
@@ -2158,6 +2163,21 @@ class Palindrome {
         }
 };
 /////////////////////////////// PALINDROMES //////////////////////////////
+
+//Find if string ends with another string
+//https://stackoverflow.com/a/874160/7829174
+bool hasEnding (std::string const &fullString, std::string const &ending) {
+    if (fullString.length() >= ending.length() ) {
+        return (0 == fullString.compare (fullString.length() - ending.length(),
+                                         ending.length(), ending) );
+    } else {
+        return false;
+    }
+}
+//std::string ending = "nary";
+//std::string test1 = "binary";
+//std::cout << hasEnding (test1, ending) << std::endl;
+// This will return 1, as binary ends with binary;
 
 int main() {
     __FastIO;

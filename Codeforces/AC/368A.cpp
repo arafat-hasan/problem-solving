@@ -1,5 +1,5 @@
 /***************************************************************
-*   FILE NAME:	Sereja and Coat Rack.cpp
+*   FILE NAME: 368A.cpp
 * 
 *	LINK: http://codeforces.com/problemset/problem/368/A
 *

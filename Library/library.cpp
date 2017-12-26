@@ -15,7 +15,6 @@
  * --------------------------------------------------------------------
  * {{short_date}}     1.0         {{File Created}}
  *
- *
  *                 _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *                _/  _/        _/_/    _/    _/    _/_/    _/
  *               _/  _/_/_/    _/  _/  _/    _/    _/  _/  _/
@@ -44,6 +43,7 @@
 #include <queue>
 #include <deque>
 #include <vector>
+#include <tuple>
 #include <stdint.h> //uint32_t
 #include <functional>
 #include <bitset>
@@ -57,9 +57,11 @@ typedef pair<int, int>      pii;
 typedef vector<pii>         vpii;
 typedef vector<int>         vi;
 
-#define FileIn(file)    freopen("input.txt", "r", stdin)
-#define FileOut(file)   freopen("output.txt", "w", stdout)
-#define __FastIO        ios_base::sync_with_stdio(false); cin.tie(0)
+#define _USE_MATH_DEFINES
+
+#define FileIn(file)        freopen("input.txt", "r", stdin)
+#define FileOut(file)       freopen("output.txt", "w", stdout)
+#define __FastIO            ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
 
 #define forr(i, a, b)   for (__typeof (a) i=a; i<=b; i++)
 #define rof(i, b, a)    for (__typeof (a) i=b; i>=a; i--)
@@ -78,15 +80,25 @@ typedef vector<int>         vi;
 #define sf(a)           scanf("%d", &a)
 #define pf(a)           printf("%d", a)
 
-#define nl              cout << '\n';
-#define sp              cout << ' ';
-#define gc              getchar
-#define chk             cout << "##########\n"
 #define pb              push_back
+#define gc              getchar
 #define eb              emplace_back
-#define debug1(x)       cerr << #x << ": " << x << endl
-#define debug2(x, y)    cerr << #x << ": " << x << '\t' << #y << ": " << y << endl
-#define debug3(x, y, z) cerr << #x << ": " << x << '\t' << #y << ": " << y << '\t' << #z << ": " << z << endl
+
+#ifndef ONLINE_JUDGE
+    #define sp              cerr << ' ';
+    #define nl              cerr << '\n';
+    #define ckk             cerr << "###############\n"
+    #define debug1(x)       cerr << #x << ": " << x << endl
+    #define debug2(x, y)    cerr << #x << ": " << x << '\t' << #y << ": " << y << endl
+    #define debug3(x, y, z) cerr << #x << ": " << x << '\t' << #y << ": " << y << '\t' << #z << ": " << z << endl
+#else
+    #define sp
+    #define nl
+    #define ckk
+    #define debug1(x)
+    #define debug2(x, y)
+    #define debug3(x, y, z)
+#endif
 
 #define max(a, b)       (a < b ? b : a)
 #define min(a, b)       (a > b ? b : a)
@@ -119,6 +131,17 @@ typedef vector<int>         vi;
 #define MAXN            32001
 #define MAXS            100000000
 #define MAX             10000005
+
+template<class T>
+void debug (T t) {
+    cout << t << endl;
+}
+
+template<typename T, typename ...Args>
+void debug (T t, Args... args) {
+    cout << t << '\t';
+    debug (args...);
+}
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////// START HERE //////////////////////////
@@ -643,21 +666,6 @@ int lcm2 (int a, int b) {
     return temp;
 }
 
-template <class T>
-int numDigits (T number) {
-    int digits = 0;
-
-    if (number < 0) digits = 1;
-
-    while (number) {
-        number /= 10;
-        digits++;
-    }
-
-    return digits;
-}
-
-
 char *strrev (char *str) { //Used by big_int_sum & big_int_mul
     char *p1, *p2;
 
@@ -804,6 +812,124 @@ class Big_num {
             }
 
             return reminder;
+        }
+
+        // Multiplies str1 and str2, and prints result.
+        // Time Complexity : O(m*n), where m and n are length of two number that
+        // need to be multiplied.
+        // ONLY NON-NEGATIVE
+        void bigInt_mult (string &num1, string &num2, string &ans) {
+            int n1 = (int) num1.size();
+            int n2 = (int) num2.size();
+
+            if (n1 == 0 || n2 == 0) {
+                ans = "0";
+                return;
+            }
+
+            // will keep the result number in vector
+            // in reverse order
+            vector<int> result (n1 + n2, 0);
+            // Below two indexes are used to find positions
+            // in result.
+            int i_n1 = 0;
+            int i_n2 = 0;
+
+            // Go from right to left in num1
+            for (int i = n1 - 1; i >= 0; i--) {
+                int carry = 0;
+                int n1_next = num1[i] - '0';
+                // To shift position to left after every
+                // multiplication of a digit in num2
+                i_n2 = 0;
+
+                // Go from right to left in num2
+                for (int j = n2 - 1; j >= 0; j--) {
+                    // Take current digit of second number
+                    int n2_next = num2[j] - '0';
+                    // Multiply with current digit of first number
+                    // and add result to previously stored result
+                    // at current position.
+                    int sum = n1_next * n2_next + result[i_n1 + i_n2] + carry;
+                    // Carry for next iteration
+                    carry = sum / 10;
+                    // Store result
+                    result[i_n1 + i_n2] = sum % 10;
+                    i_n2++;
+                }
+
+                // store carry in next cell
+                if (carry > 0)
+                    result[i_n1 + i_n2] += carry;
+
+                // To shift position to left after every
+                // multiplication of a digit in num1.
+                i_n1++;
+            }
+
+            // ignore '0's from the right
+            int i = (int) result.size() - 1;
+
+            while (i >= 0 && result[i] == 0)
+                i--;
+
+            // If all were '0's - means either both or
+            // one of num1 or num2 were '0'
+            if (i == -1) {
+                ans = "0";
+                return;
+            }
+
+            // generate the result string
+            ans.clear();
+
+            while (i >= 0)
+                ans += std::to_string (result[i--]);
+        }
+
+        // Function for finding sum of larger numbers
+        // https://www.geeksforgeeks.org/sum-two-large-numbers/
+        // Time Complexity : O(n1 + n2) where n1 and n2 are lengths of two input
+        // strings representing numbers.
+        // ONLY NON-NEGATIVE
+        void bigInt_sum (string &str1, string &str2, string &ans) {
+            // Before proceeding further, make sure length
+            // of str2 is larger.
+            if (str1.length() > str2.length() )
+                swap (str1, str2);
+
+            // Take an empty string for storing result
+            ans = "";
+            // Calculate lenght of both string
+            int n1 = (int) str1.length(), n2 = (int) str2.length();
+            int diff = n2 - n1;
+            // Initialy take carry zero
+            int carry = 0;
+
+            // Traverse from end of both strings
+            for (int i = n1 - 1; i >= 0; i--) {
+                // Do school mathematics, compute sum of
+                // current digits and carry
+                int sum = ( (str1[i] - '0') +
+                            (str2[i + diff] - '0') +
+                            carry);
+                ans.push_back ( (char) (sum % 10 + '0') );
+                carry = sum / 10;
+            }
+
+            // Add remaining digits of str2[]
+            for (int i = n2 - n1 - 1; i >= 0; i--) {
+                int sum = ( (str2[i] - '0') + carry);
+                ans.push_back ( (char) (sum % 10 + '0') );
+                carry = sum / 10;
+            }
+
+            // Add remaining carry
+            if (carry)
+                ans.push_back ( (char) (carry + '0') );
+
+            // reverse resultant string
+            reverse (ans.begin(), ans.end() );
         }
 };
 ////////////////////////// BIG NUMBER END //////////////////////////
@@ -1029,7 +1155,82 @@ int CalcFirstDecimalDigit (uint32_t x) {
         return x;
 }
 
+
+int most_significant_digit (int n) {
+    double K = log10 (n);
+    K = K - floor (K);
+    int X = (int) pow (10, K);
+    return X;
+}
+
 //////////// MOST SIGNIFICANT DIGIT END ////////////
+
+//https://www.geeksforgeeks.org/count-sum-of-digits-in-numbers-from-1-to-n/
+// Function to computer sum of digits in numbers from 1 to n
+// Comments use example of 328 to explain the code
+int sumOfDigitsFrom1ToN (int n) {
+    // base case: if n<10 return sum of
+    // first n natural numbers
+    if (n < 10)
+        return n * (n + 1) / 2;
+
+    // d = number of digits minus one in n. For 328, d is 2
+    int d = log10 (n);
+    // computing sum of digits from 1 to 10^d-1,
+    // d=1 a[0]=0;
+    // d=2 a[1]=sum of digit from 1 to 9 = 45
+    // d=3 a[2]=sum of digit from 1 to 99 = a[1]*10 + 45*10^1 = 900
+    // d=4 a[3]=sum of digit from 1 to 999 = a[2]*10 + 45*10^2 = 13500
+    int *a = new int[d + 1];
+    a[0] = 0, a[1] = 45;
+
+    for (int i = 2; i <= d; i++)
+        a[i] = a[i - 1] * 10 + 45 * ceil (pow (10, i - 1) );
+
+    // computing 10^d
+    int p = ceil (pow (10, d) );
+    // Most significant digit (msd) of n,
+    // For 328, msd is 3 which can be obtained using 328/100
+    int msd = n / p;
+    // EXPLANATION FOR FIRST and SECOND TERMS IN BELOW LINE OF CODE
+    // First two terms compute sum of digits from 1 to 299
+    // (sum of digits in range 1-99 stored in a[d]) +
+    // (sum of digits in range 100-199, can be calculated as 1*100 + a[d]
+    // (sum of digits in range 200-299, can be calculated as 2*100 + a[d]
+    //  The above sum can be written as 3*a[d] + (1+2)*100
+    // EXPLANATION FOR THIRD AND FOURTH TERMS IN BELOW LINE OF CODE
+    // The last two terms compute sum of digits in number from 300 to 328
+    // The third term adds 3*29 to sum as digit 3 occurs in all numbers
+    //                from 300 to 328
+    // The fourth term recursively calls for 28
+    return msd * a[d] + (msd * (msd - 1) / 2) * p +
+           msd * (1 + n % p) + sumOfDigitsFrom1ToN (n % p);
+}
+
+//www.geeksforgeeks.org/finding-sum-of-digits-of-a-number-until-sum-becomes-single-digit
+//Finding sum of digits of a number until sum becomes single digit
+int digSum (int n) {
+    if (n == 0)
+        return 0;
+
+    return (n % 9 == 0) ? 9 : (n % 9);
+}
+
+template <class T>
+int numDigits (T number) {
+    int digits = 0;
+
+    if (number < 0) digits = 1;
+
+    while (number) {
+        number /= 10;
+        digits++;
+    }
+
+    return digits;
+}
+
+
 
 
 ////////////////////////// SPARSE TABLE //////////////////////////
@@ -1508,20 +1709,20 @@ string to_roman (int value) {
         char const *numeral;
     };
     static romandata_t const romandata[] = {
-        1000, "M",
-        900, "CM",
-        500, "D",
-        400, "CD",
-        100, "C",
-        90, "XC",
-        50, "L",
-        40, "XL",
-        10, "X",
-        9, "IX",
-        5, "V",
-        4, "IV",
-        1, "I",
-        0, NULL
+        {1000, "M"},
+        {900, "CM"},
+        {500, "D"},
+        {400, "CD"},
+        {100, "C"},
+        {90, "XC"},
+        {50, "L"},
+        {40, "XL"},
+        {10, "X"},
+        {9, "IX"},
+        {5, "V"},
+        {4, "IV"},
+        {1, "I"},
+        {0, NULL}
     }; // end marker
     string result;
 
@@ -2326,4 +2527,40 @@ return non-zero if next permutation found, otherwise 0
 
 
 
+Define _USE_MATH_DEFINES before including math.h to expose these macro
+definitions for common math constants.  These are placed under an #ifdef
+since these commonly-defined names are not part of the C/C++ standards.
+
+
+Definitions of useful mathematical constants
+M_E        - e
+M_LOG2E    - log2(e)
+M_LOG10E   - log10(e)
+M_LN2      - ln(2)
+M_LN10     - ln(10)
+M_PI       - pi
+M_PI_2     - pi/2
+M_PI_4     - pi/4
+M_1_PI     - 1/pi
+M_2_PI     - 2/pi
+M_2_SQRTPI - 2/sqrt(pi)
+M_SQRT2    - sqrt(2)
+M_SQRT1_2  - 1/sqrt(2)
+
+
+#define M_E        2.71828182845904523536
+#define M_LOG2E    1.44269504088896340736
+#define M_LOG10E   0.434294481903251827651
+#define M_LN2      0.693147180559945309417
+#define M_LN10     2.30258509299404568402
+#define M_PI       3.14159265358979323846
+#define M_PI_2     1.57079632679489661923
+#define M_PI_4     0.785398163397448309616
+#define M_1_PI     0.318309886183790671538
+#define M_2_PI     0.636619772367581343076
+#define M_2_SQRTPI 1.12837916709551257390
+#define M_SQRT2    1.41421356237309504880
+#define M_SQRT1_2  0.707106781186547524401
+
  ********************************************************************/
+

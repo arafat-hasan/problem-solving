@@ -1,7 +1,7 @@
 /***************************************************************
-*   FILE NAME:  E - Valera and Plates.cpp
+*   FILE NAME: 365A.cpp
 * 
-*	LINK: http://codeforces.com/problemset/problem/369/A
+*	LINK: http://codeforces.com/problemset/problem/365/A 
 *
 *   PURPOSE:
 *
@@ -15,34 +15,39 @@
 *****************************************************************/
 
 #include <stdio.h>
+#include <string.h>
 
 int main() {
 	
-	int n, p, b, i;
+	char str[20];
+	int i, count, n, k, len, flag;
+	int chk[10];
+	scanf("%i %i", &n, &k);
+	count=0;
 	
-	scanf("%i %i %i", &n, &b, &p);
-	int day[n], count=0;;
-	for(i=0;i<n;i++)
-		scanf("%i", &day[i]);
-	
-	
-	for(i=0;i<n;i++){
-		if(day[i]==1){
-			if(b>0)
-				b--;
-			else
-				count++;
+	while(n--){
+		scanf("%s", str);
+		
+		for(i=0;i<=k;i++)
+			chk[i]=0;
+		
+		len=strlen(str);
+		for(i=0;i<len;i++){
+			chk[str[i]-48]++;
 		}
 		
-		else{
-			if(p>0)
-				p--;
-			else if(b>0)
-				b--;
-			else
-				count++;
+		flag=1;
+		for(i=0; i<=k;i++){
+			if(chk[i]<1){
+				flag=0;
+				break;
+			}	
 		}
+		
+		if(flag)
+			count++;
 	}
+	
 	
 	printf("%i\n", count);
 	

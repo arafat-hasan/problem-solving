@@ -1,5 +1,5 @@
 /*****************************************************************************
-*   FILE NAME:	Second-Price Auction .cpp
+*   FILE NAME: 386A.cpp
 * 	LINK: http://codeforces.com/problemset/problem/386/A
 *
 *   PURPOSE:

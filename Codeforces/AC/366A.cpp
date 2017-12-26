@@ -1,5 +1,5 @@
 /***************************************************************
-*   FILE NAME:  Dima and Guards.cpp
+*   FILE NAME: 366A.cpp
 * 
 *	LINK: http://codeforces.com/problemset/problem/366/A
 *

@@ -1,5 +1,5 @@
 /*****************************************************************************
-*   FILE NAME:	Coder.cpp
+*   FILE NAME: 384A.cpp
 * 	LINK: http://codeforces.com/problemset/problem/384/A
 *
 *   PURPOSE:

@@ -1,5 +1,5 @@
 /*
- * FILE: Almost Prime.cpp
+ * FILE: 26A.cpp
  *
  * @author: Md. Arafat Hasan Jenin <Opendoor.Arafat@gmail.com>
  * LINK: http://codeforces.com/problemset/problem/26/A

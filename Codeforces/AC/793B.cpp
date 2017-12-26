@@ -1,5 +1,5 @@
 /*
- * FILE: B. Igor and his way to work.cpp *
+ * FILE: 793B.cpp
  *
  * @author: Md. Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *

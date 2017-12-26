@@ -1,5 +1,5 @@
 /***************************************************************
-*   FILE NAME:  A - Soroban.cpp
+*   FILE NAME: 363A.cpp
 * 
 *	LINK: http://codeforces.com/problemset/problem/363/A
 *

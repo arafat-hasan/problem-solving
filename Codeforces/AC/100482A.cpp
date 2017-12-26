@@ -62,8 +62,8 @@ typedef long long           ll;
 typedef double              lf;
 typedef unsigned long long  ull;
 typedef pair<int, int>      pii;
-typedef vector<pii>			vpii;
-typedef vector<int>			vi;
+typedef vector<pii>         vpii;
+typedef vector<int>         vi;
 
 #define __FastIO        ios_base::sync_with_stdio(false); cin.tie(0)
 
@@ -99,18 +99,21 @@ typedef vector<int>			vi;
 
 int main() {
     __FastIO;
-	int t, n, cs = 0;
-	string str;
-	cin >> t;
-	while(t--){
-		cin >> n;
-		cin.ignore();
-		Rep(i, n-1){
-			getline(cin, str);
-		}
-		cout << "Case #" << ++cs << ": ";
-		if(n == 1) cout << "1\n";
-		else cout << "2\n";
-	}
+    int t, n, cs = 0;
+    string str;
+    cin >> t;
+
+    while (t--) {
+        cin >> n;
+        cin.ignore();
+        Rep (i, n - 1) {
+            getline (cin, str);
+        }
+        cout << "Case #" << ++cs << ": ";
+
+        if (n == 1) cout << "1\n";
+        else cout << "2\n";
+    }
+
     return 0;
 }

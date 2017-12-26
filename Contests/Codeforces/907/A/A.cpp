@@ -1,19 +1,19 @@
 /*
- * FILE: B.cpp
+ * FILE: A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 25-12-17 15:07:20 (+06)
- * LAST MODIFIED: 25-12-17 15:18:31 (+06)
+ * DATE CREATED: 23-12-17 20:08:27 (+06)
+ * LAST MODIFIED: __last_modified
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 25-12-17     1.0         File Created, Accepted
+ * 23-12-17     1.0         {{File Created}}
  *
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
@@ -59,9 +59,7 @@ typedef vector<pii>         vpii;
 typedef vector<int>         vi;
 typedef vector<long long>   vl;
 
-#define _USE_MATH_DEFINES
-
-#define __FastIO        ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+#define __FastIO        ios_base::sync_with_stdio(false); cin.tie(0)
 
 #define forr(i, a, b)   for (__typeof (a) i = a; i <= b; i++)
 #define rof(i, b, a)    for (__typeof (a) i = b; i >= a; i--)
@@ -90,18 +88,25 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
-    int n, x = 0, y = 0;
-    string str;
-    cin >> n >> str;
+    int v1, v2, v3, vm;
+    cin >> v1 >> v2 >> v3 >> vm;
 
-    for (int i = 0; i < n; i++) {
-        if (str[i] == 'L') x--;
-        else if (str[i] == 'R') x++;
-        else if (str[i] == 'U') y++;
-        else y--;
+    for (int s3 = vm; s3 <= vm * 2; s3++) {
+        if (s3 >= v3 and s3 <= v3 * 2) {
+            for (int s2 = v2; s2 <= v2 * 2; s2++) {
+                if (vm <= s2 and s2 > s3 and (vm * 2 < s2) ) {
+                    for (int s1 = v1; s1 <= v1 * 2; s1++) {
+                        if (vm <= s1 and s1 > s2 and (vm * 2 < s1) ) {
+                            cout << s1 << endl << s2 << endl << s3 << endl;
+                            return 0;
+                        }
+                    }
+                }
+            }
+        }
     }
 
-    cout << n - (abs (0 - x) + abs (0 - y) ) << endl;
+    cout << "-1\n";
     return 0;
 }
 

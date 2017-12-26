@@ -15,7 +15,6 @@
  * --------------------------------------------------------------------
  * {{short_date}}     1.0         {{File Created}}
  *
- *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
  *             _/  _/_/_/    _/  _/  _/    _/    _/  _/  _/
@@ -44,6 +43,7 @@
 #include <queue>
 #include <deque>
 #include <vector>
+#include <tuple>
 #include <stdint.h> //uint32_t
 #include <functional>
 #include <bitset>
@@ -59,7 +59,9 @@ typedef vector<pii>         vpii;
 typedef vector<int>         vi;
 typedef vector<long long>   vl;
 
-#define __FastIO        ios_base::sync_with_stdio(false); cin.tie(0)
+#define _USE_MATH_DEFINES
+
+#define __FastIO        ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
 
 #define forr(i, a, b)   for (__typeof (a) i = a; i <= b; i++)
 #define rof(i, b, a)    for (__typeof (a) i = b; i >= a; i--)
@@ -69,13 +71,23 @@ typedef vector<long long>   vl;
 #define fill(ar, val)   memset(ar, val, sizeof(ar))
 #define clr(a)          memset(a, 0, sizeof(a))
 
-#define nl              cout << '\n';
-#define sp              cout << ' ';
-#define ckk             cout << "###############\n"
 #define pb              push_back
-#define debug1(x)       cerr << #x << ": " << x << endl
-#define debug2(x, y)    cerr << #x << ": " << x << '\t' << #y << ": " << y << endl
-#define debug3(x, y, z) cerr << #x << ": " << x << '\t' << #y << ": " << y << '\t' << #z << ": " << z << endl
+
+#ifndef ONLINE_JUDGE
+    #define nl              cerr << '\n';
+    #define sp              cerr << ' ';
+    #define ckk             cerr << "###############\n"
+    #define debug1(x)       cerr << #x << ": " << x << endl
+    #define debug2(x, y)    cerr << #x << ": " << x << '\t' << #y << ": " << y << endl
+    #define debug3(x, y, z) cerr << #x << ": " << x << '\t' << #y << ": " << y << '\t' << #z << ": " << z << endl
+#else
+    #define nl
+    #define sp
+    #define ckk
+    #define debug1(x)
+    #define debug2(x, y)
+    #define debug3(x, y, z)
+#endif
 
 #define PI              acos(-1.0)
 #define INF             0x7fffffff
@@ -84,7 +96,6 @@ typedef vector<long long>   vl;
 #define MAX             10000007 //10e7
 
 ////////////////////////// START HERE //////////////////////////
-
 
 int main() {
     __FastIO;

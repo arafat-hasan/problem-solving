@@ -1,19 +1,19 @@
 /*
- * FILE: B.cpp
+ * FILE: 910A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 25-12-17 15:07:20 (+06)
- * LAST MODIFIED: 25-12-17 15:18:31 (+06)
+ * DATE CREATED: 23-12-17 12:36:03 (+06)
+ * LAST MODIFIED: 23-12-17 13:36:31 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 25-12-17     1.0         File Created, Accepted
+ * 23-12-17     1.0         File Created, Accepted
  *
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
@@ -59,9 +59,7 @@ typedef vector<pii>         vpii;
 typedef vector<int>         vi;
 typedef vector<long long>   vl;
 
-#define _USE_MATH_DEFINES
-
-#define __FastIO        ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+#define __FastIO        ios_base::sync_with_stdio(false); cin.tie(0)
 
 #define forr(i, a, b)   for (__typeof (a) i = a; i <= b; i++)
 #define rof(i, b, a)    for (__typeof (a) i = b; i >= a; i--)
@@ -90,18 +88,29 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
-    int n, x = 0, y = 0;
-    string str;
-    cin >> n >> str;
+    int n, d, cnt = 0;
+    string v;
+    cin >> n >> d >> v;
 
-    for (int i = 0; i < n; i++) {
-        if (str[i] == 'L') x--;
-        else if (str[i] == 'R') x++;
-        else if (str[i] == 'U') y++;
-        else y--;
+    for (int i = 0; i < n - 1;) {
+        bool fl = false;
+        int j;
+
+        for (j = i + d; j > i; j--) {
+            if (j >= n) continue;
+
+            if (v[j] == '1') {
+                i = j;
+                cnt++;
+                fl = true;
+                break;
+            }
+        }
+
+        if (!fl) return ! (cout << "-1\n");
     }
 
-    cout << n - (abs (0 - x) + abs (0 - y) ) << endl;
+    cout << cnt << endl;
     return 0;
 }
 

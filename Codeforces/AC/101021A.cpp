@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: 101021A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 01-01-18 02:13:36 (+06)
+ * LAST MODIFIED: 01-01-18 03:13:47 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 01-01-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -99,7 +99,25 @@ typedef vector<long long>   vl;
 ////////////////////////// START HERE //////////////////////////
 
 int main() {
-    __FastIO;
+    int mid, hi = 1000000, lo = 1;
+    string str;
+
+    while (hi != lo) {
+        mid = (hi + lo + 1) / 2;
+        printf ("%d\n", mid);
+        fflush (stdout);
+        cin >> str;
+
+        if (str == "<") {
+            hi = mid - 1;
+        } else {
+            lo = mid;
+        }
+    }
+
+    printf ("! %d\n", hi);
+    fflush (stdout);
     return 0;
 }
+
 

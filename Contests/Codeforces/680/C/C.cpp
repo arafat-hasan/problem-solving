@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: C.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 29-12-17 19:26:20 (+06)
+ * LAST MODIFIED: 01-01-18 01:38:08 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 29-12-17     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -98,8 +98,47 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
-int main() {
-    __FastIO;
-    return 0;
+bool isprime (int num) {
+    if (num == 2) return true;
+
+    if (num < 2 or num % 2 == 0) return false;
+
+    int i, root = (int) sqrt (num);
+
+    for (i = 3; i <= root; i += 2)
+        if (num % i == 0)    return false;
+
+    return true;
 }
 
+int main() {
+    __FastIO;
+    int cnt  = 0;
+    string str;
+
+    for (int i = 2; i <= 50; i++) {
+        if (isprime (i) ) {
+            for (int j = i; j < 50; j *= i) {
+                cout << j << endl;
+                fflush (stdout);
+                cin >> str;
+
+                if (str == "yes") {
+                    cnt++;
+                }
+
+                if (cnt > 1) {
+                    cout << "composite\n";
+                    fflush (stdout);
+                    return 0;
+                }
+
+                if (str == "no") break;
+            }
+        }
+    }
+
+    cout << "prime\n";
+    fflush (stdout);
+    return 0;
+}

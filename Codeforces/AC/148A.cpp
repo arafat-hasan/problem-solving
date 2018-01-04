@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: 148A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 27-12-17 21:43:37 (+06)
+ * LAST MODIFIED: 27-12-17 22:32:30 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 27-12-17     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -70,7 +70,6 @@ typedef vector<long long>   vl;
 #define all(ar)         ar.begin(), ar.end()
 #define fill(ar, val)   memset((ar), (val), sizeof((ar)))
 #define clr(a)          memset((a), 0, sizeof((a)))
-#define sz(a)           (int) a.size()
 
 #define pb              push_back
 
@@ -94,12 +93,29 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             10000007 //1e7+7
+#define MAX             100005
 
 ////////////////////////// START HERE //////////////////////////
 
+bool ara[MAX];
+
 int main() {
     __FastIO;
+    int k, l, m, n, d, cnt = 0;
+    cin >> k >> l >> m >> n >> d;
+
+    for (int i = k; i <= d; i += k) ara[i] = true;
+
+    for (int i = l; i <= d; i += l) ara[i] = true;
+
+    for (int i = m; i <= d; i += m) ara[i] = true;
+
+    for (int i = n; i <= d; i += n) ara[i] = true;
+
+    for (int i = 0; i <= d; i++) if (ara[i]) cnt++;
+
+    cout << cnt << endl;
     return 0;
 }
+
 

@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 27-12-17 22:42:07 (+06)
+ * LAST MODIFIED: 28-12-17 13:54:43 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 27-12-17     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -70,7 +70,7 @@ typedef vector<long long>   vl;
 #define all(ar)         ar.begin(), ar.end()
 #define fill(ar, val)   memset((ar), (val), sizeof((ar)))
 #define clr(a)          memset((a), 0, sizeof((a)))
-#define sz(a)           (int) a.size()
+#define sz(a)            (int) a.size()
 
 #define pb              push_back
 
@@ -94,12 +94,30 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             10000007 //1e7+7
+#define MAX             10000007 //10e7
 
 ////////////////////////// START HERE //////////////////////////
 
 int main() {
     __FastIO;
+    string f, s;
+    cin >> f >> s;
+    vector<string> v;
+    string tmp_str1, tmp_str2;
+
+    for (int i = 0; i < sz (f); i++) {
+        tmp_str1.pb (f[i]);
+        tmp_str2 = tmp_str1;
+
+        for (int j = 0; j < sz (s); j++) {
+            tmp_str2.pb (s[j]);
+            v.pb (tmp_str2);
+        }
+    }
+
+    sort (all (v) );
+    cout << v[0] << endl;
     return 0;
 }
+
 

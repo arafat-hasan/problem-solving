@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: 777B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 27-12-17 15:51:24 (+06)
+ * LAST MODIFIED: 27-12-17 20:39:06 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 27-12-17     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -63,21 +63,20 @@ typedef vector<long long>   vl;
 
 #define __FastIO        ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
 
-#define forr(i, a, b)   for (__typeof (a) i = (a); i <= (b); i++)
-#define rof(i, b, a)    for (__typeof (a) i = (b); i >= (a); i--)
-#define rep(i, n)       for (__typeof (n) i = 0; i < (n); i++)
+#define forr(i, a, b)   for (__typeof (a) i = a; i <= b; i++)
+#define rof(i, b, a)    for (__typeof (a) i = b; i >= a; i--)
+#define rep(i, n)       for (__typeof (n) i = 0; i < n; i++)
 #define forit(i, s)     for (__typeof ((s).end()) i = (s).begin(); i != (s).end(); ++i)
 #define all(ar)         ar.begin(), ar.end()
-#define fill(ar, val)   memset((ar), (val), sizeof((ar)))
-#define clr(a)          memset((a), 0, sizeof((a)))
-#define sz(a)           (int) a.size()
+#define fill(ar, val)   memset(ar, val, sizeof(ar))
+#define clr(a)          memset(a, 0, sizeof(a))
 
 #define pb              push_back
 
 #ifndef ONLINE_JUDGE
     #define nl              cerr << '\n';
     #define sp              cerr << ' ';
-    #define ckk             cerr << "###############\n"
+    #define ckk             cout << "###############\n"
     #define debug1(x)       cerr << #x << ": " << (x) << endl
     #define debug2(x, y)    cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << endl
     #define debug3(x, y, z) cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << '\t' << #z << ": " << (z) << endl
@@ -94,12 +93,58 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             10000007 //1e7+7
+#define MAX             10000007 //10e7
 
 ////////////////////////// START HERE //////////////////////////
 
 int main() {
     __FastIO;
+    int n;
+    string s, m;
+    cin >> n >> s >> m;
+    map<char, int> _m, __m, _s, __s;
+    rep (i, n) _m[m[i]]++;
+    rep (i, n) _s[s[i]]++;
+    __m = _m;
+    int cnt = 0;
+
+    for (char i = '0'; i <= '9'; i++) {
+        int tmp = _s[i];
+
+        for (char j = (char) (i); j <= '9' and tmp > 0; j++) {
+            if (_m[j] >= tmp) {
+                _m[j] -= tmp;
+                tmp -= tmp;
+            } else {
+                tmp -= _m[j];
+                _m[j] -= _m[j];
+            }
+        }
+
+        if (tmp != 0) cnt += tmp;
+    }
+
+    cout << cnt << endl;
+    cnt = 0;
+
+    for (char i = '0'; i <= '9'; i++) {
+        int tmp = _s[i];
+
+        for (char j = (char) (i + 1); j <= '9' and tmp > 0; j++) {
+            if (__m[j] >= tmp) {
+                __m[j] -= tmp;
+                cnt += tmp;
+                tmp -= tmp;
+            } else {
+                cnt += __m[j];
+                tmp -= __m[j];
+                __m[j] -= __m[j];
+            }
+        }
+    }
+
+    cout << cnt << endl;
     return 0;
 }
+
 

@@ -1,11 +1,11 @@
 /*
- * FILE: {{untitled}}
+ * FILE: A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
+ * DATE CREATED: 01-01-18 22:03:45 (+06)
  * LAST MODIFIED: __last_modified
  *
  * DESCRIPTION:
@@ -13,7 +13,7 @@
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 01-01-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,6 +100,16 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
+    string str, base ("HappyNewYear");
+    int n;
+    cin >> n;
+
+    while (n--) {
+        cin >> str;
+        cout << "Happy New Year-" << 2018 + (sz (str) - sz (base) ) << endl;
+    }
+
     return 0;
 }
+
 

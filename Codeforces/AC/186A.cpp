@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: 186A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 04-01-18 17:30:28 (+06)
+ * LAST MODIFIED: 04-01-18 17:54:13 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 04-01-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,6 +100,18 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
+    string str1, str2;
+    cin >> str1 >> str2;
+
+    if (sz (str1) != sz (str2) ) return ! (cout << "NO\n");
+
+    int cnt = 0;
+    set<char> st;
+    rep (i, sz (str1) ) {
+        if (str1[i] != str2[i]) st.insert (str1[i]), st.insert (str2[i]), cnt++;
+    }
+    cout << ( (sz (st) == 2 and cnt == 2) ? "YES\n" : "NO\n");
     return 0;
 }
+
 

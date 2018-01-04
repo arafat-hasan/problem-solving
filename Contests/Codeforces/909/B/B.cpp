@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 27-12-17 22:56:37 (+06)
+ * LAST MODIFIED: 27-12-17 23:51:02 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 27-12-17     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -70,7 +70,6 @@ typedef vector<long long>   vl;
 #define all(ar)         ar.begin(), ar.end()
 #define fill(ar, val)   memset((ar), (val), sizeof((ar)))
 #define clr(a)          memset((a), 0, sizeof((a)))
-#define sz(a)           (int) a.size()
 
 #define pb              push_back
 
@@ -94,12 +93,21 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             10000007 //1e7+7
+#define MAX             10000007 //10e7
 
 ////////////////////////// START HERE //////////////////////////
 
 int main() {
     __FastIO;
+    int n, foo = 0;
+    cin >> n;
+
+    for (int i = 1, j = n; j > 0; i++, j--) {
+        foo += min (j, i);
+    }
+
+    cout << foo << endl;
     return 0;
 }
+
 

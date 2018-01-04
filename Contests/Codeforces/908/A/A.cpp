@@ -1,11 +1,11 @@
 /*
- * FILE: {{untitled}}
+ * FILE: A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
+ * DATE CREATED: 29-12-17 21:44:16 (+06)
  * LAST MODIFIED: __last_modified
  *
  * DESCRIPTION:
@@ -13,7 +13,7 @@
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 29-12-17     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -98,8 +98,27 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
+bool isvowel (char ch) {
+    if (ch == 'a' or ch == 'e' or ch == 'i' or ch == 'o' or ch == 'u')
+        return true;
+
+    return false;
+}
+
 int main() {
     __FastIO;
+    string str;
+    cin >> str;
+    int cnt = 0;
+
+    for (auto i : str) {
+        if (isvowel (i) ) cnt++;
+        else if (i == '1' or i == '3' or i == '5' or i == '7' or i == '9')
+            cnt++;
+    }
+
+    cout << cnt << endl;
     return 0;
 }
+
 

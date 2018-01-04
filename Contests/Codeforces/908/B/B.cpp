@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 29-12-17 22:06:30 (+06)
+ * LAST MODIFIED: 29-12-17 22:28:34 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 29-12-17     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -98,8 +98,68 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
+string str;
+char mat[100][100];
+int n, m, cnt = 0;
+int sx, sy;
+
+bool solve (map<int, char> mp) {
+    int x = sx, y = sy;
+
+    for (auto i : str) {
+        int tmp = i - '0';
+
+        if (mp[tmp] == 'u') y--;
+        else if (mp[tmp] == 'd') y++;
+        else if (mp[tmp] == 'l') x++;
+        else if (mp[tmp] == 'r') x--;
+
+        if ( (x < 0 or x >= m) or (y < 0 or y >= n) )
+            return false;
+
+        if (mat[y][x] == 'E') return true;
+
+        if (mat[y][x] == '#') return false;
+    }
+
+    return false;
+}
+
+
 int main() {
     __FastIO;
+    cin >> n >> m;
+    rep (i, n) rep (j, m) {
+        cin >> mat[i][j];
+
+        if (mat[i][j] == 'S') {
+            sx = j; sy = i;
+        }
+    }
+    cin >> str;
+
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            if (j == i) continue;
+
+            for (int k = 0; k < 4; k++) {
+                if (k == j or k == i) continue;
+
+                for (int l = 0; l < 4; l++) {
+                    if (l == k or l == j or l == i) continue;
+
+                    map<int, char> mp ({{i, 'u'}, {j, 'd'}, {k, 'l'}, {l, 'r'}});
+
+                    if (solve (mp) == true) {
+                        cnt++;
+                    }
+                }
+            }
+        }
+    }
+
+    cout << cnt << endl;
     return 0;
 }
+
 

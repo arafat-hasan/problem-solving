@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 28-12-17 20:53:01 (+06)
+ * LAST MODIFIED: 28-12-17 21:13:07 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 28-12-17     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,6 +100,21 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
+    int n, a, b, m, left_min, right_min, max = -INF;
+    cin >> n >> a >> b;
+
+    if (n == 2) max = min (a, b);
+
+    for (int i = 1; i < n; i++) {
+        left_min = a / i;
+        right_min = b / (n - i);
+        m = min (left_min, right_min);
+
+        if (max < m) max = m;
+    }
+
+    cout << max << endl;
     return 0;
 }
+
 

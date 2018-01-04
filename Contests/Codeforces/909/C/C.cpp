@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: C.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 28-12-17 00:05:14 (+06)
+ * LAST MODIFIED: 29-12-17 00:17:16 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 28-12-17     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -70,7 +70,6 @@ typedef vector<long long>   vl;
 #define all(ar)         ar.begin(), ar.end()
 #define fill(ar, val)   memset((ar), (val), sizeof((ar)))
 #define clr(a)          memset((a), 0, sizeof((a)))
-#define sz(a)           (int) a.size()
 
 #define pb              push_back
 
@@ -94,12 +93,38 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             10000007 //1e7+7
+#define MAX             10000007 //1e7
 
 ////////////////////////// START HERE //////////////////////////
 
+string str;
+
+int fun (int i) {
+    if (i == (int) str.size() - 1) return 1;
+
+    if (str[i] == 's') return (fun (i + 1) % MOD);
+
+    if (str[i] == 'f') {
+        for (int j = i; j < (int) str.size(); j++) {
+            if (str[j] != 'f') {
+                if (j == (int) str.size() - 1)
+                    return 1;
+                else
+                    return ( (2 * (fun (j + 1) % MOD) ) % MOD);
+            }
+        }
+    }
+
+    return 0;
+}
+
 int main() {
     __FastIO;
+    char ch;
+    int n;
+    cin >> n;
+    rep (i, n) cin >> ch, str.pb (ch);
+    cout << (fun (0) % MOD) << endl;
     return 0;
 }
 

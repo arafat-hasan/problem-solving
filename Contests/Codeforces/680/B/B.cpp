@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 29-12-17 18:34:26 (+06)
+ * LAST MODIFIED: 29-12-17 18:55:28 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 29-12-17     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,6 +100,25 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
+    int a, n;
+    cin >> n >> a;
+    a--;
+    vi v (n);
+    rep (i, n) cin >> v[i];
+    int cnt = 0;
+
+    for (int i = a, j = a; i < n or j >= 0; i++, j--) {
+        int tmp_i = i < n ? v[i] : -1;
+        int tmp_j = j >= 0 ? v[j] : -1;
+
+        if (i == j and v[i] == 1) cnt++;
+        else if (tmp_i == 1 and tmp_j == 1) cnt += 2;
+        else if ( (tmp_i == -1 or tmp_j == -1) and \
+                  (tmp_i == 1 or tmp_j == 1) ) cnt++;
+    }
+
+    cout << cnt << endl;
     return 0;
 }
+
 

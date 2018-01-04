@@ -1,11 +1,11 @@
 /*
- * FILE: {{untitled}}
+ * FILE: B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
+ * DATE CREATED: 01-01-18 22:12:58 (+06)
  * LAST MODIFIED: __last_modified
  *
  * DESCRIPTION:
@@ -13,7 +13,7 @@
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 01-01-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -98,8 +98,43 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
+int LCSubStr (string  &X, string &Y, int m, int n) {
+    // Create a table to store lengths of longest common suffixes of
+    // substrings.   Notethat LCSuff[i][j] contains length of longest
+    // common suffix of X[0..i-1] and Y[0..j-1]. The first row and
+    // first column entries have no logical meaning, they are used only
+    // for simplicity of program
+    int LCSuff[m + 1][n + 1];
+    int result = 0;  // To store length of the longest common substring
+
+    /* Following steps build LCSuff[m+1][n+1] in bottom up fashion. */
+    for (int i = 0; i <= m; i++) {
+        for (int j = 0; j <= n; j++) {
+            if (i == 0 || j == 0)
+                LCSuff[i][j] = 0;
+            else if (X[i - 1] == Y[j - 1]) {
+                LCSuff[i][j] = LCSuff[i - 1][j - 1] + 1;
+                result = max (result, LCSuff[i][j]);
+            } else LCSuff[i][j] = 0;
+        }
+    }
+
+    return result;
+}
+
 int main() {
     __FastIO;
+    int n, t, m, q, l;
+    string str1, str2;
+    //cin >> t;
+    //while(t--){
+    //    cin >> n >> m;
+    //    cin >> str1 >> str2;
+    //}
+    str1 = "hello";
+    str2 = "hell";
+    cout << LCSubStr (str1, str2, sz (str1), sz (str2) );
     return 0;
 }
+
 

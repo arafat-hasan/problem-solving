@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 28-12-17 20:06:35 (+06)
+ * LAST MODIFIED: 28-12-17 20:39:10 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 28-12-17     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,6 +100,36 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
+    int n, min = INF, foo = 0, dis = INF;
+    cin >> n;
+    vi v (n);
+    rep (i, n) {
+        cin >> v[i];
+
+        if (v[i] < min) min = v[i];
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (v[i] == min) {
+            foo = -1;
+
+            for (int j = i + 1; j < n; j++) {
+                if (v[j] == min) {
+                    foo = j;
+                    break;
+                }
+            }
+
+            if (foo != -1) {
+                if (dis > (foo - i) ) dis = (foo - i);
+            } else foo = n;
+
+            i = foo - 1;
+        }
+    }
+
+    cout << dis << endl;
     return 0;
 }
+
 

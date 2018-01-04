@@ -70,6 +70,7 @@ typedef vector<int>         vi;
 #define all(ar)         ar.begin(), ar.end()
 #define fill(ar, val)   memset(ar, val, sizeof(ar))
 #define clr(a)          memset(a, 0, sizeof(a))
+#define sz(a)           (int) a.size()
 
 #define sfll(a)         scanf("%lld", &a)
 #define pfll(a)         printf("%lld", a)
@@ -129,8 +130,8 @@ typedef vector<int>         vi;
 #define MOD             1000000007
 #define EPS             1e-7
 #define MAXN            32001
-#define MAXS            100000000
-#define MAX             10000005
+#define MAXS            100000008 // 1e8+8
+#define MAX             10000007 // 1e7+7
 
 template<class T>
 void debug (T t) {
@@ -348,9 +349,9 @@ class Primes {
 
     public:
         bool isprime (int num) {
-            if (num < 2 or num % 2 == 0) return false;
-
             if (num == 2) return true;
+
+            if (num < 2 or num % 2 == 0) return false;
 
             int i, root = (int) sqrt (num);
 

@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 29-12-17 18:06:51 (+06)
+ * LAST MODIFIED: 29-12-17 18:34:06 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 29-12-17     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -98,8 +98,31 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
+
 int main() {
     __FastIO;
+    map<int, int> mp;
+    int tmp;
+    int ans = 0;
+    rep (i, 5) {
+        cin >> tmp;
+        ans += tmp;
+        mp[tmp]++;
+    }
+    forit (i, mp) {
+        if (i->second >= 2) {
+            tmp = 0;
+            forit (j, mp) {
+                if (j->first != i->first) {
+                    tmp += (j->first) * (j->second);
+                } else if (i->second > 3) {
+                    tmp += j->first * (j->second - 3);
+                }
+            }
+            ans = min (ans, tmp);
+        }
+    }
+    cout << (sz (mp) == 1 ? (mp.begin()->first * (mp.begin()->second - 3) ) :
+             (ans) ) << endl;
     return 0;
 }
-

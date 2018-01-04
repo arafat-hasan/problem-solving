@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: C.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 28-12-17 21:22:32 (+06)
+ * LAST MODIFIED: 28-12-17 23:24:31 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 28-12-17     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,6 +100,18 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
+    vi v (3);
+    cin >> v[0] >> v[1] >> v[2];
+    sort (all (v) );
+
+    if (v[0] == 1 or \
+        (v[0] == 2 and v[1] == 2) or \
+        (v[0] == 3 and v[2] == 3)  or \
+        (v[0] == 2 and v[1] == 4 and v[2] == 4) ) {
+        cout << "YES\n";
+    } else cout << "NO\n";
+
     return 0;
 }
+
 

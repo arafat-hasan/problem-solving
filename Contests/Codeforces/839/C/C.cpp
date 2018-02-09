@@ -6,7 +6,7 @@
  * LINK:
  *
  * DATE CREATED: 12-08-17 21:22:58 (BST)
- * LAST MODIFIED: 13-08-17 00:22:17 (BST)
+ * LAST MODIFIED: 26-01-18 19:18:56 (+06)
  *
  * DESCRIPTION:
  *
@@ -96,40 +96,38 @@ typedef vector<int>         vi;
 
 ////////////////////////// START HERE //////////////////////////
 
-int color[MAX];
-int cnt = 0;
 vi adj[MAX];
-int foo[MAX], path[MAX];
 
-void dfs(int u) {
-    int i, v, sz;
-    sz = (int) adj[u].size();
-    if (sz == 1 and adj[u][0] != 0) cnt++;
-    color[u] = 1;
-    for (i = 0; i < sz; i++) {
-        v = adj[u][i];
-        if (color[v] == 0) {
-            dfs(v);
-            if ((int) adj[v].size() == 1) path[v] = 1;
-            path[u] += (path[v]);
-            foo[u] += (foo[v] + path[v]);
-        }
+double dfs (int u, int p) {
+    int cnt = 0;
+    double res = 0.0;
+
+    for (int i : adj[u]) {
+        if (p == i) continue;
+
+        res += dfs (i, u);
+        cnt++;
     }
-    color[u] = 2;
+
+    if (!cnt) return 0.0;
+
+    return (res / cnt) + 1.0;
 }
 
 int main() {
     __FastIO;
     int n, u, v;
     cin >> n;
+
     for (int i = 1; i < n; i++) {
         cin >> u >> v;
-        adj[u].pb(v);
-        adj[v].pb(u);
+        u--; v--;
+        adj[u].pb (v);
+        adj[v].pb (u);
     }
-    dfs(1);
-    cout << fixed << setprecision(15);
-    cout << ((lf) (foo[1])) / ((lf)cnt) << '\n';
+
+    cout << fixed << setprecision (15);
+    cout << dfs (0, -1)  << '\n';
     return 0;
 }
 

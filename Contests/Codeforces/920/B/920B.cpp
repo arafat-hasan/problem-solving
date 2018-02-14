@@ -6,14 +6,14 @@
  * LINK:
  *
  * DATE CREATED: 02-02-18 21:22:11 (+06)
- * LAST MODIFIED: 02-02-18 21:53:46 (+06)
+ * LAST MODIFIED: 13-02-18 23:43:26 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 02-02-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -112,12 +112,9 @@ int main() {
             v.pb ({l, r});
         }
 
-        for (int i = 0, j = 1; i < n; i++) {
-            int tmp =  max (j, v[i].first);
-            tmp = (tmp > v[i].second ? 0 : tmp);
-            cout << tmp << ' ';
-
-            if ( (v[i].first != v[i].second) or v[i].first == j) j++;
+        for (int i = 0, j = 0; i < n; i++, j++) {
+            j =  max (j, v[i].first);
+            cout << (j > v[i].second ? ! (j--) : j) << ' ';
         }
 
         cout << '\n';

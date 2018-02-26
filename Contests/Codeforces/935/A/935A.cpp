@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 935A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 19-02-18 22:41:39 (+06)
+ * LAST MODIFIED: __last_modified
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 19-02-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,27 +100,16 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
-    int n;
-    vi forb;
+    int n, cnt = 0;
     cin >> n;
-    vi v (n);
-    rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
 
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
-
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
-
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
+    for (int i = 1; i < n; i++) {
+        if ( (n - i) % i == 0) {
+            cnt++;
         }
     }
 
-    cout << "YES\n";
+    cout << cnt << endl;
     return 0;
 }
 

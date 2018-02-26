@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 940A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 24-02-18 15:35:13 (+06)
+ * LAST MODIFIED: 24-02-18 15:54:21 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 24-02-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,27 +100,21 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
-    int n;
-    vi forb;
-    cin >> n;
-    vi v (n);
-    rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
+    int n, d, arr[101], mx = -INF;
+    cin >> n >> d;
+    rep (i, n) cin >> arr[i];
+    sort (arr, arr + n);
 
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
-
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
-
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
+    for (int i = 0, j = 0; i < n and j < n; j++) {
+        if (abs (arr[j] - arr[i]) > d) {
+            i++;
+            j--;
+        } else {
+            mx = max (mx, j - i);
         }
     }
 
-    cout << "YES\n";
+    cout << n - mx - 1 << endl;
     return 0;
 }
 

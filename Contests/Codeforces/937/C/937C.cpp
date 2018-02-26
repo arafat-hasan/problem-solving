@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 937C.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 25-02-18 23:43:34 (+06)
+ * LAST MODIFIED: 26-02-18 16:53:32 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 25-02-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,27 +100,38 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
-    int n;
-    vi forb;
-    cin >> n;
-    vi v (n);
-    rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
+    ll k, d, t;
+    cin >> k >> d >> t;
 
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
+    if (k % d == 0) return ! (cout << t << endl);
 
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
+    llf ans = 0.0, bar = (llf) t;
 
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
+    if (d < k) {
+        ll md = k % d;
+
+        while (ans < bar) {
+            ans += (llf) k;
+
+            if (ans >= bar) break;
+
+            ans += (llf) md / 2.0;
+            debug2 (ans, md);
+        }
+    } else {
+        ll md = d % k;
+
+        while (ans < bar) {
+            ans += (llf) k;
+
+            if (ans >= bar) break;
+
+            ans += (llf) md / 2.0;
         }
     }
 
-    cout << "YES\n";
+    cout << fixed << setprecision (14);
+    cout << ans << endl;
     return 0;
 }
 

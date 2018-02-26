@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 312A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 27-02-18 00:47:44 (+06)
+ * LAST MODIFIED: 27-02-18 01:29:16 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 27-02-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -101,26 +101,17 @@ typedef vector<long long>   vl;
 int main() {
     __FastIO;
     int n;
-    vi forb;
+    string str;
     cin >> n;
-    vi v (n);
-    rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
-
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
-
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
-
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
-        }
+    cin.ignore();
+    rep (i, n) {
+        getline (cin, str);
+        debug1(str);
+        bool fred = (str.find_last_of (".alal") ==  (str.size() - 1) ? true : false);
+        bool rainbow = (str.find ("miao.") == 0 ? true : false);
+        debug1(str.find_last_of (".alal"));
+        puts ( ! (fred ^ rainbow) ? "OMG>.< I don't know!" : (fred ? "Freda's" : "Rainbow's") );
     }
-
-    cout << "YES\n";
     return 0;
 }
 

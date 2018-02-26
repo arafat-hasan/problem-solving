@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 938B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
- * LINK:
+ * LINK: http://codeforces.com/contest/938/problem/B
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 16-02-18 21:30:56 (+06)
+ * LAST MODIFIED: 18-02-18 00:55:02 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 16-02-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -94,33 +94,30 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             10000007 //1e7+7
+#define MAX             1000000
 
 ////////////////////////// START HERE //////////////////////////
 
 int main() {
     __FastIO;
     int n;
-    vi forb;
-    cin >> n;
+    int half = MAX / 2;
+    cin >> n ;
     vi v (n);
     rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
+    sort (all (v) );
+    int ami = -1;
 
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
-
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
-
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
+    for (int i = 0; i < n; i++) {
+        if (v[i] > half) {
+            ami = i;
+            break;
         }
     }
 
-    cout << "YES\n";
+    int amar_kharach = (ami == -1 ? v[n - 1] - 1 : v[ami - 1] - 1);
+    int tahar_kharach = (ami == -1 ? 0 : MAX - v[ami]);
+    cout << max (amar_kharach, tahar_kharach) << endl;
     return 0;
 }
 

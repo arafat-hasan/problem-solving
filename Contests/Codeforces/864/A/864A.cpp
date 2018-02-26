@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 864A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 18-02-18 14:58:26 (+06)
+ * LAST MODIFIED: 18-02-18 15:10:54 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 18-02-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,27 +100,26 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
-    int n;
-    vi forb;
+    int n, tmp;
+    bool ans = false;
     cin >> n;
-    vi v (n);
-    rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
+    map<int, int> mp;
+    rep (i, n) cin >> tmp, mp[tmp]++;
 
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
-
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
-
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
-        }
+    if (sz (mp) == 2) {
+        if (mp.begin()->second == n / 2)
+            ans  = true;
     }
 
-    cout << "YES\n";
+    if (ans) {
+        cout << "YES\n";
+
+        for (auto i : mp)
+            cout << i.first << ' ';
+
+        cout << '\n';
+    } else cout << "NO\n";
+
     return 0;
 }
 

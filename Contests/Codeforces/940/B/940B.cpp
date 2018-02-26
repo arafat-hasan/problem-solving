@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 940B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 24-02-18 16:01:02 (+06)
+ * LAST MODIFIED: 24-02-18 16:54:06 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 24-02-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -98,30 +98,78 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
-int main() {
-    __FastIO;
-    int n;
-    vi forb;
-    cin >> n;
-    vi v (n);
-    rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
+ll k, a, b;
 
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
-
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
-
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
-        }
+ll fun (ll sum, ll n) {
+    if (k == 1) {
+        return  (n - 1) * a;
     }
 
-    cout << "YES\n";
+    if (n < k) {
+        sum += ( (n - 1) * a);
+        return sum;
+    }
+
+    if (n % k != 0 and n > k) {
+        sum += ( (n % k) * a);
+        n -= (n % k);
+    }
+
+    if ( (n - (n / k) ) * a > b and n % k == 0) {
+        sum += b;
+        n /= k;
+    } else if ( (n - (n / k) ) * a < b) {
+        sum += ( (n - 1) * a);
+        return sum;
+    } else {
+        sum += a;
+        n--;
+    }
+
+    return fun (sum, n);
+}
+
+int main() {
+    __FastIO;
+    ll n;
+    cin >> n >> k >> a >> b;
+    cout << fun (n, 0) << endl;
     return 0;
 }
 
 
+//int main() {
+//    __FastIO;
+//    ll n, k, a, b, sum = 0;
+//    cin >> n >> k >> a >> b;
+
+//    if (k == 1) {
+//        return ! (cout << (n - 1) * a);
+//    }
+
+//    while (n != 1) {
+//        if (n < k) {
+//            sum += ( (n - 1) * a);
+//            break;
+//        }
+
+//        if (n % k != 0 and n > k) {
+//            sum += ( (n % k) * a);
+//            n -= (n % k);
+//        }
+
+//        if ( (n - (n / k) ) * a > b and n % k == 0) {
+//            sum += b;
+//            n /= k;
+//        } else if ( (n - (n / k) ) * a < b) {
+//            sum += ( (n - 1) * a);
+//            break;
+//        } else {
+//            sum += a;
+//            n--;
+//        }
+//    }
+
+//    cout << sum << endl;
+//    return 0;
+//}

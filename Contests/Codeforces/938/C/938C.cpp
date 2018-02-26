@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 938C.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 16-02-18 22:09:31 (+06)
+ * LAST MODIFIED: 17-02-18 01:26:50 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 16-02-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -98,29 +98,79 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
+bool chk (int n, int m, int x) {
+    int tmp = n / m;
+    tmp = tmp * tmp;
+    tmp = (n * n) - tmp;
+    return tmp == x;
+}
+
 int main() {
-    __FastIO;
-    int n;
-    vi forb;
-    cin >> n;
-    vi v (n);
-    rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
+    //__FastIO;
+    int t, x;
+    int n = 0, m = 0;
+    cin >> t;
 
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
+    while (t--) {
+        //for (int k = 1; k < 100000; k++) {
+        cin >> x;
+        //x = k;
+        //cout << x << ' ';
+        int root = (int) sqrt (x) - 3;
+        root = (root < 1 ? 1 : root);
 
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
+        while ( (root * root) < x) root++;
 
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
+        //debug2 (x, root);
+        bool fl = false;
+
+        for (int i = 0; i < 50000; i++, root++) {
+upore:
+            int borgo = root * root;
+            int number_of_zero = borgo - x;
+            int sqrt_of_number_of_zero = (int) sqrt (number_of_zero) - 3;
+            //debug3 (borgo, number_of_zero,  sqrt_of_number_of_zero);
+            sqrt_of_number_of_zero = (sqrt_of_number_of_zero < 1 ? 1 :
+                                      sqrt_of_number_of_zero);
+
+            while ( (sqrt_of_number_of_zero * sqrt_of_number_of_zero) < number_of_zero)
+                sqrt_of_number_of_zero++;
+
+            //debug3 (root, number_of_zero,  sqrt_of_number_of_zero);
+
+            if ( (sqrt_of_number_of_zero *  sqrt_of_number_of_zero) > number_of_zero)
+                continue;
+
+            //ckk;
+
+            for (int j = 1; j <= 1000; j++) {
+                int tmp = root / j;
+                //debug2 (tmp, sqrt_of_number_of_zero);
+
+                if (tmp == sqrt_of_number_of_zero) {
+                    n = root;
+                    m = j;
+                    bool check = chk (n, m, x);
+
+                    if (check == false) {
+                        root++;
+                        goto upore;
+                    }
+
+                    fl = true;
+                    break;
+                }
+            }
+
+            if (fl) break;
         }
+
+        if (fl)
+            cout << n << ' ' << m << '\n';
+        else cout << "-1\n";
     }
 
-    cout << "YES\n";
+    //}
     return 0;
 }
 

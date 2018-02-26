@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 939D.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 17-02-18 23:44:05 (+06)
+ * LAST MODIFIED: 18-02-18 00:18:59 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 17-02-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -98,29 +98,44 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
+vector<int> adj[30];
+bool vis[30];
+vpii uttor;
+
+void dfs (int s) {
+    vis[s] = true;
+
+    for (int i : adj[s]) {
+        if (vis[i]) continue;
+
+        uttor.pb ({s, i});
+        dfs (i);
+    }
+}
+
 int main() {
     __FastIO;
     int n;
-    vi forb;
-    cin >> n;
-    vi v (n);
-    rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
+    string tal, val;
+    set<int> kichuna;
+    cin >> n >> tal >>  val;
 
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
-
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
-
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
-        }
+    for (int i = 0; i < n; i++) {
+        int tmp1 = tal[i] - 'a';
+        int tmp2 = val[i] - 'a';
+        kichuna.insert (tmp1);
+        adj[tmp1].pb (tmp2);
+        adj[tmp2].pb (tmp1);
     }
 
-    cout << "YES\n";
+    for (auto i : kichuna)
+        dfs (i);
+
+    cout << sz (uttor) << '\n';
+
+    for (auto i : uttor)
+        cout << (char) (i.first + 'a') << ' ' << (char) (i.second + 'a') << '\n';
+
     return 0;
 }
 

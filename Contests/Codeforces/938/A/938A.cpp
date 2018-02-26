@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 938A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 16-02-18 21:07:13 (+06)
+ * LAST MODIFIED: __last_modified
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 16-02-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -98,29 +98,29 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
+bool isvowel (char ch) {
+    return (ch == 'a' or ch == 'e' or ch == 'i' or ch == 'o' or ch == 'u'
+            or ch == 'y');
+}
+
 int main() {
     __FastIO;
     int n;
-    vi forb;
-    cin >> n;
-    vi v (n);
-    rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
+    string str;
+    cin >> n >> str;
+    str.erase (str.begin() + n, str.end() );
 
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
-
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
-
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
+    for (int i = 0; i < sz (str); i++) {
+        for (int j = 1; j < sz (str); j++) {
+            if (isvowel (str[j - 1]) and isvowel (str[j]) ) {
+                str.erase (str.begin() + j);
+                i = 0;
+                break;
+            }
         }
     }
 
-    cout << "YES\n";
+    cout << str << endl;
     return 0;
 }
 

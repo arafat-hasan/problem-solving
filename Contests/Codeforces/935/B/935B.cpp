@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 935B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 19-02-18 22:59:13 (+06)
+ * LAST MODIFIED: 20-02-18 03:29:16 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 19-02-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,27 +100,22 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
-    int n;
-    vi forb;
-    cin >> n;
-    vi v (n);
-    rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
+    int n, x = 0, y = 0, cnt = 0, pos = 0, tmp;
+    string str;
+    cin >> n >> str;
 
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
+    for (int i = 0; i < sz (str); i++) {
+        str[i] == 'U' ? y++ : x++;
+        tmp = x - y;
 
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
-
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
+        if ( (tmp > 0 and pos < 0) or (tmp < 0 and pos > 0) ) {
+            cnt++;
         }
+
+        pos = (tmp > 0 ? 1 : (tmp < 0 ? -1 : pos) );
     }
 
-    cout << "YES\n";
+    cout << cnt << endl;
     return 0;
 }
 

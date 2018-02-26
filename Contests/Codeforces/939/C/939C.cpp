@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 939C.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 17-02-18 17:05:59 (+06)
+ * LAST MODIFIED: 17-02-18 17:50:39 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 17-02-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,27 +100,41 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
-    int n;
-    vi forb;
+    int n, s, f;
+    ll arr[100005];
     cin >> n;
-    vi v (n);
-    rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
+    rep (i, n) cin >> arr[i];
 
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
+    for (int i = 1; i < n; i++) {
+        arr[i] = arr[i] + arr[i - 1];
+    }
 
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
+    cin >> s >> f;
+    int window_size = f - s;
+    int uttor = 1, right_pivot;
+    ll sum, sum_one, sum_two, mx = -1e18 - 1000;
 
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
+    for (int i = s - 1, j = 0; j < n; i--, j++) {
+        if (i < 0) i = n - 1;
+
+        right_pivot = i + window_size - 1;
+
+        if (right_pivot >= n) {
+            right_pivot %= n;
+            sum_one = arr[n - 1] - (i - 1 < 0 ? 0 : arr[i - 1]);
+            sum_two = arr[right_pivot];
+            sum = sum_one + sum_two;
+        } else {
+            sum = arr[right_pivot] - (i - 1 < 0 ? 0 : arr[i - 1]);
+        }
+
+        if (mx < sum) {
+            mx = sum;
+            uttor = j;
         }
     }
 
-    cout << "YES\n";
+    cout << uttor + 1 << endl;
     return 0;
 }
 

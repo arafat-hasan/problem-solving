@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 934B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 14-02-18 18:38:02 (+06)
+ * LAST MODIFIED: 14-02-18 18:57:12 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 14-02-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -94,33 +94,33 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             10000007 //1e7+7
-
+#define MAX             1e18
 ////////////////////////// START HERE //////////////////////////
-
 int main() {
     __FastIO;
-    int n;
-    vi forb;
-    cin >> n;
-    vi v (n);
-    rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
+    ull k;
+    string str;
+    cin >> k;
 
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
+    if (k == 1) return ! (cout << "4\n");
 
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
+    if (k > 36) return ! (cout << "-1\n");
 
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
-        }
-    }
+    ll even = (k & 1 ? k - 1 : k) / 2;
 
-    cout << "YES\n";
+    for (int i = 0; i < even; i++)
+        str.pb ('8');
+
+    if (k & 1) str.pb ('0');
+
+    stringstream ss;
+    ss << str;
+    ull tmp;
+    ss >> tmp;
+
+    if (tmp > MAX) return ! (cout << "-1\n");
+
+    cout << tmp << endl;
     return 0;
 }
 

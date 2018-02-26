@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 932B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 15-02-18 20:44:02 (+06)
+ * LAST MODIFIED: 15-02-18 20:59:26 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 15-02-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -94,33 +94,61 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             10000007 //1e7+7
+#define MAX             1000006 //1e6+6
 
 ////////////////////////// START HERE //////////////////////////
 
-int main() {
-    __FastIO;
-    int n;
-    vi forb;
-    cin >> n;
-    vi v (n);
-    rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
+int bar[MAX + 6];
+unordered_map< int, vector<int> > store;
 
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
+int findFrequency (int left, int right, int element) {
+    int a = (int) (lower_bound (store[element].begin(), store[element].end(),
+                                left) -  store[element].begin() );
+    int b = (int) (upper_bound (store[element].begin(), store[element].end(),
+                                right) - store[element].begin() );
+    return b - a;
+}
 
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
+int fun (int n) {
+    int p = 1;
 
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
-        }
+    while (n > 0) {
+        int tmp = n % 10;
+        p *= (tmp ? tmp : 1);
+        n /= 10;
     }
 
-    cout << "YES\n";
+    return p;
+}
+
+int main() {
+    __FastIO;
+    int q, l, r, k, n, cnt;
+
+    for (int i = 1; i < MAX; i++) {
+        n = i;
+
+        while (n >= 10) {
+            n = fun (n);
+        }
+
+        bar[i] = n;
+        //debug2 (i, n);
+    }
+
+    int sz = sizeof (bar) / sizeof (bar[0]);
+
+    for (int i = 0; i < sz; ++i)
+        store[bar[i]].push_back (i + 1);
+
+    cin >> q;
+
+    while (q--) {
+        cin >> l >> r >> k;
+        cnt  = findFrequency (l + 1, r + 1, k);
+        cout << cnt << '\n';
+    }
+
     return 0;
 }
 

@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 935C.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 20-02-18 00:02:14 (+06)
+ * LAST MODIFIED: 20-02-18 18:12:52 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 20-02-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -93,35 +93,43 @@ typedef vector<long long>   vl;
 #define PI              acos(-1.0)
 #define INF             0x7fffffff
 #define MOD             1000000007
-#define EPS             1e-7
+#define EPS             1e-13
 #define MAX             10000007 //1e7+7
 
 ////////////////////////// START HERE //////////////////////////
 
 int main() {
     __FastIO;
-    int n;
-    vi forb;
-    cin >> n;
-    vi v (n);
-    rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
+    lf R, x1, y1, x2, y2;
+    cout << "82 1928 -30264 2004 -30294\n";
+    cin >> R >> x1 >> y1 >> x2 >> y2;
+    cout << fixed << setprecision (12);
+    lf distance = sqrt (pow (x2 - x1, 2) + pow (y2 - y1, 2) );
+    lf r = (R + distance) / 2, m = 0, x3, y3, ans_x, ans_y;
 
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
+    if (fabs (x1 - x2) < EPS) {
+        x3 = x1;
 
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
+        if ( (fabs (y1 - y2) < EPS) )
+            return ! (cout << x1 + R / 2 << ' ' << y1 << ' ' << R / 2 << endl);
 
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
-        }
+        y3 = (y2 > y1 ? y1 - R : y1 + R);
+    } else if (fabs (y1 - y2) < EPS) {
+        y3 = y1;
+        x3 = (x2 > x1 ? x1 - R : x1 + R);
+    } else {
+        m = (y2 - y1) / (x2 - x1);
+        x3 = sqrt ( (R * R) / ( (1 + (m * m) ) * 10000) ) * 100 + x1;
+        y3 = m * sqrt ( (R * R) / (1 + (m * m) ) ) + y1;
+        //x3 = 2 * x2 - x1;
+        //y3 = 2 * y2 - y1;
+        debug2 (m, R);
+        ckk;
     }
 
-    cout << "YES\n";
+    debug3 (distance, r, m);
+    debug2 (x3, y3);
+    ans_x = r > R ? x1 : (x2 + x3) / 2, ans_y = r > R ? y1 : (y2 + y3) / 2;
+    cout << ans_x << ' ' << ans_y << ' ' << min (R, r) << endl;
     return 0;
 }
-
-

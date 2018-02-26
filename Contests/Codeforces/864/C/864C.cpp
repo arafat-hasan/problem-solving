@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 864C.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 18-02-18 16:21:28 (+06)
+ * LAST MODIFIED: 22-02-18 23:34:44 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 18-02-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,28 +100,47 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
-    int n;
-    vi forb;
-    cin >> n;
-    vi v (n);
-    rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
+    int a, b, f, k;
+    cin >> a >> b >> f >> k;
+    //debug3 (a, b, f);
 
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
+    if (b < f or (a - f) > b) return ! (cout << "-1\n");
 
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
+    int cokkor = (k & 1 ? k - 1 : k) / 2;
+    int fuel_now = b, cnt = 0;
+    bool first_time = true;
+    int prothom2 = 2 * f;
+    int ditio2 = 2 * (a - f);
+    int last_trip = (k & 1 ? -1 : k / 2 - 1);
+    //debug3 (prothom2, ditio2, last_trip);
+    //ckk;
 
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
+    for (int trip = 0; trip < cokkor; trip++, first_time = false) {
+        fuel_now -= (first_time ? f : prothom2);
+        fuel_now = (fuel_now < ditio2 ? (cnt++, b) : fuel_now);
+        //debug3 ("first: ", fuel_now, cnt);
+        fuel_now -= ditio2;
+
+        if (fuel_now < 0) return ! (cout << "-1\n");
+
+        if (trip == last_trip) {
+            fuel_now = (fuel_now < f ? (cnt++, b) : fuel_now);
+        } else {
+            fuel_now = (fuel_now < prothom2 ? (cnt++, b) : fuel_now);
         }
+
+        //debug3 ("sec: ", fuel_now, cnt);
+        if (fuel_now < 0) return ! (cout << "-1\n");
     }
 
-    cout << "YES\n";
+    if (k & 1) {
+        fuel_now -= (first_time ? f : prothom2);
+        if (fuel_now < 0) return ! (cout << "-1\n");
+        //debug3 ("sec: ", fuel_now, cnt);
+        fuel_now -= (fuel_now < (a - f) ? (cnt++, b) : fuel_now);
+    }
+
+    cout << cnt << endl;
     return 0;
 }
-
 

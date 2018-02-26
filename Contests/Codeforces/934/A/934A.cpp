@@ -1,19 +1,19 @@
 /*
- * FILE: 920C.cpp
+ * FILE: 934A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 02-02-18 22:04:37 (+06)
- * LAST MODIFIED: 15-02-18 12:08:39 (+06)
+ * DATE CREATED: 14-02-18 18:09:12 (+06)
+ * LAST MODIFIED: 15-02-18 00:47:00 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 02-02-18     1.0         {{File Created}}
+ * 14-02-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,28 +100,38 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
-    int n;
-    vi forb;
-    cin >> n;
-    vi v (n);
-    rep (i, n) cin >> v[i];
-    rep (i, n - 1) cin >> forb[i];
-    forr (i, 1, n - 2) forb[i] += forb[i - 1];
+    ll n, m, bar = 0;
+    ll mx = (ll) ( - 1e18 - 10);
+    ll tmp;
+    cin >> n >> m;
+    vi a (n), b (m);
+    rep (i, n) cin >> a[i];
+    rep (i, m) cin >> b[i];
 
-    for (int i = 0; i < n - 1; i++) {
-        if (v[i] > i + 1) {
-            int tmp = forb[v[i] - 1] - forb[i - 1];
+    for (ll j = 0; j < n; j++) {
+        for (ll k = 0; k < m; k++) {
+            tmp =  (ll) a[j] * b[k];
 
-            if (tmp != (v[i] - i - 1) ) return ! (cout << "NO\n");
-        } else if (v[i] < i + 1) {
-            int tmp = forb[i] - forb[v[i] - 1];
-
-            if (tmp != (i - v[i] + 1) ) return ! (cout << "NO\n");
+            if (mx <= tmp) {
+                mx = tmp;
+                bar = j;
+            }
         }
     }
 
-    cout << "YES\n";
+    a.erase (a.begin() + bar);
+    mx = (ll) ( - 1e18 - 10);
+
+    for (ll j = 0; j < n - 1; j++) {
+        for (ll k = 0; k < m; k++) {
+            tmp =  (ll) a[j] * b[k];
+
+            if (mx <= tmp) {
+                mx = tmp;
+            }
+        }
+    }
+
+    cout << mx << endl;
     return 0;
 }
-
-

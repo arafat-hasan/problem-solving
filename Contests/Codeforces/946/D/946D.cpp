@@ -1,19 +1,19 @@
 /*
- * FILE: Again_Prime_No_Time-10780.cpp
+ * FILE: 946D.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 06-03-18 16:41:24 (+06)
- * LAST MODIFIED: 06-03-18 16:58:17 (+06)
+ * DATE CREATED: 06-03-18 22:26:36 (+06)
+ * LAST MODIFIED: 07-03-18 01:25:45 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 28 Jan 2017  1.0         {{File Created}}
+ * 06-03-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -95,104 +95,122 @@ typedef vector<long long>   vl;
 #define MOD             1000000007
 #define EPS             1e-7
 #define MAX             10000007 //1e7+7
-#define MAXS            100005 //1e5+5
 
 ////////////////////////// START HERE //////////////////////////
 
-bool isPrime[MAXS]; //for sieve
-int prime[MAXS]; //for sieve
-int fact[100][2]; //for prime factor
-vpii utpapdok[10005];
-//int isPrime[MAXS], prime[MAXS];  // Primes class
-//100 will be replaced with max number of factors
-
-int sieve (int n) {
-    int i, res, j;
-    double root = sqrt (n);
-    isPrime[0] = isPrime[1] = 1;
-
-    for (i = 4; i < n; i += 2)
-        isPrime[i] = 1;
-
-    for (i = 3, j = 0; i <= root; i += 2) {
-        if (!isPrime[i]) {
-            for (j = i * i; j < n; j += 2 * i)
-                isPrime[j] = 1;
-        }
-    }
-
-    for (i = 0, res = 0; i < n; i++) {
-        if (isPrime[i] == 0) {
-            prime[res++] = i;
-        }
-    }
-
-    return (res - 1);
-}
-
-int primefactor (int n, int primesize) {
-    // res is return value of seive
-    int i, j;
-
-    if (n == 0 || isPrime[n] == 0)
-        return 0;
-
-    for (i = 0, j = 0; i < primesize; i++) {
-        if (n % prime[i] == 0) {
-            fact[j][0] = prime[i];
-            fact[j][1] = 0;
-
-            while (n % prime[i] == 0) {
-                n /= prime[i];
-                fact[j][1]++;
-            }
-
-            j++;
-        }
-    }
-
-    return j;
-}
 int main() {
     __FastIO;
-    int t, n, m, cs = 0;
-    int prime_sz = sieve (10005);
-
-    for (int i = 1; i < 10005; i++) {
-        int sz = primefactor (i, prime_sz);
-
-        for (int j = 0; j < sz; j++) {
-            for (int k = 0; k < fact[j][1]; k++)
-                utpapdok[i].pb (fact[j][0]);
-        }
+    int n, m, skip;
+    string str[502];
+    cin >> n >> m >> skip;
+    rep (i, n) {
+        cin >> str[i];
     }
 
-    for (int i = 0; i < 10; i++) {
-        for (auto j : utpapdok[i]) debug2 (i, j);
+    for (int i = 0; i < skip; i++) {
+        int mx = -INF, mx_j = -1, mx_k = -1;
 
+        for (int j = 0; j < n; j++) {
+            //debug1 (str[j]);
+            bool fl = false, close = false;
+            int cnt = 0;
+            int cnt_k = -1;
+
+            for (int k = 0; k < m; k++) {
+                if (fl == true) {
+                    if (str[j][k] == '0') cnt++;
+                    else {
+                        close = true;
+                        break;
+                    }
+                }
+
+                if (str[j][k] == '1') {
+                    cnt_k = k;
+                    fl = true;
+                }
+            }
+
+            if (fl == false) continue;
+
+            if (close == false) cnt = 0;
+
+            //debug2 (cnt, cnt_k);
+
+            if (mx < cnt) {
+                mx = cnt;
+                mx_j = j;
+                mx_k = cnt_k;
+            }
+
+            fl = false;
+            cnt = 0;
+            cnt_k = -1;
+            close = false;
+
+            for (int k = m - 1; k >= 0; k--) {
+                if (fl == true) {
+                    if (str[j][k] == '0') cnt++;
+                    else {
+                        close = true;
+                        break;
+                    }
+                }
+
+                if (str[j][k] == '1') {
+                    cnt_k = k;
+                    fl = true;
+                }
+            }
+
+            if (close == false) cnt = 0;
+
+            //debug2 (cnt, cnt_k);
+
+            if (mx < cnt) {
+                mx = cnt;
+                mx_j = j;
+                mx_k = cnt_k;
+            }
+        }
+
+        debug3 (mx, mx_j, mx_k);
+
+        if (mx_k != -1 and mx_j != -1)
+            str[mx_j][mx_k] = '0';
+
+        rep (kk, n) {
+            cout << str[kk] << endl;
+        }
         ckk;
     }
 
-    //cin >> t;
-    //while (t--) {
-    //    cin >> m >> n;
-    //    int sz = primefactor (m, prime_sz);
-    //    //fact[][];
-    //    int foo[sz][2];
-    //    for (int i = 0; i < sz; i++) foo[i][1] = 0, foo[i][0] = fact[i][0];
-    //    for (int i = 1; i <= n; i++) {
-    //        for (int j = 0; j < sz (utpapdok[i]); j++) {
-    //            for (int k = 0; k < sz; k++) {
-    //                if (fact[k][0] == utpapdok[i][j]) {
-    //                    foo[k][1]++;
-    //                }
-    //            }
-    //        }
-    //    }
-    //    for (int i = 0; i < sz; i++) {
-    //        debug2 (foo[i][0], foo[i][1]);
-    //    }
-    //}
+    int ans = 0;
+
+    for (int j = 0; j < n; j++) {
+        int left = -1, right = -1;
+
+        for (int k = 0; k < m; k++) {
+            if (str[j][k] == '1') {
+                left = k;
+                break;
+            }
+        }
+
+        for (int k = m - 1; k >= 0; k--) {
+            if (str[j][k] == '1') {
+                right = k;
+                break;
+            }
+        }
+
+        debug3 (str[j], left, right);
+
+        if (! (right == -1 or left == -1) ) ans += (right - left + 1);
+    }
+
+    cout << ans << endl;
     return 0;
 }
+
 

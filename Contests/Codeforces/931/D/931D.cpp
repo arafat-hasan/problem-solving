@@ -1,19 +1,19 @@
 /*
- * FILE: Again_Prime_No_Time-10780.cpp
+ * FILE: 931D.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 06-03-18 16:41:24 (+06)
- * LAST MODIFIED: 06-03-18 16:58:17 (+06)
+ * DATE CREATED: 04-03-18 22:34:38 (+06)
+ * LAST MODIFIED: 04-03-18 22:34:41 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 28 Jan 2017  1.0         {{File Created}}
+ * 04-03-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -94,105 +94,79 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             10000007 //1e7+7
-#define MAXS            100005 //1e5+5
+#define MAX             100005 //1e5+5
 
 ////////////////////////// START HERE //////////////////////////
 
-bool isPrime[MAXS]; //for sieve
-int prime[MAXS]; //for sieve
-int fact[100][2]; //for prime factor
-vpii utpapdok[10005];
-//int isPrime[MAXS], prime[MAXS];  // Primes class
-//100 will be replaced with max number of factors
 
-int sieve (int n) {
-    int i, res, j;
-    double root = sqrt (n);
-    isPrime[0] = isPrime[1] = 1;
+vector<int> adj [MAX], level[MAX]; // for BFS & bfs_vis
+int cost[MAX]; // for BFS & bfs_vis
+vector<bool> val (MAX, 1);
 
-    for (i = 4; i < n; i += 2)
-        isPrime[i] = 1;
+int bfs (int s, int n) {
+    int i, cn, v, sz;
 
-    for (i = 3, j = 0; i <= root; i += 2) {
-        if (!isPrime[i]) {
-            for (j = i * i; j < n; j += 2 * i)
-                isPrime[j] = 1;
-        }
-    }
+    for (i = 0; i < n; i++)
+        cost[i] = INT_MAX;
 
-    for (i = 0, res = 0; i < n; i++) {
-        if (isPrime[i] == 0) {
-            prime[res++] = i;
-        }
-    }
+    queue<int> Q;
+    Q.push (s);
+    cost[s] = 0;
 
-    return (res - 1);
-}
+    while (!Q.empty() ) {
+        cn = Q.front();
+        Q.pop();
+        sz = (int) adj[cn].size();
 
-int primefactor (int n, int primesize) {
-    // res is return value of seive
-    int i, j;
+        for (i = 0; i < sz; i++) {
+            v = adj[cn][i];
 
-    if (n == 0 || isPrime[n] == 0)
-        return 0;
-
-    for (i = 0, j = 0; i < primesize; i++) {
-        if (n % prime[i] == 0) {
-            fact[j][0] = prime[i];
-            fact[j][1] = 0;
-
-            while (n % prime[i] == 0) {
-                n /= prime[i];
-                fact[j][1]++;
+            if (cost[cn] + 1 < cost[v]) {
+                Q.push (v);
+                cost[v] = cost[cn] + 1;
             }
-
-            j++;
         }
     }
 
-    return j;
-}
-int main() {
-    __FastIO;
-    int t, n, m, cs = 0;
-    int prime_sz = sieve (10005);
-
-    for (int i = 1; i < 10005; i++) {
-        int sz = primefactor (i, prime_sz);
-
-        for (int j = 0; j < sz; j++) {
-            for (int k = 0; k < fact[j][1]; k++)
-                utpapdok[i].pb (fact[j][0]);
-        }
-    }
-
-    for (int i = 0; i < 10; i++) {
-        for (auto j : utpapdok[i]) debug2 (i, j);
-
-        ckk;
-    }
-
-    //cin >> t;
-    //while (t--) {
-    //    cin >> m >> n;
-    //    int sz = primefactor (m, prime_sz);
-    //    //fact[][];
-    //    int foo[sz][2];
-    //    for (int i = 0; i < sz; i++) foo[i][1] = 0, foo[i][0] = fact[i][0];
-    //    for (int i = 1; i <= n; i++) {
-    //        for (int j = 0; j < sz (utpapdok[i]); j++) {
-    //            for (int k = 0; k < sz; k++) {
-    //                if (fact[k][0] == utpapdok[i][j]) {
-    //                    foo[k][1]++;
-    //                }
-    //            }
-    //        }
-    //    }
-    //    for (int i = 0; i < sz; i++) {
-    //        debug2 (foo[i][0], foo[i][1]);
-    //    }
-    //}
     return 0;
 }
+
+int main() {
+    __FastIO;
+    int n, tmp;
+    cin >> n;
+    rep (i, n - 1) {
+        cin >> tmp;
+        tmp--;
+        adj[i + 1].pb (tmp);
+        adj[tmp].pb (i + 1);
+    }
+    bfs (0, n);
+
+    for (int i = 0; i < n; i++) {
+        level[cost[i]].pb (i);
+        debug2 (i, cost[i]);
+    }
+
+    for (int j = 0; j < n; j++)
+        for (int i = 0; i < sz (level[j]); i++) {
+            debug2 (j, level[j][i]);
+        }
+
+    for (int i = 0; i < n; i++) {
+        if (val[0] == 1) ans++;
+
+        int tmp = cost[i];
+        int sum = 0;
+        for (int j = 0; j < sz (level[tmp]); j++) {
+            sum += val[level[tmp][j]];
+        }
+        if(sum&1) sum = 1;
+        else sum = 0;
+        val[i]
+    }
+
+    return 0;
+}
+
 

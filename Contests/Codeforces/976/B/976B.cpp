@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: 976B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 30-04-18 21:07:38 (+06)
+ * LAST MODIFIED: 30-04-18 22:11:07 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 30-04-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,6 +100,30 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
+    ll n, m, k;
+    cin >> n >> m >> k;
+
+    if (k < n) {
+        cout << k + 1 << ' ' << 1 << '\n';
+
+    } else {
+        ll foo = k - n + 1;
+        ll md = foo % (m - 1);
+        ll div = foo / (m - 1);
+        //debug2 (n, m);
+        //debug3 (foo, md, div);
+
+        if (div & 1) {
+            cout << (md != 0 ? n - div : n - div + 1) \
+                 << ' ' << m - md + ( (bool) md) << '\n';
+
+        } else {
+            cout << (md != 0 ?  n - div : n - div + 1) \
+                 << ' ' << md + (md == 0 ? 2 : 1) << '\n';
+        }
+    }
+
     return 0;
 }
+
 

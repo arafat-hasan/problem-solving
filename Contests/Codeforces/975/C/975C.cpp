@@ -1,11 +1,11 @@
 /*
- * FILE: {{untitled}}
+ * FILE: 975C.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
+ * DATE CREATED: 01-05-18 20:52:58 (+06)
  * LAST MODIFIED: __last_modified
  *
  * DESCRIPTION:
@@ -13,7 +13,7 @@
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 01-05-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,6 +100,40 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
+    int n, q;
+    cin >> n >> q;
+    vl k(q);
+    vpii strength;
+    pii tmp;
+    rep (i, n) {
+        cin >> tmp.first;
+        tmp.second = tmp.first;
+        strength.pb (tmp);
+    }
+    rep(i, q) cin >> k[i];
+    int lead = 0, live = n;
+    for(int i = 0; i < q; i++){
+        if(strength[lead].second > k[i]){
+            cout << live << '\n';
+            strength[lead].second -= k[i];
+        }else if(strength[lead].second == k[i]){
+            live--;
+            cout << live << '\n';
+            strength[lead].second = 0;
+            lead++;
+
+        }else{
+            live--;
+            cout << live << '\n';
+            //int die = strength[lead].second;
+            strength[lead].second = 0;
+            lead++;
+            //strength[lead].second -= (k[i] - die);
+
+        }
+    }
+
     return 0;
 }
+
 

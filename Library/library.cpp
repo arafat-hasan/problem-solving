@@ -68,8 +68,8 @@ typedef vector<int>         vi;
 #define rep(i, n)       for (__typeof (n) i=0; i<n; i++)
 #define forit(i, s)     for (__typeof ((s).end ()) i = (s).begin (); i != (s).end (); ++i)
 #define all(ar)         ar.begin(), ar.end()
-#define fill(ar, val)   memset(ar, val, sizeof(ar))
-#define clr(a)          memset(a, 0, sizeof(a))
+#define fill(a, val)    memset((a), (val), sizeof((a)))
+#define clr(a)          memset((a), 0, sizeof((a)))
 #define sz(a)           (int) a.size()
 
 #define sfll(a)         scanf("%lld", &a)
@@ -86,8 +86,8 @@ typedef vector<int>         vi;
 #define eb              emplace_back
 
 #ifndef ONLINE_JUDGE
-    #define sp              cerr << ' ';
-    #define nl              cerr << '\n';
+    #define sp              cerr << ' '
+    #define nl              cerr << '\n'
     #define ckk             cerr << "###############\n"
     #define debug1(x)       cerr << #x << ": " << x << endl
     #define debug2(x, y)    cerr << #x << ": " << x << '\t' << #y << ": " << y << endl
@@ -2445,7 +2445,7 @@ Formated I/O
 Example: std::cout << std::right << setw(5) << 123 << endl;
 //output:"  123"
 std::cout.fill('X');
-std::cout << setw(2) << one << std::endl.;
+std::cout << setw(2) << one << std::endl;
 //output: "X4"
 #include <iomanip>
 

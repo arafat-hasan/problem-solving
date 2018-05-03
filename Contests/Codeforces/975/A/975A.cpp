@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: 975A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 01-05-18 20:09:04 (+06)
+ * LAST MODIFIED: 01-05-18 20:13:37 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 01-05-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,6 +100,20 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
+    int n;
+    string str;
+    set<string> st;
+    cin >> n;
+
+    while (n--) {
+        cin >> str;
+        set<char> set (str.begin(), str.end() );
+        string unique_chars = string (set.begin(), set.end() );
+        st.insert (unique_chars);
+    }
+
+    cout << (int) st.size() << endl;
     return 0;
 }
+
 

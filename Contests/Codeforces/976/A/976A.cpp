@@ -1,11 +1,11 @@
 /*
- * FILE: {{untitled}}
+ * FILE: 976A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
+ * DATE CREATED: 30-04-18 20:44:38 (+06)
  * LAST MODIFIED: __last_modified
  *
  * DESCRIPTION:
@@ -13,7 +13,7 @@
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 30-04-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,6 +100,23 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
+    string str;
+    int n, cnt = 0;
+    cin >> n >> str;
+    rep (i, n) {
+        if (str[i] == '0') cnt++;
+    }
+
+    if (str[0] == '1') {
+        cout << '1';
+        rep (i, cnt) cout << '0';
+        cout << '\n';
+
+    } else {
+        cout << "0\n";
+    }
+
     return 0;
 }
+
 

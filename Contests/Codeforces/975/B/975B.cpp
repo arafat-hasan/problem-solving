@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: 975B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 01-05-18 20:18:29 (+06)
+ * LAST MODIFIED: 01-05-18 20:35:06 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 01-05-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,6 +100,44 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
+    ll mat[14], mx = -10e17, init[14];
+    rep (i, 14) cin >> init[i];
+
+    for (ll i = 0; i < 14; i++) {
+        rep (k, 14) mat[k] = init[k];
+
+        if (mat[i] != 0) {
+            ll tmp = mat[i], j = i + 1;
+            mat[i] = 0;
+            ll div = tmp / 14;
+            ll md = tmp % 14;
+
+            for (ll k = 0; k < 14; k++) {
+                mat[k] += div;
+            }
+
+            tmp = md;
+
+            while (tmp--) {
+                if (j == 14) j = 0;
+
+                mat[j++]++;
+            }
+
+            ll scr = 0;
+
+            for (ll k = 0; k < 14; k++) {
+                if (! (mat[k] & 1) ) {
+                    scr += mat[k];
+                }
+            }
+
+            mx = max (mx, scr);
+        }
+    }
+
+    cout << mx << endl;
     return 0;
 }
+
 

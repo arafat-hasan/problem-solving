@@ -1,11 +1,11 @@
 /*
- * FILE: {{untitled}}
+ * FILE: 977B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
+ * DATE CREATED: 07-05-18 00:32:57 (+06)
  * LAST MODIFIED: __last_modified
  *
  * DESCRIPTION:
@@ -13,7 +13,7 @@
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 07-05-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -47,7 +47,6 @@
 #include <stdint.h> //uint32_t
 #include <functional>
 #include <bitset>
-#include <unistd.h> // unsigned int sleep(unsigned int seconds);
 
 using namespace std;
 
@@ -101,6 +100,23 @@ typedef vector<long long>   vl;
 
 int main() {
     __FastIO;
+    int n, mx = -INF;
+    string str, two_gram, ans;
+    map<string, int> mp;
+    cin >> n >> str;
+
+    for (int i = 1; i < n; i++) {
+        two_gram = str.substr (i - 1, 2);
+        mp[two_gram]++;
+    }
+
+    for (auto i : mp) if (mx < i.second) {
+            mx = i.second;
+            ans = i.first;
+        }
+
+    cout << ans << endl;
     return 0;
 }
+
 

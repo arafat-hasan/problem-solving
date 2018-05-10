@@ -47,6 +47,7 @@
 #include <stdint.h> //uint32_t
 #include <functional>
 #include <bitset>
+#include <unistd.h> // unsigned int sleep(unsigned int seconds);
 
 using namespace std;
 
@@ -720,6 +721,7 @@ class Big_num {
                 for (; i >= 0; i--, k++) {
                     c[k] = (char) (sum_s (a[i] - 48, 0, carry) + 48);
                     carry = sum_c (a[i] - 48, 0, carry);
+
                 } else if (j >= 0 && i != j)
                 for (; j >= 0; j--, k++) {
                     c[k] = (char) (sum_s (0, b[j] - 48, carry) + 48);
@@ -793,6 +795,7 @@ class Big_num {
                     reminder = temp;
                     temp = temp * 10 + a[i];
                     flag = 1;
+
                 } else {
                     reminder = temp;
                     temp = temp * 10 + a[i];
@@ -950,6 +953,7 @@ int big_mod (int base, int power, int mod) {
         int p1 = base % mod;
         int p2 = (big_mod (base, power - 1, mod) ) % mod;
         return (p1 * p2) % mod;
+
     } else if (power % 2 == 0) {
         int p1 = (big_mod (base, power / 2, mod) ) % mod;
         return (p1 * p1) % mod;
@@ -1023,6 +1027,7 @@ class Sorting {
                     c[k] = a[i];
                     k++;
                     i++;
+
                 } else {
                     c[k] = a[j];
                     k++;
@@ -1069,12 +1074,14 @@ class Sorting {
                         swap (array[i], array[low]);
                         low++;
                         high++;
+
                     } else high++;
                 }
 
                 swap (array[end], array[low]);
                 quick_sort (array, start, low - 1);
                 quick_sort (array, low + 1, high);
+
             } else return;
         }
 
@@ -1282,6 +1289,7 @@ vector<string> infix_to_postfix (deque<string> v) {
         if (tmp[0] >= '0' && tmp[0] <= '9') {
             P.push_back (tmp);
         }
+
         /// Operator
         else if (tmp == "+" || tmp == "-" || tmp == "*" || tmp == "/") {
             if (tmp == "+" || tmp == "-") {
@@ -1290,6 +1298,7 @@ vector<string> infix_to_postfix (deque<string> v) {
                     P.push_back (Stk.top() );
                     Stk.pop();
                 }
+
             } else if (tmp == "*" || tmp == "/" ) {
                 while (!Stk.empty() && \
                        ( Stk.top() == "*" || Stk.top() == "/") ) {
@@ -1299,6 +1308,7 @@ vector<string> infix_to_postfix (deque<string> v) {
             }
 
             Stk.push (tmp);
+
         } else {
             if (tmp == "(") Stk.push (tmp);
             else {
@@ -1390,6 +1400,7 @@ class Subsecuence {
             if (X[m - 1] == Y[n - 1]) {
                 ans += X[m - 1];
                 lcs_print (X, Y, m - 1, n - 1);
+
             } else {
                 if (dp[m - 1][n] > dp[m][n - 1]) lcs_print (X, Y, m - 1, n);
                 else lcs_print (X, Y, m, n - 1);
@@ -1455,6 +1466,7 @@ class Subsecuence {
                     // reduce values of i, j and index
                     i--; j--; index--;
                 }
+
                 // If not same, then find the larger of two and
                 // go in the direction of larger value
                 else if (dp[i - 1][j] > dp[i][j - 1])
@@ -1504,6 +1516,7 @@ class Subsecuence {
                 for (j = 0; j + i < len; j++) {
                     if (str[j] == str[i + j]) {
                         DP[j][j + i] = (short) (DP[j + 1][j + i - 1] +  (i == 0 ? 1 : 2) );
+
                     } else {
                         DP[j][j + i] = max (DP[j + 1][j + i], DP[j][j + i - 1]);
                     }
@@ -1616,6 +1629,7 @@ int kadane (int *arr, int *start, int *finish, int n) {
         if (sum < 0) {
             sum = 0;
             local_start = i + 1;
+
         } else if (sum > maxSum) {
             maxSum = sum;
             *start = local_start;
@@ -1958,6 +1972,7 @@ void computeLPSArray (char *pat, int M, int *lps) {
             len++;
             lps[i] = len;
             i++;
+
         } else { // (pat[i] != pat[len])
             // This is tricky. Consider the example.
             // AAACAAAA and i = 7. The idea is similar
@@ -1966,6 +1981,7 @@ void computeLPSArray (char *pat, int M, int *lps) {
                 len = lps[len - 1];
                 // Also, note that we do not increment
                 // i here
+
             } else { // if (len == 0)
                 lps[i] = 0;
                 i++;
@@ -1996,6 +2012,7 @@ void KMPSearch (char *pat, char *txt) {
             printf ("Found pattern at index %d \n", i - j);
             j = lps[j - 1];
         }
+
         // mismatch after j matches
         else if (i < N && pat[j] != txt[i]) {
             // Do not match lps[0..lps[j-1]] characters,
@@ -2279,6 +2296,7 @@ class Magic_Square {
                     if (j < mn or j >= (n - mn) ) {
                         if (i < mn or i >= (n - mn) ) mat[i][j] = (i * n) +  (j + 1);
                         else mat[i][j] = (revY * n) + (revX + 1);
+
                     } else {
                         if (i >= mn and i < (n - mn) ) mat[i][j] = (i * n) +  (j + 1);
                         else mat[i][j] = (revY * n) + (revX + 1);
@@ -2372,6 +2390,7 @@ bool hasEnding (std::string const &fullString, std::string const &ending) {
     if (fullString.length() >= ending.length() ) {
         return (0 == fullString.compare (fullString.length() - ending.length(),
                                          ending.length(), ending) );
+
     } else {
         return false;
     }

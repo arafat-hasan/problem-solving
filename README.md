@@ -18,7 +18,9 @@ SPOJ: [arafat_hasan] (http://www.spoj.com/users/arafat_hasan/)
 Top Coder: [arafat_hasan] (https://www.topcoder.com/members/Arafat_Hasan/)
 
 #### usernames in other platforms
-Stackoverflow: [arafat_hasan] (https://stackoverflow.com/users/7829174/arafat-hasan/)
-GitHub: [AHJenin] (https://github.com/AHJenin/)
-Facebook: [arafathasanjenin] (https://facebook.com/arafathasanjenin)
-Twitter: [AHJenin] (https://twitter.com/AHJenin)
+Stackoverflow: [arafat_hasan] (https://stackoverflow.com/users/7829174/arafat-hasan/)  
+GitHub: [AHJenin] (https://github.com/AHJenin/)  
+Linkedin: [arafat-hasan] (https://www.linkedin.com/in/arafat-hasan)  
+Facebook: [arafathasanjenin] (https://facebook.com/arafathasanjenin)  
+Twitter: [AHJenin] (https://twitter.com/AHJenin)  
+

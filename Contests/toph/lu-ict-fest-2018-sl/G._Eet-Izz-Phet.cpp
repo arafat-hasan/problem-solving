@@ -1,19 +1,19 @@
 /*
- * FILE: 975C.cpp
+ * FILE: G._Eet-Izz-Phet.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
- * LINK: http://codeforces.com/contest/975/problem/C
+ * LINK:
  *
- * DATE CREATED: 01-05-18 20:52:58 (+06)
- * LAST MODIFIED: 12-05-18 23:38:09 (+06)
+ * DATE CREATED: 13-05-18 12:57:08 (+06)
+ * LAST MODIFIED: 13-05-18 13:18:35 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 01-05-18     1.0         {{File Created}}
+ * 13-05-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -94,32 +94,50 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             200005 //1e5+5
+#define MAX             10000007 //1e7+7
 
 ////////////////////////// START HERE //////////////////////////
 
-int a[MAX], q[MAX];
-ll asum[MAX + 1];
-
 int main() {
     __FastIO;
-    int n, nq;
-    cin >> n >> nq;
-    rep (i, n) cin >> a[i];
-    rep (i, nq) cin >> q[i];
-    forr (i, 1, n) asum[i] += asum[i - 1] + a[i - 1];
-    ll qsum = 0;
-    rep (qi, nq) {
-        qsum += q[qi];
-        int idx = (int) (upper_bound (asum, asum + n + 1, qsum) - asum);
+    int n, m;
+    string str;
+    cin >> n;
+    vector<size_t> v (n);
+    hash<string> hasher;
+    size_t hash;
+    int j = 0;
+    rep (k, n) {
+        cin >> str;
+        hash = hasher (str);
+        v[j++] = hash;
+    }
+    sort (all (v) );
+    cin >> m;
+    j = 0;
+    rep (k, m) {
+        cin >> str;
+        hash = hasher (str);
+        int lo = 0, hi = n - 1;
+        bool flag = false;
 
-        if (idx > n) {
-            cout << n << '\n';
-            qsum = 0;
+        while (lo <= hi) {
+            int mid = (lo + hi) / 2;
 
-        } else {
-            cout << n - idx + 1 << '\n';
+            if (v[mid] == hash) {
+                flag = true;
+                break;
+
+            } else if (v[mid] < hash) {
+                lo = mid + 1;
+
+            } else {
+                hi = mid - 1;
+            }
         }
+
+        if (flag == true)  cout << "yes\n";
+        else cout << "no\n";
     }
     return 0;
 }

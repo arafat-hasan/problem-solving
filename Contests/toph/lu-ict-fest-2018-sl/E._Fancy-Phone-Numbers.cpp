@@ -1,19 +1,19 @@
 /*
- * FILE: 975C.cpp
+ * FILE: E._Fancy-Phone-Numbers.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
- * LINK: http://codeforces.com/contest/975/problem/C
+ * LINK:
  *
- * DATE CREATED: 01-05-18 20:52:58 (+06)
- * LAST MODIFIED: 12-05-18 23:38:09 (+06)
+ * DATE CREATED: 13-05-18 12:17:29 (+06)
+ * LAST MODIFIED: 13-05-18 12:33:06 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 01-05-18     1.0         {{File Created}}
+ * 13-05-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -94,33 +94,84 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             200005 //1e5+5
+#define MAX             10000007 //1e7+7
 
 ////////////////////////// START HERE //////////////////////////
 
-int a[MAX], q[MAX];
-ll asum[MAX + 1];
+bool con1 (string str) {
+    for (int i = 0; i < (int) str.size(); i++) {
+        int cnt = 0;
+
+        for (int j = i + 1; j < (int) str.size(); j++) {
+            if (str[j - 1] + 1 == str[j]) cnt++;
+            else break;
+        }
+
+        if (cnt == 3) return true;
+    }
+
+    return false;
+}
+
+bool con2 (string str) {
+    for (int i = 0; i < (int) str.size(); i++) {
+        int cnt = 0;
+
+        for (int j = i + 1; j < (int) str.size(); j++) {
+            if (str[j - 1] == str[j]) cnt++;
+            else break;
+        }
+
+        if (cnt == 2) return true;
+    }
+
+    return false;
+}
+
+bool con3 (string str) {
+    for (int i = 1; i < (int) str.size(); i++) {
+        if (str[i - 1] == str[i]) {
+            for (int j = i + 2; j < (int) str.size(); j++) {
+                if (str[j - 1] == str[j]) return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+bool con4 (string str) {
+    map<char, int> mp;
+
+    for (int i = 0; i < (int) str.size(); i++) {
+        mp[str[i]]++;
+    }
+
+    int mx = -INF;
+
+    for (auto i : mp) mx = max (mx, i.second);
+
+    return mx >= 5;
+}
 
 int main() {
     __FastIO;
-    int n, nq;
-    cin >> n >> nq;
-    rep (i, n) cin >> a[i];
-    rep (i, nq) cin >> q[i];
-    forr (i, 1, n) asum[i] += asum[i - 1] + a[i - 1];
-    ll qsum = 0;
-    rep (qi, nq) {
-        qsum += q[qi];
-        int idx = (int) (upper_bound (asum, asum + n + 1, qsum) - asum);
+    int t;
+    string str;
+    cin >> t;
 
-        if (idx > n) {
-            cout << n << '\n';
-            qsum = 0;
+    while (t--) {
+        cin >> str;
+
+        if (con1 (str) or con2 (str) or con3 (str) or con4 (str) ) {
+            cout << "Fancy\n";
 
         } else {
-            cout << n - idx + 1 << '\n';
+            cout << "Not Fancy\n";
         }
     }
+
     return 0;
 }
+
 

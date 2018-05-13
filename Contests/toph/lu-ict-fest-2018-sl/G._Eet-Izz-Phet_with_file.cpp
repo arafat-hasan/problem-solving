@@ -1,19 +1,19 @@
 /*
- * FILE: 975C.cpp
+ * FILE: G._Eet-Izz-Phet.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
- * LINK: http://codeforces.com/contest/975/problem/C
+ * LINK:
  *
- * DATE CREATED: 01-05-18 20:52:58 (+06)
- * LAST MODIFIED: 12-05-18 23:38:09 (+06)
+ * DATE CREATED: 13-05-18 12:57:08 (+06)
+ * LAST MODIFIED: 13-05-18 13:18:35 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 01-05-18     1.0         {{File Created}}
+ * 13-05-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -47,6 +47,7 @@
 #include <stdint.h> //uint32_t
 #include <functional>
 #include <bitset>
+#include <fstream>
 
 using namespace std;
 
@@ -94,33 +95,40 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             200005 //1e5+5
+#define MAX             10000007 //1e7+7
 
 ////////////////////////// START HERE //////////////////////////
 
-int a[MAX], q[MAX];
-ll asum[MAX + 1];
-
 int main() {
     __FastIO;
-    int n, nq;
-    cin >> n >> nq;
-    rep (i, n) cin >> a[i];
-    rep (i, nq) cin >> q[i];
-    forr (i, 1, n) asum[i] += asum[i - 1] + a[i - 1];
-    ll qsum = 0;
-    rep (qi, nq) {
-        qsum += q[qi];
-        int idx = (int) (upper_bound (asum, asum + n + 1, qsum) - asum);
-
-        if (idx > n) {
-            cout << n << '\n';
-            qsum = 0;
-
-        } else {
-            cout << n - idx + 1 << '\n';
-        }
+    ofstream outfile;
+    outfile.open ("afile.dat");
+    int n, m;
+    string str, line;
+    cin >> n;
+    rep (i, n) {
+        cin >> str;
+        outfile << str << '\n';
     }
+    outfile.close();
+    cin >> m;
+    ifstream infile;
+    infile.open ("afile.dat");
+    rep (i, m) {
+        cin >> str;
+        bool flag = false;
+
+        while (infile >> line) {
+            if (line == str) {
+                flag = true;
+                break;
+            }
+        }
+
+        cout << (flag ? "yes\n" : "no\n");
+        infile.clear();
+        infile.seekg (0, ios::beg);
+    }
+    infile.close();
     return 0;
 }
-

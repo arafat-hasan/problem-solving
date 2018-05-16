@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: 979B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 14-05-18 21:00:00 (+06)
+ * LAST MODIFIED: 14-05-18 22:14:31 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 14-05-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -47,7 +47,6 @@
 #include <stdint.h> //uint32_t
 #include <functional>
 #include <bitset>
-#include <unistd.h> // unsigned int sleep(unsigned int seconds);
 
 using namespace std;
 
@@ -62,7 +61,7 @@ typedef vector<long long>   vl;
 
 #define _USE_MATH_DEFINES
 
-#define _FastIO        ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+#define __FastIO        ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
 
 #define forr(i, a, b)   for (__typeof (a) i = (a); i <= (b); i++)
 #define rof(i, b, a)    for (__typeof (a) i = (b); i >= (a); i--)
@@ -79,9 +78,9 @@ typedef vector<long long>   vl;
     #define nl              cerr << '\n'
     #define sp              cerr << ' '
     #define ckk             cerr << "###############\n"
-    #define debug1(x)       cerr << #x << ": " << (x) << '\n'
-    #define debug2(x, y)    cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << '\n'
-    #define debug3(x, y, z) cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << '\t' << #z << ": " << (z) << '\n'
+    #define debug1(x)       cerr << #x << ": " << (x) << endl
+    #define debug2(x, y)    cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << endl
+    #define debug3(x, y, z) cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << '\t' << #z << ": " << (z) << endl
 #else
     #define nl
     #define sp
@@ -100,7 +99,85 @@ typedef vector<long long>   vl;
 ////////////////////////// START HERE //////////////////////////
 
 int main() {
-    _FastIO;
+    __FastIO;
+    int n;
+    int b_sh = -INF, b_ku = -INF, b_ka = -INF;
+    string shiro, kuro, katie;
+    map<char, int> sh, ku, ka;
+    cin >> n >> kuro >> shiro >> katie;
+    //debug1 (n);
+    //debug1 (kuro);
+    //debug1 (shiro);
+    //debug1 (katie);
+    //ckk;
+    int sz = (int) kuro.size();
+
+    for (int i = 0; i < (int) kuro.size(); i++) {
+        ku[kuro[i]]++;
+    }
+
+    for (int i = 0; i < (int) shiro.size(); i++) {
+        sh[shiro[i]]++;
+    }
+
+    for (int i = 0; i < (int) katie.size(); i++) {
+        ka[katie[i]]++;
+    }
+
+    for (auto i : ku) b_ku = max (i.second, b_ku);
+
+    for (auto i : sh) b_sh = max (i.second, b_sh);
+
+    for (auto i : ka) b_ka = max (i.second, b_ka);
+
+    //debug3 (b_ku, b_sh, b_ka);
+    /// ugly
+    int u_sh = sz - b_sh;
+    int u_ku = sz - b_ku;
+    int u_ka = sz - b_ka;
+    //debug3 (u_ka, u_sh, u_ka);
+    /// extra n's
+    int baki_sh = n - u_sh;
+    int baki_ka = n - u_ka;
+    int baki_ku = n - u_ku;
+    //debug3 (baki_ku, baki_sh, baki_ka);
+
+    if (baki_sh > 0) {
+        b_sh = baki_sh & 1 ?  sz - 1 : sz;
+
+    } else {
+        b_sh = b_sh + n;
+    }
+
+    if (baki_ka > 0) {
+        b_ka = baki_ka & 1 ? sz - 1 : sz;
+
+    } else {
+        b_ka = b_ka + n;
+    }
+
+    if (baki_ku > 0) {
+        b_ku = baki_ku & 1 ?  sz - 1 : sz;
+
+    } else {
+        b_ku = b_ku + n;
+    }
+
+    debug3 (b_ku, b_sh, b_ka);
+
+    if (b_ku > b_sh and b_ku > b_ka) {
+        cout << "Kuro\n";
+
+    } else if (b_ka > b_sh and b_ka > b_ku) {
+        cout << "Katie\n";
+
+    } else if (b_sh > b_ka and b_sh > b_ku) {
+        cout << "Shiro\n";
+
+    } else {
+        cout << "Draw\n";
+    }
+
     return 0;
 }
 

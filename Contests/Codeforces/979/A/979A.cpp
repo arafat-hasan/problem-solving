@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: 979A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 14-05-18 20:38:33 (+06)
+ * LAST MODIFIED: 14-05-18 20:44:00 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 14-05-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -47,7 +47,6 @@
 #include <stdint.h> //uint32_t
 #include <functional>
 #include <bitset>
-#include <unistd.h> // unsigned int sleep(unsigned int seconds);
 
 using namespace std;
 
@@ -62,7 +61,7 @@ typedef vector<long long>   vl;
 
 #define _USE_MATH_DEFINES
 
-#define _FastIO        ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+#define __FastIO        ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
 
 #define forr(i, a, b)   for (__typeof (a) i = (a); i <= (b); i++)
 #define rof(i, b, a)    for (__typeof (a) i = (b); i >= (a); i--)
@@ -79,9 +78,9 @@ typedef vector<long long>   vl;
     #define nl              cerr << '\n'
     #define sp              cerr << ' '
     #define ckk             cerr << "###############\n"
-    #define debug1(x)       cerr << #x << ": " << (x) << '\n'
-    #define debug2(x, y)    cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << '\n'
-    #define debug3(x, y, z) cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << '\t' << #z << ": " << (z) << '\n'
+    #define debug1(x)       cerr << #x << ": " << (x) << endl
+    #define debug2(x, y)    cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << endl
+    #define debug3(x, y, z) cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << '\t' << #z << ": " << (z) << endl
 #else
     #define nl
     #define sp
@@ -100,7 +99,15 @@ typedef vector<long long>   vl;
 ////////////////////////// START HERE //////////////////////////
 
 int main() {
-    _FastIO;
+    __FastIO;
+    ll n;
+    cin >> n;
+
+    if (n == 0) return ! (cout << "0\n");
+
+    n++;
+    cout << (n & 1 ? n : n / 2) << endl;
     return 0;
 }
+
 

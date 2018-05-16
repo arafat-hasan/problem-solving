@@ -62,7 +62,7 @@ typedef vector<int>         vi;
 
 #define FileIn(file)        freopen("input.txt", "r", stdin)
 #define FileOut(file)       freopen("output.txt", "w", stdout)
-#define __FastIO            ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+#define _FastIO             ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
 
 #define forr(i, a, b)   for (__typeof (a) i=a; i<=b; i++)
 #define rof(i, b, a)    for (__typeof (a) i=b; i>=a; i--)
@@ -87,12 +87,12 @@ typedef vector<int>         vi;
 #define eb              emplace_back
 
 #ifndef ONLINE_JUDGE
-    #define sp              cerr << ' '
     #define nl              cerr << '\n'
+    #define sp              cerr << ' '
     #define ckk             cerr << "###############\n"
-    #define debug1(x)       cerr << #x << ": " << x << endl
-    #define debug2(x, y)    cerr << #x << ": " << x << '\t' << #y << ": " << y << endl
-    #define debug3(x, y, z) cerr << #x << ": " << x << '\t' << #y << ": " << y << '\t' << #z << ": " << z << endl
+    #define debug1(x)       cerr << #x << ": " << (x) << '\n'
+    #define debug2(x, y)    cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << '\n'
+    #define debug3(x, y, z) cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << '\t' << #z << ": " << (z) << '\n'
 #else
     #define sp
     #define nl
@@ -1183,7 +1183,7 @@ int sumOfDigitsFrom1ToN (int n) {
         return n * (n + 1) / 2;
 
     // d = number of digits minus one in n. For 328, d is 2
-    int d = log10 (n);
+    int d = (int) log10 (n);
     // computing sum of digits from 1 to 10^d-1,
     // d=1 a[0]=0;
     // d=2 a[1]=sum of digit from 1 to 9 = 45
@@ -1193,10 +1193,10 @@ int sumOfDigitsFrom1ToN (int n) {
     a[0] = 0, a[1] = 45;
 
     for (int i = 2; i <= d; i++)
-        a[i] = a[i - 1] * 10 + 45 * ceil (pow (10, i - 1) );
+        a[i] = (int) (a[i - 1] * 10 + 45 * ceil (pow (10, i - 1) ) );
 
     // computing 10^d
-    int p = ceil (pow (10, d) );
+    int p = (int) ceil (pow (10, d) );
     // Most significant digit (msd) of n,
     // For 328, msd is 3 which can be obtained using 328/100
     int msd = n / p;
@@ -2401,7 +2401,7 @@ bool hasEnding (std::string const &fullString, std::string const &ending) {
 // This will return 1, as binary ends with binary;
 
 int main() {
-    __FastIO;
+    _FastIO;
     cout << "Hello World!\n";
     return 0;
 }

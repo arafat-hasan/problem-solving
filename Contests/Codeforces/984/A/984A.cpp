@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: 984A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 15-05-18 20:46:06 (+06)
+ * LAST MODIFIED: 15-05-18 20:53:48 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 15-05-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -101,6 +101,30 @@ typedef vector<long long>   vl;
 
 int main() {
     _FastIO;
+    int n;
+    cin >> n;
+    vi v (n);
+    rep (i, n) cin >> v[i];
+    sort (all (v) );
+
+    for (int i = 0; i < n - 1; i++) {
+        if  ( (int) v.size() != 1) {
+            v.erase (v.end() - 1);
+
+        } else {
+            break;
+        }
+
+        if ( (int) v.size() != 1) {
+            v.erase (v.begin() );
+
+        } else {
+            break;
+        }
+    }
+
+    cout << v[0] << endl;
     return 0;
 }
+
 

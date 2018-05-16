@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: 984B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 15-05-18 20:58:40 (+06)
+ * LAST MODIFIED: 15-05-18 21:46:17 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 15-05-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -99,8 +99,58 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
+int dx[] = {1, 1, 0, -1, -1, -1, 0, 1};
+int dy[] = {0, 1, 1, 1, 0, -1, -1, -1}; //8 Direction
+
+int n, m;
+char mat[101][101];
+
+bool isvalid (int y, int x) {
+    if (x < 0 or y < 0 or x >= m or y >= n)
+        return false;
+
+    if (mat[y][x] == '*')
+        return true;
+
+    return false;
+}
+
 int main() {
     _FastIO;
+    bool flag = true;
+    cin >> n >> m;
+    rep (i, n) rep (j, m) cin >> mat[i][j];
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (mat[i][j] != '*' ) {
+                int cnt = 0;
+
+                for (int k = 0; k < 8; k++) {
+                    int x = dx[k] + j;
+                    int y = dy[k] + i;
+
+                    if (isvalid (y, x) )  {
+                        cnt++;
+                    }
+                }
+
+                if (mat[i][j] == '.' and cnt > 0 ) {
+                    flag = false;
+                    goto ans_sec;
+                }
+
+                if (mat[i][j] - '0' != cnt and mat[i][j] != '.') {
+                    flag = false;
+                    goto ans_sec;
+                }
+            }
+        }
+    }
+
+ans_sec:
+    cout << (flag ? "YES\n" : "NO\n");
     return 0;
 }
+
 

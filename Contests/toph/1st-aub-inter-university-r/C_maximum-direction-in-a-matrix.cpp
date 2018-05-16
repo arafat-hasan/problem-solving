@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: C_maximum-direction-in-a-matrix.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 15-05-18 15:49:46 (+06)
+ * LAST MODIFIED: 15-05-18 15:58:25 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 15-05-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -47,7 +47,6 @@
 #include <stdint.h> //uint32_t
 #include <functional>
 #include <bitset>
-#include <unistd.h> // unsigned int sleep(unsigned int seconds);
 
 using namespace std;
 
@@ -62,7 +61,7 @@ typedef vector<long long>   vl;
 
 #define _USE_MATH_DEFINES
 
-#define _FastIO        ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+#define __FastIO        ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
 
 #define forr(i, a, b)   for (__typeof (a) i = (a); i <= (b); i++)
 #define rof(i, b, a)    for (__typeof (a) i = (b); i >= (a); i--)
@@ -79,9 +78,9 @@ typedef vector<long long>   vl;
     #define nl              cerr << '\n'
     #define sp              cerr << ' '
     #define ckk             cerr << "###############\n"
-    #define debug1(x)       cerr << #x << ": " << (x) << '\n'
-    #define debug2(x, y)    cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << '\n'
-    #define debug3(x, y, z) cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << '\t' << #z << ": " << (z) << '\n'
+    #define debug1(x)       cerr << #x << ": " << (x) << endl
+    #define debug2(x, y)    cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << endl
+    #define debug3(x, y, z) cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << '\t' << #z << ": " << (z) << endl
 #else
     #define nl
     #define sp
@@ -100,7 +99,48 @@ typedef vector<long long>   vl;
 ////////////////////////// START HERE //////////////////////////
 
 int main() {
-    _FastIO;
+    __FastIO;
+    int n, mat[101][101];
+    cin >> n;
+    rep (i, n) rep (j, n) cin >> mat[i][j];
+    ll tmp = 1, mx = -1e17;
+
+    for (int i = 0; i < n; i++) {
+        tmp = 0;
+
+        for (int j = 0; j < n; j++) {
+            tmp += mat[i][j];
+        }
+
+        mx = max (mx, tmp);
+    }
+
+    for (int i = 0; i < n; i++) {
+        tmp = 0;
+
+        for (int j = 0; j < n; j++) {
+            tmp += mat[j][i];
+        }
+
+        mx = max (mx, tmp);
+    }
+
+    tmp = 0;
+
+    for (int i = 0, j = 0; i < n; j++, i++) {
+        tmp += mat[i][j];
+    }
+
+    mx = max (mx, tmp);
+    tmp = 0;
+
+    for (int i = 0, j = n - 1; i < n; i++, j--) {
+        tmp += mat[i][j];
+    }
+
+    mx = max (mx, tmp);
+    cout << mx << endl;
     return 0;
 }
+
 

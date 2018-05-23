@@ -1,19 +1,19 @@
 /*
- * FILE: 984C.cpp
+ * FILE: 982A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 15-05-18 23:01:02 (+06)
- * LAST MODIFIED: 18-05-18 01:37:10 (+06)
+ * DATE CREATED: 17-05-18 23:15:05 (+06)
+ * LAST MODIFIED: 18-05-18 00:11:32 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 15-05-18     1.0         {{File Created}}
+ * 17-05-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -48,6 +48,7 @@
 #include <functional>
 #include <bitset>
 #include <unistd.h> // unsigned int sleep(unsigned int seconds);
+//#include <WinBase.h>
 
 using namespace std;
 
@@ -96,89 +97,46 @@ typedef vector<long long>   vl;
 #define MOD             1000000007
 #define EPS             1e-7
 #define MAX             10000007 //1e7+7
-#define MAXS            10000007 //1e7+7
 
 ////////////////////////// START HERE //////////////////////////
 
-bool isPrime[MAXS]; //for sieve
-int prime[MAXS]; //for sieve
-
-bool isprime (int num) {
-    if (num == 2) return true;
-
-    if (num < 2 or num % 2 == 0) return false;
-
-    int i, root = (int) sqrt (num);
-
-    for (i = 3; i <= root; i += 2)
-        if (num % i == 0)    return false;
-
-    return true;
-}
-
-int sieve (int n) {
-    int i, res, j;
-    double root = sqrt (n);
-    isPrime[0] = isPrime[1] = 1;
-
-    for (i = 4; i < n; i += 2)
-        isPrime[i] = 1;
-
-    for (i = 3, j = 0; i <= root; i += 2) {
-        if (!isPrime[i]) {
-            for (j = i * i; j < n; j += 2 * i)
-                isPrime[j] = 1;
-        }
-    }
-
-    for (i = 0, res = 0; i < n; i++) {
-        if (isPrime[i] == 0) {
-            prime[res++] = i;
-        }
-    }
-
-    return (res - 1);
-}
-
 int main() {
     _FastIO;
-    int prime_sz = sieve (MAXS);
-    ll t, p, q, b;
-    cin >> t;
+    int n;
+    string str;
+    cin >> n >> str;
 
-    while (t--) {
-        cin >> p >> q >> b;
-        ll m = min (p, q);
-        int i = 0;
+    if (n == 1 and str == "1") {
+        cout << "Yes\n";
+        return 0;
 
-        while (prime[i] <= m and prime_sz > i) {
-            while (q % prime[i] == 0 and p % prime[i] == 0) {
-                q /= prime[i];
-                p /= prime[i];
-            }
-
-            i++;
-        }
-
-        //debug3 (p, q, b);
-        m = q;
-        bool flag = false;
-
-        for (i = 0; i < prime_sz and prime[i] <= m; i++) {
-            if (q % prime[i] == 0) {
-                if (b % prime[i] == 0) {
-                    flag = true;
-                    break;
-                }
-            }
-        }
-
-        if (q == 1) flag = true;
-
-        cout << (flag ? "Finite\n" : "Infinite\n");
+    } else if (n == 1) {
+        cout << "No\n";
+        return 0;
     }
 
+    if (n == 2) {
+        if (str == "11" or str == "00") return ! (cout << "No\n");
+        else return ! (cout << "Yes\n");
+    }
+
+    if ( (str[n - 1] == '0' and str[n - 2] == '0') or \
+         (str[0] == '0' and str[1] == '0') )
+        return ! (cout << "No\n");
+
+    for (int i = 1; i < n - 1; i++) {
+        if (str[i] == '1') {
+            if (str[i - 1] == '1' or str[i + 1] == '1')
+                return ! (cout << "No\n");
+
+        } else {
+            if (str[i - 1] == '0' and str[i + 1] == '0') {
+                return ! (cout << "No\n");
+            }
+        }
+    }
+
+    cout << "Yes\n";
     return 0;
 }
-
 

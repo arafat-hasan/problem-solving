@@ -1,19 +1,19 @@
 /*
- * FILE: 984C.cpp
+ * FILE: 985B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 15-05-18 23:01:02 (+06)
- * LAST MODIFIED: 18-05-18 01:37:10 (+06)
+ * DATE CREATED: 21-05-18 21:55:26 (+06)
+ * LAST MODIFIED: 21-05-18 22:11:27 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 15-05-18     1.0         {{File Created}}
+ * 21-05-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -95,89 +95,54 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             10000007 //1e7+7
-#define MAXS            10000007 //1e7+7
+#define MAX             2001
 
 ////////////////////////// START HERE //////////////////////////
 
-bool isPrime[MAXS]; //for sieve
-int prime[MAXS]; //for sieve
-
-bool isprime (int num) {
-    if (num == 2) return true;
-
-    if (num < 2 or num % 2 == 0) return false;
-
-    int i, root = (int) sqrt (num);
-
-    for (i = 3; i <= root; i += 2)
-        if (num % i == 0)    return false;
-
-    return true;
-}
-
-int sieve (int n) {
-    int i, res, j;
-    double root = sqrt (n);
-    isPrime[0] = isPrime[1] = 1;
-
-    for (i = 4; i < n; i += 2)
-        isPrime[i] = 1;
-
-    for (i = 3, j = 0; i <= root; i += 2) {
-        if (!isPrime[i]) {
-            for (j = i * i; j < n; j += 2 * i)
-                isPrime[j] = 1;
-        }
-    }
-
-    for (i = 0, res = 0; i < n; i++) {
-        if (isPrime[i] == 0) {
-            prime[res++] = i;
-        }
-    }
-
-    return (res - 1);
-}
+int sheet[MAX][MAX];
+char mat[MAX][MAX];
 
 int main() {
     _FastIO;
-    int prime_sz = sieve (MAXS);
-    ll t, p, q, b;
-    cin >> t;
+    int n, m;
+    cin >> n >> m;
+    rep (i, n) rep (j, m) cin >> mat[i][j];
 
-    while (t--) {
-        cin >> p >> q >> b;
-        ll m = min (p, q);
-        int i = 0;
+    for (int j = 0; j < m; j++) {
+        int cnt = 0;
 
-        while (prime[i] <= m and prime_sz > i) {
-            while (q % prime[i] == 0 and p % prime[i] == 0) {
-                q /= prime[i];
-                p /= prime[i];
-            }
-
-            i++;
+        for (int i = 0; i < n; i++) {
+            if (mat[i][j] == '1') cnt++;
         }
 
-        //debug3 (p, q, b);
-        m = q;
-        bool flag = false;
-
-        for (i = 0; i < prime_sz and prime[i] <= m; i++) {
-            if (q % prime[i] == 0) {
-                if (b % prime[i] == 0) {
-                    flag = true;
-                    break;
-                }
-            }
+        for (int i = 0; i < n; i++) {
+            if (mat[i][j] == '1') sheet[i][j] = cnt;
         }
-
-        if (q == 1) flag = true;
-
-        cout << (flag ? "Finite\n" : "Infinite\n");
     }
 
+    bool flag = false;
+
+    for (int i = 0; i < n; i++) {
+        bool local_flag = true;
+        bool all_not_zero = false;
+
+        for (int j = 0; j < m; j++) {
+            if (sheet[i][j] == 1) {
+                local_flag = false;
+                break;
+            }
+
+            if (sheet[i][j] >= 2) all_not_zero = true;
+        }
+
+        if (local_flag and all_not_zero) {
+            flag = true;
+            goto ans_sec;
+        }
+    }
+
+ans_sec:
+    cout << (flag ? "YES\n" : "NO\n");
     return 0;
 }
 

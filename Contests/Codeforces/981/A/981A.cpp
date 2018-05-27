@@ -1,19 +1,19 @@
 /*
- * FILE: 985C.cpp
+ * FILE: 981A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 26-05-18 13:33:36 (+06)
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 27-05-18 20:53:07 (+06)
+ * LAST MODIFIED: 27-05-18 21:02:01 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 26-05-18     1.0         {{File Created}}
+ * 27-05-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -99,8 +99,29 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
+string str;
+
+bool ispalindrome (int s, int e) {
+    string tmp = str.substr (s, e - s + 1);
+    string rev = tmp;
+    reverse (all (rev) );
+    return tmp == rev;
+}
+
 int main() {
     _FastIO;
+    cin >> str;
+    int mx = 0;
+
+    for (int i = 0; i < (int) str.size(); i++) {
+        for (int j = i; j < (int) str.size(); j++) {
+            if (!ispalindrome (i, j) ) {
+                mx = max (mx, j - i + 1);
+            }
+        }
+    }
+
+    cout << mx << endl;
     return 0;
 }
 

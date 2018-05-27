@@ -1,19 +1,19 @@
 /*
- * FILE: 985C.cpp
+ * FILE: 981B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 26-05-18 13:33:36 (+06)
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 27-05-18 21:11:47 (+06)
+ * LAST MODIFIED: 27-05-18 21:21:46 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 26-05-18     1.0         {{File Created}}
+ * 27-05-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -99,8 +99,46 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
+struct chem {
+    int id, val;
+};
+
+bool compare (const chem &a, const chem &b) {
+    if (a.id > b.id) return true;
+    else if (a.id == b.id) {
+        return a.val > b.val;
+    }
+
+    return false;
+}
+
 int main() {
     _FastIO;
+    int n, m, id, val;
+    vector<chem> v;
+    cin >> n;
+    rep (i, n) {
+        cin >> id >> val;
+        v.pb ({id, val});
+    }
+    cin >> m;
+    rep (i, m) {
+        cin >> id >> val;
+        v.pb ({id, val});
+    }
+    sort (all (v), compare);
+    set<int> st;
+    ll sum = 0;
+
+    for (auto i : v) {
+        //debug2 (i.id, i.val);
+        if (st.count (i.id) == 0) {
+            st.insert (i.id);
+            sum += (ll) i.val;
+        }
+    }
+
+    cout << sum << endl;
     return 0;
 }
 

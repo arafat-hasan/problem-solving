@@ -1,19 +1,19 @@
 /*
- * FILE: 985C.cpp
+ * FILE: ZUBREACH.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 26-05-18 13:33:36 (+06)
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 24-05-18 14:28:45 (+06)
+ * LAST MODIFIED: 24-05-18 14:31:36 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 26-05-18     1.0         {{File Created}}
+ * 24-05-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -101,7 +101,30 @@ typedef vector<long long>   vl;
 
 int main() {
     _FastIO;
+    int t, n, m, rx, ry, mv, cs = 0;
+    string str;
+    cin >> t;
+
+    while (t--) {
+        cin >> m >> n >> rx >> ry >> mv >> str;
+        int x = 0, y = 0;
+
+        for (int i = 0; i < mv; i++) {
+            if (str[i] == 'U') y++;
+            else if (str[i] == 'D') y--;
+            else if (str[i] == 'L') x--;
+            else if (str[i] == 'R') x++;
+        }
+
+        cout << "Case " << ++cs << ": ";
+
+        if (x == rx and y == ry) cout << "REACHED\n";
+        else if (x >= 0 and x <= m and y >= 0 and y <= n) cout << "SOMEWHERE\n";
+        else cout << "DANGER\n";
+    }
+
     return 0;
 }
+
 
 

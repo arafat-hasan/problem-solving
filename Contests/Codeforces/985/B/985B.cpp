@@ -119,6 +119,7 @@ int main() {
             if (mat[i][j] == '1') sheet[i][j] = cnt;
         }
     }
+    rep(i, n) {rep(j, m) cout << sheet[i][j] << ' '; nl;}
 
     bool flag = false;
 

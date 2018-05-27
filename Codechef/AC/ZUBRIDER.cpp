@@ -1,19 +1,19 @@
 /*
- * FILE: 985C.cpp
+ * FILE: ZUBRIDER.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 26-05-18 13:33:36 (+06)
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 24-05-18 15:16:05 (+06)
+ * LAST MODIFIED: 24-05-18 15:45:29 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 26-05-18     1.0         {{File Created}}
+ * 24-05-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -101,6 +101,29 @@ typedef vector<long long>   vl;
 
 int main() {
     _FastIO;
+    ll t, kp, ks, n, cs = 0;
+    cin >> t;
+
+    while (t--) {
+        cin >> kp >> ks >> n;
+        vl gp (n), gs (n);
+        rep (i, n) cin >> gp[i];
+        rep (i, n) cin >> gs[i];
+        sort (all (gp) );
+        sort (all (gs) );
+        ll mul = 1;
+        ll need = (kp * ks);
+
+        for (ll i = 0; i < n; i++) {
+            ll key = need / gp[i];
+            ll idx = (ll)  (upper_bound (all (gs), key) - gs.begin() );
+            ll val = (ll) gs.size() - idx - i;
+            mul = (mul * val) % MOD;
+        }
+
+        cout << "Case " << ++cs << ": " << mul << '\n';
+    }
+
     return 0;
 }
 

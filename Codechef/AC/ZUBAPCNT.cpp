@@ -1,19 +1,19 @@
 /*
- * FILE: 985C.cpp
+ * FILE: ZUBAPCNT.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
- * LINK:
+ * LINK: https://www.codechef.com/problems/ZUBAPCNT
  *
- * DATE CREATED: 26-05-18 13:33:36 (+06)
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 24-05-18 14:07:07 (+06)
+ * LAST MODIFIED: 25-05-18 17:58:57 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 26-05-18     1.0         {{File Created}}
+ * 24-05-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -95,12 +95,43 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             10000007 //1e7+7
+#define MAX             100005
 
 ////////////////////////// START HERE //////////////////////////
 
+int v[MAX + 6];
+
 int main() {
     _FastIO;
+    ll t, n, m, cs = 0, mul = 1;
+    string str;
+    cin >> t;
+
+    for (ll i = 0L; i < MAX; i++) {
+        mul = (mul * 26L) % MOD;
+        v[i] = (int) mul;
+    }
+
+    while (t--) {
+        cin >> n >> m;
+        cout << "Case " << ++cs << ": \n";
+
+        while (m--) {
+            cin >> str;
+            ll sz = (ll) str.size();
+            ll faka = n - sz;
+            ll sum = 0L;
+
+            if (faka == 0) sum = 1;
+            else if (faka < 0) sum = 0;
+            else {
+                sum = (v[faka - 1] * (faka + 1) ) % MOD;
+            }
+
+            cout << sum << '\n';
+        }
+    }
+
     return 0;
 }
 

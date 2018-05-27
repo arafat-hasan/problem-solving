@@ -1,19 +1,19 @@
 /*
- * FILE: 985C.cpp
+ * FILE: Binomial_Showdown-530.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 26-05-18 13:33:36 (+06)
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 25-05-18 15:54:51 (+06)
+ * LAST MODIFIED: 25-05-18 16:56:37 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 26-05-18     1.0         {{File Created}}
+ * 25-05-18     1.0         File Created, Accepted
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -101,6 +101,22 @@ typedef vector<long long>   vl;
 
 int main() {
     _FastIO;
+    int n, k;
+    ull combination;
+
+    while (cin >> n >> k, (n or k) ) {
+        combination = 1ull;
+
+        if (k > (n / 2) ) k = n - k;
+
+        for (int i = 0; i < k; i++) {
+            combination *=  (n - i);
+            combination /= (i + 1);
+        }
+
+        cout << combination << '\n';
+    }
+
     return 0;
 }
 

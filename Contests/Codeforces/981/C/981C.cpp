@@ -1,19 +1,19 @@
 /*
- * FILE: 985C.cpp
+ * FILE: 981C.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: 26-05-18 13:33:36 (+06)
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 27-05-18 22:17:49 (+06)
+ * LAST MODIFIED: 27-05-18 23:17:23 (+06)
  *
  * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 26-05-18     1.0         {{File Created}}
+ * 27-05-18     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -95,12 +95,60 @@ typedef vector<long long>   vl;
 #define INF             0x7fffffff
 #define MOD             1000000007
 #define EPS             1e-7
-#define MAX             10000007 //1e7+7
+#define MAX             100005
 
 ////////////////////////// START HERE //////////////////////////
 
+vector<int> adj[MAX];
+
 int main() {
     _FastIO;
+    int n, u, v;
+    cin >> n;
+    rep (i, n - 1) {
+        cin >> u >> v;
+        u--; v--;
+        adj[u].pb (v);
+        adj[v].pb (u);
+    }
+    int cnt = 0, ans = 0, mx_sz = 1;
+
+    for (int i = 0; i < n; i++) {
+        if ( (int) adj[i].size() > 2) {
+            ans = i;
+            mx_sz = (int) adj[i].size();
+            cnt++;
+        }
+    }
+
+    if (cnt == 1) {
+        cout << "Yes\n" << mx_sz << '\n';
+
+        for (int i = 0; i < (int) adj[ans].size(); i++) {
+            int vtx = adj[ans][i];
+            int pre = ans, now = vtx;
+
+            while (adj[now].size() > 1) {
+                if (adj[now][0] == pre) {
+                    pre = now;
+                    now = adj[now][1];
+
+                } else {
+                    pre = now;
+                    now = adj[now][0];
+                }
+            }
+
+            cout << ans + 1 << ' ' << now + 1 << '\n';
+        }
+
+    } else if (cnt == 0) {
+        cout << "Yes\n" << mx_sz << '\n' << 1 << ' ' << n << '\n';
+
+    } else {
+        cout << "No\n";
+    }
+
     return 0;
 }
 

@@ -6,6 +6,7 @@ ACM type problems solved by me.
 **Arafat Hasan Jenin** *<arafathasanjenin[at]gmail[dot]com>*  
 Mawlana Bhashani Science and Technology University  
 Santosh, Tangail
+*From Rangpur, Bangladesh*
 
 <br><br>
 
@@ -19,7 +20,7 @@ Top Coder: [arafat_hasan](https://www.topcoder.com/members/Arafat_Hasan/)
 
 #### usernames in other platforms
 Stackoverflow: [arafat_hasan](https://stackoverflow.com/users/7829174/arafat-hasan/)  
-GitHub: [AHJenin](https://github.com/AHJenin/)  
+GitHub: [arafat-hasan](https://github.com/arafat-hasan/)  
 Linkedin: [arafat-hasan](https://www.linkedin.com/in/arafat-hasan)  
 Facebook: [arafathasanjenin](https://facebook.com/arafathasanjenin)  
 Twitter: [AHJenin](https://twitter.com/AHJenin)  

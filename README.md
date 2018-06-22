@@ -5,8 +5,9 @@ ACM type problems solved by me.
 
 **Arafat Hasan Jenin** *<arafathasanjenin[at]gmail[dot]com>*  
 Mawlana Bhashani Science and Technology University  
-Santosh, Tangail
+Santosh, Tangail  
 *From Rangpur, Bangladesh*
+
 
 <br><br>
 

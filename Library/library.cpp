@@ -2399,7 +2399,7 @@ bool hasEnding (std::string const &fullString, std::string const &ending) {
 //std::string ending = "nary";
 //std::string test1 = "binary";
 //std::cout << hasEnding (test1, ending) << std::endl;
-// This will return 1, as binary ends with binary;
+// This will return 1, as binary ends with nary;
 
 int main() {
     _FastIO;

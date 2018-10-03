@@ -3,7 +3,7 @@ ACM type problems solved by me.
 
 <br><br>
 
-**Arafat Hasan Jenin** *<arafathasanjenin[at]gmail[dot]com>*  
+**Arafat Hasan Jenin** *<opendoor.arafat[at]gmail[dot]com>*  
 Mawlana Bhashani Science and Technology University  
 Santosh, Tangail  
 *From Rangpur, Bangladesh*

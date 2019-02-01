@@ -120,7 +120,6 @@ int main() {
     int t;
     cin >> t;
 
-    cout < < "asdf";
     while (t--) {
         cin >> a >> b;
         cout << call (a, b) << endl;

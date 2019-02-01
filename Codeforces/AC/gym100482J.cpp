@@ -1,12 +1,12 @@
 /*
- * FILE: 100482B.cpp
+ * FILE: gym100482J.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
- * LINK: http://codeforces.com/gym/100482/problem/B
+ * LINK: http://codeforces.com/gym/100482/problem/J 
  *
- * DATE CREATED: 01-08-17 00:45:24 (BST)
- * LAST MODIFIED: 01-08-17 00:45:51 (BST)
+ * DATE CREATED: 01-08-17 00:49:01 (BST)
+ * LAST MODIFIED: 01-08-17 00:49:53 (BST)
  *
  * DESCRIPTION:
  *
@@ -96,42 +96,27 @@ typedef vector<int>         vi;
 
 ////////////////////////// START HERE //////////////////////////
 
-
 int main() {
     __FastIO;
-    int t, x[4], y[4], cs = 0;
-    lf price;
+    int t, n, cs = 0;
     cin >> t;
-    cout << fixed << setprecision(2);
     while (t--) {
-        Rep(i, 4) cin >> x[i] >> y[i];
-        cin >> price;
-        lf a = sqrt(sq((x[0] - x[1])) + sq((y[0] - y[1])));
-        lf b = sqrt(sq((x[1] - x[2])) + sq((y[1] - y[2])));
-        lf c = sqrt(sq((x[2] - x[3])) + sq((y[2] - y[3])));
-        lf d = sqrt(sq((x[3] - x[0])) + sq((y[3] - y[0])));
-        lf m1 = sqrt(sq((x[0] - x[2])) + sq((y[0] - y[2])));
-        lf m2 = sqrt(sq((x[1] - x[3])) + sq((y[1] - y[3])));
-
-        lf s = (a + b + m1) / 2.0;
-        lf tri1 = sqrt(s * (s - a) * (s - b) * (s - m1));
-        s = (c + d + m1) / 2.0;
-        lf tri2 = sqrt(s * (s - c) * (s - d) * (s - m1));
-
-        lf qdr1 = tri1 + tri2;
-
-        s = (d + a + m2) / 2.0;
-        tri1 = sqrt(s * (s - d) * (s - a) * (s - m2));
-        s = (b + c + m2) / 2.0;
-        tri2 = sqrt(s * (s - b) * (s - c) * (s - m2));
-
-        lf qdr2 = tri1 + tri2;
-
-        lf qdr = min(qdr1, qdr2);
-
-        lf ans = price / qdr;
-        cout << "Case #" << ++cs << ": " << ans << '\n';
-
+        cin >> n;
+        vi v(n);
+        set<vi> st;
+        Rep(i, n) cin >> v[i];
+        sort(all(v));
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                for (int k = j + 1; k < n; k++) {
+                    vi tri = {v[i], v[j], v[k]};
+                    if (tri[0] + tri[1] > tri[2]) {
+                        st.insert(tri);
+                    }
+                }
+            }
+        }
+        cout << "Case #" << ++cs << ": " << (int) st.size() << '\n';
     }
     return 0;
 }

@@ -1,12 +1,12 @@
 /*
- * FILE: 100482J.cpp
+ * FILE: gym100482A.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
- * LINK: http://codeforces.com/gym/100482/problem/J 
+ * LINK: http://codeforces.com/gym/100482/problem/A
  *
- * DATE CREATED: 01-08-17 00:49:01 (BST)
- * LAST MODIFIED: 01-08-17 00:49:53 (BST)
+ * DATE CREATED: 01-08-17 00:43:04 (BST)
+ * LAST MODIFIED: 01-08-17 00:45:18 (BST)
  *
  * DESCRIPTION:
  *
@@ -96,27 +96,24 @@ typedef vector<int>         vi;
 
 ////////////////////////// START HERE //////////////////////////
 
+
 int main() {
     __FastIO;
     int t, n, cs = 0;
+    string str;
     cin >> t;
+
     while (t--) {
         cin >> n;
-        vi v(n);
-        set<vi> st;
-        Rep(i, n) cin >> v[i];
-        sort(all(v));
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                for (int k = j + 1; k < n; k++) {
-                    vi tri = {v[i], v[j], v[k]};
-                    if (tri[0] + tri[1] > tri[2]) {
-                        st.insert(tri);
-                    }
-                }
-            }
+        cin.ignore();
+        Rep (i, n - 1) {
+            getline (cin, str);
         }
-        cout << "Case #" << ++cs << ": " << (int) st.size() << '\n';
+        cout << "Case #" << ++cs << ": ";
+
+        if (n == 1) cout << "1\n";
+        else cout << "2\n";
     }
+
     return 0;
 }

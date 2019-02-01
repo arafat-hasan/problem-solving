@@ -1,12 +1,12 @@
 /*
- * FILE: 100482A.cpp
+ * FILE: gym100482I.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
- * LINK: http://codeforces.com/gym/100482/problem/A
+ * LINK: http://codeforces.com/gym/100482/problem/I
  *
- * DATE CREATED: 01-08-17 00:43:04 (BST)
- * LAST MODIFIED: 01-08-17 00:45:18 (BST)
+ * DATE CREATED: 01-08-17 00:46:58 (BST)
+ * LAST MODIFIED: 01-08-17 00:47:08 (BST)
  *
  * DESCRIPTION:
  *
@@ -62,8 +62,8 @@ typedef long long           ll;
 typedef double              lf;
 typedef unsigned long long  ull;
 typedef pair<int, int>      pii;
-typedef vector<pii>         vpii;
-typedef vector<int>         vi;
+typedef vector<pii>			vpii;
+typedef vector<int>			vi;
 
 #define __FastIO        ios_base::sync_with_stdio(false); cin.tie(0)
 
@@ -99,21 +99,7 @@ typedef vector<int>         vi;
 
 int main() {
     __FastIO;
-    int t, n, cs = 0;
-    string str;
-    cin >> t;
-
-    while (t--) {
-        cin >> n;
-        cin.ignore();
-        Rep (i, n - 1) {
-            getline (cin, str);
-        }
-        cout << "Case #" << ++cs << ": ";
-
-        if (n == 1) cout << "1\n";
-        else cout << "2\n";
-    }
 
     return 0;
 }
+

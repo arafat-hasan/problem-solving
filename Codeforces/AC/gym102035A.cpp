@@ -1,19 +1,19 @@
 /*
- * FILE: CPCRC1C.cpp
+ * FILE: gym102035A.cpp
  *
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
  *
- * LINK:
+ * LINK: https://codeforces.com/gym/102035/problem/A
  *
- * DATE CREATED: 30-01-19 16:37:26 (+06)
- * LAST MODIFIED:
+ * DATE CREATED: 31-01-19 17:55:43 (+06)
+ * LAST MODIFIED: 31-01-19 17:55:59 (+06)
  *
- * VERDICT: Almost Accepted
+ * VERDICT: Accepetd
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 30-01-19     1.0         Deleted code is debugged code.
+ * 31-01-19     1.0         Deleted code is debugged code.
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -98,50 +98,10 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
-vector<int> num;
-int dp[12][2];
-
-int digitDP (int idx, int sum, bool small, bool anyNonZero) {
-    debug3 (idx, sum, small);
-
-    if (idx == (int) num.size()) return sum;
-
-    //if (dp[idx][small] != -1) return ;
-
-    int lmt = (small ? 9 : num[idx]);
-    int res = 0;
-
-    for (int dgt = 0; dgt <= lmt; dgt++) {
-        bool fAnyNonZero = anyNonZero;
-        fAnyNonZero = dgt > 0? true : fAnyNonZero;
-        res += digitDP (idx + 1, sum  + dgt, dgt > 0 ? true : small, fAnyNonZero);
-    }
-
-    ckk;
-    return dp[idx][small] = res;
-}
-
-int call (int n) {
-    num.clear();
-
-    while (n > 0) {
-        num.push_back (n % 10);
-        n /= 10;
-    }
-
-    reverse (num.begin(), num.end());
-    forit (i, num) debug1 (*i);
-    memset (dp, -1, sizeof dp);
-    return digitDP (0, 0, 0, 0);
-}
-
 int main() {
-    //ios_base::sync_with_stdio (false); cin.tie (0); cout.tie (0);
-    int a, b;
-
-    while (cin >> a >> b and a != -1 and b != -1) {
-        cout << call (b) << '\n';
-    }
-
+    ios_base::sync_with_stdio (false); cin.tie (0); cout.tie (0);
+    int n;
+    cin >> n;
+    cout << n * 4 << endl;
     return 0;
 }

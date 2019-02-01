@@ -1,12 +1,12 @@
 /*
- * FILE: 100482I.cpp
+ * FILE: gym100482B.cpp
  *
  * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
- * LINK: http://codeforces.com/gym/100482/problem/I
+ * LINK: http://codeforces.com/gym/100482/problem/B
  *
- * DATE CREATED: 01-08-17 00:46:58 (BST)
- * LAST MODIFIED: 01-08-17 00:47:08 (BST)
+ * DATE CREATED: 01-08-17 00:45:24 (BST)
+ * LAST MODIFIED: 01-08-17 00:45:51 (BST)
  *
  * DESCRIPTION:
  *
@@ -62,8 +62,8 @@ typedef long long           ll;
 typedef double              lf;
 typedef unsigned long long  ull;
 typedef pair<int, int>      pii;
-typedef vector<pii>			vpii;
-typedef vector<int>			vi;
+typedef vector<pii>         vpii;
+typedef vector<int>         vi;
 
 #define __FastIO        ios_base::sync_with_stdio(false); cin.tie(0)
 
@@ -99,7 +99,39 @@ typedef vector<int>			vi;
 
 int main() {
     __FastIO;
+    int t, x[4], y[4], cs = 0;
+    lf price;
+    cin >> t;
+    cout << fixed << setprecision(2);
+    while (t--) {
+        Rep(i, 4) cin >> x[i] >> y[i];
+        cin >> price;
+        lf a = sqrt(sq((x[0] - x[1])) + sq((y[0] - y[1])));
+        lf b = sqrt(sq((x[1] - x[2])) + sq((y[1] - y[2])));
+        lf c = sqrt(sq((x[2] - x[3])) + sq((y[2] - y[3])));
+        lf d = sqrt(sq((x[3] - x[0])) + sq((y[3] - y[0])));
+        lf m1 = sqrt(sq((x[0] - x[2])) + sq((y[0] - y[2])));
+        lf m2 = sqrt(sq((x[1] - x[3])) + sq((y[1] - y[3])));
 
+        lf s = (a + b + m1) / 2.0;
+        lf tri1 = sqrt(s * (s - a) * (s - b) * (s - m1));
+        s = (c + d + m1) / 2.0;
+        lf tri2 = sqrt(s * (s - c) * (s - d) * (s - m1));
+
+        lf qdr1 = tri1 + tri2;
+
+        s = (d + a + m2) / 2.0;
+        tri1 = sqrt(s * (s - d) * (s - a) * (s - m2));
+        s = (b + c + m2) / 2.0;
+        tri2 = sqrt(s * (s - b) * (s - c) * (s - m2));
+
+        lf qdr2 = tri1 + tri2;
+
+        lf qdr = min(qdr1, qdr2);
+
+        lf ans = price / qdr;
+        cout << "Case #" << ++cs << ": " << ans << '\n';
+
+    }
     return 0;
 }
-

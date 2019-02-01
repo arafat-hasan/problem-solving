@@ -1,19 +1,19 @@
 /*
- * FILE: gym_100283.cpp
+ * FILE: 1106B.cpp
  *
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
  *
- * LINK: https://codeforces.com/gym/100283/problem/E
+ * LINK: https://codeforces.com/contest/1106/problem/B
  *
- * DATE CREATED: 20-09-18 15:35:38 (+06)
- * LAST MODIFIED: 20-09-18 16:47:01 (+06)
+ * DATE CREATED: 31-01-19 18:52:43 (+06)
+ * LAST MODIFIED: 31-01-19 20:21:50 (+06)
  *
- * VERDICT: Accepetd
+ * VERDICT: Almost Accepted
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 20-09-18     1.0         Deleted code is debugged code.
+ * 31-01-19     1.0         Deleted code is debugged code.
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -63,8 +63,6 @@ typedef vector<long long>   vl;
 
 #define _USE_MATH_DEFINES
 
-#define _FastIO        ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
-
 #define forr(i, a, b)   for (__typeof (a) i = (a); i <= (b); i++)
 #define rof(i, b, a)    for (__typeof (a) i = (b); i >= (a); i--)
 #define rep(i, n)       for (__typeof (n) i = 0; i < (n); i++)
@@ -101,29 +99,66 @@ typedef vector<long long>   vl;
 ////////////////////////// START HERE //////////////////////////
 
 int main() {
-    _FastIO;
-    freopen ("ghanophobia.in", "r", stdin);
-    int n, cs = 0, ghana, egypt;
-    cin >> n;
+    ios_base::sync_with_stdio (false); cin.tie (0); cout.tie (0);
+    //cout << "8 5\n8 6 2 1 4 5 7 5\n6 3 3 2 6 2 3 2\n2 8\n1 4\n4 7\n3 4\n6 10\n"
+    //     << endl;
+    //ckk;
+    ll n, m;
+    cin >> n >> m;
+    vector<pair<ll, ll>> p; vector<ll> a (n), c (n);
+    rep (i, n)  cin >> a[i];
+    rep (i, n) {
+        cin >> c[i];
+        p.pb ({c[i], i});
+    }
+    sort (all (p));
+    ll d, t;
+    rep (i, m) {
+        cin >> t >> d;
+        t--;
+        //cout << "\n\nsorted cost\n";
+        //debug2 (t, d);
+        //for (ll j = 0; j < n; j++) {
+        //    cout << p[j].first <<  '\t' << p[j].second << '\t' << a[p[j].second] << '\n';
+        //}
+        //ckk;
+        ll customer = 0;
+        //debug2 (a[t], d);
 
-    while (n--) {
-        cin >> egypt; cin.ignore(); cin >> ghana;
-        cout << "Case " << ++cs << ": ";
-
-        if (ghana + 6 == egypt + 1) {
-            egypt = egypt + 2;
-            ghana = ghana * 2 + 6;
-            cout << (ghana == egypt ? "PENALTIES" : (ghana < egypt ? "YES" : "NO") );
-
-        } else if (ghana + 6 < egypt + 1) {
-            cout << "YES";
+        if (a[t] >= d) {
+            a[t] -= d;
+            customer = d * c[t];
+            //cout << "first\n";
 
         } else {
-            cout << "NO";
+            d -= a[t];
+            customer = a[t] * c[t];
+            a[t] = 0;
+            //debug3 (a[t], customer, d);
+
+            for (ll j = 0; j < (int) p.size(); j++) {
+                ll idx = p[j].second;
+
+                if (a[idx] > 0) {
+                    ll diff;
+
+                    if (a[idx] >= d) diff = d;
+                    else diff = a[idx];
+
+                    d -= diff;
+                    a[idx] -= diff;
+                    //debug3 (idx, diff, d);
+                    customer += (diff * c[idx]);
+
+                } else {
+                    //p.erase (p.begin() + j);
+                }
+            }
+
+            if (d != 0) customer = 0;
         }
 
-        cout << endl;
+        cout << customer << '\n';
     }
-
     return 0;
 }

@@ -105,6 +105,7 @@ ll digitDP (int idx, int 3cnt, int 6cnt, int 9cnt, bool isSmall) {
     if (idx == (int) b.size()) return (3cnt == 6cnt and 6cnt == 9cnt);
 
     if (idx < (int) a.size()) return 0;
+
     ll res = 0;
 }
 
@@ -119,6 +120,7 @@ int main() {
     int t;
     cin >> t;
 
+    cout < < "asdf";
     while (t--) {
         cin >> a >> b;
         cout << call (a, b) << endl;

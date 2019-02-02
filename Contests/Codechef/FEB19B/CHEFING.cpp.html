@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>FILE: CHEFING.cpp</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="cpp">
+<meta name="settings" content="number_lines,use_css,pre_wrap,no_foldcolumn,expand_tabs,line_ids,prevent_copy=">
+<meta name="colorscheme" content="solarized">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #839496; background-color: #002b36; }
+body { font-family: monospace; color: #839496; background-color: #002b36; }
+* { font-size: 1em; }
+.PreProc { color: #cb4b16; }
+.LineNr { color: #586e75; background-color: #073642; padding-bottom: 1px; }
+.Type { color: #b58900; }
+.cPreCondit { color: #cb4b16; }
+.Comment { color: #586e75; }
+.Constant { color: #2aa198; }
+.Special { color: #dc322f; }
+.Statement { color: #859900; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+/* function to open any folds containing a jumped-to line before jumping to it */
+function JumpToLine()
+{
+  var lineNum;
+  lineNum = window.location.hash;
+  lineNum = lineNum.substr(1); /* strip off '#' */
+
+  if (lineNum.indexOf('L') == -1) {
+    lineNum = 'L'+lineNum;
+  }
+  lineElem = document.getElementById(lineNum);
+  /* Always jump to new location even if the line was hidden inside a fold, or
+   * we corrected the raw number to a line ID.
+   */
+  if (lineElem) {
+    lineElem.scrollIntoView(true);
+  }
+  return true;
+}
+if ('onhashchange' in window) {
+  window.onhashchange = JumpToLine;
+}
+
+-->
+</script>
+</head>
+<body onload='JumpToLine();'>
+<pre id='vimCodeElement'>
+<span id="L1" class="LineNr">  1 </span><span class="Comment">/*</span>
+<span id="L2" class="LineNr">  2 </span><span class="Comment"> * FILE: CHEFING.cpp</span>
+<span id="L3" class="LineNr">  3 </span><span class="Comment"> *</span>
+<span id="L4" class="LineNr">  4 </span><span class="Comment"> * @author: Arafat Hasan Jenin &lt;opendoor.arafat[at]gmail[dot]com&gt;</span>
+<span id="L5" class="LineNr">  5 </span><span class="Comment"> *</span>
+<span id="L6" class="LineNr">  6 </span><span class="Comment"> * LINK: <a href="https://www.codechef.com/FEB19B/problems/CHEFING">https://www.codechef.com/FEB19B/problems/CHEFING</a></span>
+<span id="L7" class="LineNr">  7 </span><span class="Comment"> *</span>
+<span id="L8" class="LineNr">  8 </span><span class="Comment"> * DATE CREATED: 02-02-19 12:25:54 (+06)</span>
+<span id="L9" class="LineNr">  9 </span><span class="Comment"> * LAST MODIFIED: 02-02-19 16:46:05 (+06)</span>
+<span id="L10" class="LineNr"> 10 </span><span class="Comment"> *</span>
+<span id="L11" class="LineNr"> 11 </span><span class="Comment"> * VERDICT: Accepetd</span>
+<span id="L12" class="LineNr"> 12 </span><span class="Comment"> *</span>
+<span id="L13" class="LineNr"> 13 </span><span class="Comment"> * DEVELOPMENT HISTORY:</span>
+<span id="L14" class="LineNr"> 14 </span><span class="Comment"> * Date         Version     Description</span>
+<span id="L15" class="LineNr"> 15 </span><span class="Comment"> * --------------------------------------------------------------------</span>
+<span id="L16" class="LineNr"> 16 </span><span class="Comment"> * 02-02-19     1.0         Deleted code is debugged code.</span>
+<span id="L17" class="LineNr"> 17 </span><span class="Comment"> *</span>
+<span id="L18" class="LineNr"> 18 </span><span class="Comment"> *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/</span>
+<span id="L19" class="LineNr"> 19 </span><span class="Comment"> *              _/  _/        _/_/    _/    _/    _/_/    _/</span>
+<span id="L20" class="LineNr"> 20 </span><span class="Comment"> *             _/  _/_/_/    _/  _/  _/    _/    _/  _/  _/</span>
+<span id="L21" class="LineNr"> 21 </span><span class="Comment"> *      _/    _/  _/        _/    _/_/    _/    _/    _/_/</span>
+<span id="L22" class="LineNr"> 22 </span><span class="Comment"> *       _/_/    _/_/_/_/  _/      _/  _/_/_/  _/      _/</span>
+<span id="L23" class="LineNr"> 23 </span><span class="Comment"> </span><span class="Comment">*/</span>
+<span id="L24" class="LineNr"> 24 </span>
+<span id="L25" class="LineNr"> 25 </span><span class="Comment">///////////////////////////////////////////////////////////////////////</span>
+<span id="L26" class="LineNr"> 26 </span>
+<span id="L27" class="LineNr"> 27 </span><span class="PreProc">#include </span><span class="Constant">&lt;iostream&gt;</span>
+<span id="L28" class="LineNr"> 28 </span><span class="PreProc">#include </span><span class="Constant">&lt;climits&gt;</span>
+<span id="L29" class="LineNr"> 29 </span><span class="PreProc">#include </span><span class="Constant">&lt;cmath&gt;</span>
+<span id="L30" class="LineNr"> 30 </span><span class="PreProc">#include </span><span class="Constant">&lt;cstring&gt;</span>
+<span id="L31" class="LineNr"> 31 </span><span class="PreProc">#include </span><span class="Constant">&lt;cctype&gt;</span>
+<span id="L32" class="LineNr"> 32 </span><span class="PreProc">#include </span><span class="Constant">&lt;cstdio&gt;</span>
+<span id="L33" class="LineNr"> 33 </span><span class="PreProc">#include </span><span class="Constant">&lt;cstdlib&gt;</span>
+<span id="L34" class="LineNr"> 34 </span><span class="PreProc">#include </span><span class="Constant">&lt;iomanip&gt;</span>
+<span id="L35" class="LineNr"> 35 </span><span class="PreProc">#include </span><span class="Constant">&lt;utility&gt;</span>
+<span id="L36" class="LineNr"> 36 </span><span class="PreProc">#include </span><span class="Constant">&lt;sstream&gt;</span>
+<span id="L37" class="LineNr"> 37 </span><span class="PreProc">#include </span><span class="Constant">&lt;algorithm&gt;</span>
+<span id="L38" class="LineNr"> 38 </span><span class="PreProc">#include </span><span class="Constant">&lt;stack&gt;</span>
+<span id="L39" class="LineNr"> 39 </span><span class="PreProc">#include </span><span class="Constant">&lt;set&gt;</span>
+<span id="L40" class="LineNr"> 40 </span><span class="PreProc">#include </span><span class="Constant">&lt;list&gt;</span>
+<span id="L41" class="LineNr"> 41 </span><span class="PreProc">#include </span><span class="Constant">&lt;map&gt;</span>
+<span id="L42" class="LineNr"> 42 </span><span class="PreProc">#include </span><span class="Constant">&lt;unordered_map&gt;</span>
+<span id="L43" class="LineNr"> 43 </span><span class="PreProc">#include </span><span class="Constant">&lt;unordered_set&gt;</span>
+<span id="L44" class="LineNr"> 44 </span><span class="PreProc">#include </span><span class="Constant">&lt;queue&gt;</span>
+<span id="L45" class="LineNr"> 45 </span><span class="PreProc">#include </span><span class="Constant">&lt;deque&gt;</span>
+<span id="L46" class="LineNr"> 46 </span><span class="PreProc">#include </span><span class="Constant">&lt;vector&gt;</span>
+<span id="L47" class="LineNr"> 47 </span><span class="PreProc">#include </span><span class="Constant">&lt;tuple&gt;</span>
+<span id="L48" class="LineNr"> 48 </span><span class="PreProc">#include </span><span class="Constant">&lt;stdint.h&gt;</span> <span class="Comment">//uint32_t</span>
+<span id="L49" class="LineNr"> 49 </span><span class="PreProc">#include </span><span class="Constant">&lt;functional&gt;</span>
+<span id="L50" class="LineNr"> 50 </span><span class="PreProc">#include </span><span class="Constant">&lt;bitset&gt;</span>
+<span id="L51" class="LineNr"> 51 </span><span class="PreProc">#include </span><span class="Constant">&lt;unistd.h&gt;</span> <span class="Comment">// unsigned int sleep(unsigned int seconds);</span>
+<span id="L52" class="LineNr"> 52 </span>
+<span id="L53" class="LineNr"> 53 </span><span class="Statement">using</span> <span class="Type">namespace</span> std;
+<span id="L54" class="LineNr"> 54 </span>
+<span id="L55" class="LineNr"> 55 </span><span class="Type">typedef</span> <span class="Type">long</span> <span class="Type">long</span>           ll;
+<span id="L56" class="LineNr"> 56 </span><span class="Type">typedef</span> <span class="Type">double</span>              lf;
+<span id="L57" class="LineNr"> 57 </span><span class="Type">typedef</span> <span class="Type">long</span> <span class="Type">double</span>         llf;
+<span id="L58" class="LineNr"> 58 </span><span class="Type">typedef</span> <span class="Type">unsigned</span> <span class="Type">long</span> <span class="Type">long</span>  ull;
+<span id="L59" class="LineNr"> 59 </span><span class="Type">typedef</span> pair&lt;<span class="Type">int</span>, <span class="Type">int</span>&gt;      pii;
+<span id="L60" class="LineNr"> 60 </span><span class="Type">typedef</span> vector&lt;pii&gt;         vpii;
+<span id="L61" class="LineNr"> 61 </span><span class="Type">typedef</span> vector&lt;<span class="Type">int</span>&gt;         vi;
+<span id="L62" class="LineNr"> 62 </span><span class="Type">typedef</span> vector&lt;<span class="Type">long</span> <span class="Type">long</span>&gt;   vl;
+<span id="L63" class="LineNr"> 63 </span>
+<span id="L64" class="LineNr"> 64 </span><span class="PreProc">#define _USE_MATH_DEFINES</span>
+<span id="L65" class="LineNr"> 65 </span>
+<span id="L66" class="LineNr"> 66 </span><span class="PreProc">#define forr(i, a, b)   </span><span class="Statement">for</span><span class="PreProc"> (__typeof (a) i = (a); i &lt;= (b); i++)</span>
+<span id="L67" class="LineNr"> 67 </span><span class="PreProc">#define rof(i, b, a)    </span><span class="Statement">for</span><span class="PreProc"> (__typeof (a) i = (b); i &gt;= (a); i--)</span>
+<span id="L68" class="LineNr"> 68 </span><span class="PreProc">#define rep(i, n)       </span><span class="Statement">for</span><span class="PreProc"> (__typeof (n) i = </span><span class="Constant">0</span><span class="PreProc">; i &lt; (n); i++)</span>
+<span id="L69" class="LineNr"> 69 </span><span class="PreProc">#define forit(i, s)     </span><span class="Statement">for</span><span class="PreProc"> (__typeof ((s).end()) i = (s).begin(); i != (s).end(); ++i)</span>
+<span id="L70" class="LineNr"> 70 </span><span class="PreProc">#define all(ar)         ar.begin(), ar.end()</span>
+<span id="L71" class="LineNr"> 71 </span><span class="PreProc">#define fill(a, val)    memset((a), (val), </span><span class="Statement">sizeof</span><span class="PreProc">((a)))</span>
+<span id="L72" class="LineNr"> 72 </span><span class="PreProc">#define clr(a)          memset((a), </span><span class="Constant">0</span><span class="PreProc">, </span><span class="Statement">sizeof</span><span class="PreProc">((a)))</span>
+<span id="L73" class="LineNr"> 73 </span><span class="PreProc">#define sz(a)           (</span><span class="Type">int</span><span class="PreProc">) a.size()</span>
+<span id="L74" class="LineNr"> 74 </span>
+<span id="L75" class="LineNr"> 75 </span><span class="PreProc">#define pb              push_back</span>
+<span id="L76" class="LineNr"> 76 </span>
+<span id="L77" class="LineNr"> 77 </span><span class="cPreCondit">#ifndef ONLINE_JUDGE</span>
+<span id="L78" class="LineNr"> 78 </span>    <span class="PreProc">#define nl              cerr &lt;&lt; </span><span class="Special">'\n'</span>
+<span id="L79" class="LineNr"> 79 </span>    <span class="PreProc">#define sp              cerr &lt;&lt; </span><span class="Constant">' '</span>
+<span id="L80" class="LineNr"> 80 </span>    <span class="PreProc">#define ckk             cerr &lt;&lt; </span><span class="Constant">&quot;###############</span><span class="Special">\n</span><span class="Constant">&quot;</span>
+<span id="L81" class="LineNr"> 81 </span>    <span class="PreProc">#define debug1(x)       cerr &lt;&lt; #x &lt;&lt; </span><span class="Constant">&quot;: &quot;</span><span class="PreProc"> &lt;&lt; (x) &lt;&lt; </span><span class="Special">'\n'</span>
+<span id="L82" class="LineNr"> 82 </span>    <span class="PreProc">#define debug2(x, y)    cerr &lt;&lt; #x &lt;&lt; </span><span class="Constant">&quot;: &quot;</span><span class="PreProc"> &lt;&lt; (x) &lt;&lt; </span><span class="Special">'\t'</span><span class="PreProc"> &lt;&lt; #y &lt;&lt; </span><span class="Constant">&quot;: &quot;</span><span class="PreProc"> &lt;&lt; (y) &lt;&lt; </span><span class="Special">'\n'</span>
+<span id="L83" class="LineNr"> 83 </span>    <span class="PreProc">#define debug3(x, y, z) cerr &lt;&lt; #x &lt;&lt; </span><span class="Constant">&quot;: &quot;</span><span class="PreProc"> &lt;&lt; (x) &lt;&lt; </span><span class="Special">'\t'</span><span class="PreProc"> &lt;&lt; #y &lt;&lt; </span><span class="Constant">&quot;: &quot;</span><span class="PreProc"> &lt;&lt; (y) &lt;&lt; </span><span class="Special">'\t'</span><span class="PreProc"> &lt;&lt; #z &lt;&lt; </span><span class="Constant">&quot;: &quot;</span><span class="PreProc"> &lt;&lt; (z) &lt;&lt; </span><span class="Special">'\n'</span>
+<span id="L84" class="LineNr"> 84 </span><span class="cPreCondit">#else</span>
+<span id="L85" class="LineNr"> 85 </span>    <span class="PreProc">#define nl</span>
+<span id="L86" class="LineNr"> 86 </span>    <span class="PreProc">#define sp</span>
+<span id="L87" class="LineNr"> 87 </span>    <span class="PreProc">#define ckk</span>
+<span id="L88" class="LineNr"> 88 </span>    <span class="PreProc">#define debug1(x)</span>
+<span id="L89" class="LineNr"> 89 </span>    <span class="PreProc">#define debug2(x, y)</span>
+<span id="L90" class="LineNr"> 90 </span>    <span class="PreProc">#define debug3(x, y, z)</span>
+<span id="L91" class="LineNr"> 91 </span><span class="cPreCondit">#endif</span>
+<span id="L92" class="LineNr"> 92 </span>
+<span id="L93" class="LineNr"> 93 </span><span class="PreProc">#define PI              acos(-</span><span class="Constant">1.0</span><span class="PreProc">)</span>
+<span id="L94" class="LineNr"> 94 </span><span class="PreProc">#define INF             </span><span class="Constant">0x7fffffff</span>
+<span id="L95" class="LineNr"> 95 </span><span class="PreProc">#define MOD             </span><span class="Constant">1000000007</span>
+<span id="L96" class="LineNr"> 96 </span><span class="PreProc">#define EPS             </span><span class="Constant">1e-7</span>
+<span id="L97" class="LineNr"> 97 </span><span class="PreProc">#define MAX             </span><span class="Constant">10000007</span><span class="PreProc"> </span><span class="Comment">//1e7+7</span>
+<span id="L98" class="LineNr"> 98 </span>
+<span id="L99" class="LineNr"> 99 </span><span class="Comment">////////////////////////// START HERE //////////////////////////</span>
+<span id="L100" class="LineNr">100 </span>
+<span id="L101" class="LineNr">101 </span><span class="Type">const</span> <span class="Type">int</span> MAX_CHAR = <span class="Constant">26</span>;
+<span id="L102" class="LineNr">102 </span>
+<span id="L103" class="LineNr">103 </span><span class="Type">void</span> commonCharacters(string str[], <span class="Type">int</span> n)
+<span id="L104" class="LineNr">104 </span>{
+<span id="L105" class="LineNr">105 </span>    <span class="Comment">// primary array for common characters  </span>
+<span id="L106" class="LineNr">106 </span>    <span class="Comment">// we assume all characters are seen before. </span>
+<span id="L107" class="LineNr">107 </span>    <span class="Type">bool</span> prim[MAX_CHAR];
+<span id="L108" class="LineNr">108 </span>    memset(prim, <span class="Constant">true</span>, <span class="Statement">sizeof</span>(prim));
+<span id="L109" class="LineNr">109 </span>
+<span id="L110" class="LineNr">110 </span>    <span class="Comment">// for each string </span>
+<span id="L111" class="LineNr">111 </span>    <span class="Statement">for</span> (<span class="Type">int</span> i = <span class="Constant">0</span>; i &lt; n; i++) {
+<span id="L112" class="LineNr">112 </span>
+<span id="L113" class="LineNr">113 </span>        <span class="Comment">// secondary array for common characters </span>
+<span id="L114" class="LineNr">114 </span>        <span class="Comment">// Initially marked false </span>
+<span id="L115" class="LineNr">115 </span>        <span class="Type">bool</span> sec[MAX_CHAR] = { <span class="Constant">false</span> };
+<span id="L116" class="LineNr">116 </span>
+<span id="L117" class="LineNr">117 </span>        <span class="Comment">// for every character of ith string </span>
+<span id="L118" class="LineNr">118 </span>        <span class="Statement">for</span> (<span class="Type">int</span> j = <span class="Constant">0</span>; str[i][j]; j++) {
+<span id="L119" class="LineNr">119 </span>
+<span id="L120" class="LineNr">120 </span>            <span class="Comment">// if character is present in all  </span>
+<span id="L121" class="LineNr">121 </span>            <span class="Comment">// strings before, mark it. </span>
+<span id="L122" class="LineNr">122 </span>            <span class="Statement">if</span> (prim[str[i][j] - <span class="Constant">'a'</span>])
+<span id="L123" class="LineNr">123 </span>                sec[str[i][j] - <span class="Constant">'a'</span>] = <span class="Constant">true</span>;
+<span id="L124" class="LineNr">124 </span>        }
+<span id="L125" class="LineNr">125 </span>
+<span id="L126" class="LineNr">126 </span>        <span class="Comment">// copy whole secondary array into primary </span>
+<span id="L127" class="LineNr">127 </span>        memcpy(prim, sec, MAX_CHAR);
+<span id="L128" class="LineNr">128 </span>    }
+<span id="L129" class="LineNr">129 </span>
+<span id="L130" class="LineNr">130 </span>    <span class="Comment">// displaying common characters </span>
+<span id="L131" class="LineNr">131 </span>    <span class="Statement">for</span> (<span class="Type">int</span> i = <span class="Constant">0</span>; i &lt; <span class="Constant">26</span>; i++)
+<span id="L132" class="LineNr">132 </span>        <span class="Statement">if</span> (prim[i])
+<span id="L133" class="LineNr">133 </span>            printf(<span class="Constant">&quot;</span><span class="Special">%c</span><span class="Constant"> &quot;</span>, i + <span class="Constant">'a'</span>);
+<span id="L134" class="LineNr">134 </span>}
+<span id="L135" class="LineNr">135 </span>
+<span id="L136" class="LineNr">136 </span><span class="Type">int</span> main() {
+<span id="L137" class="LineNr">137 </span>    ios_base::sync_with_stdio (<span class="Constant">false</span>); cin.tie (<span class="Constant">0</span>); cout.tie (<span class="Constant">0</span>);
+<span id="L138" class="LineNr">138 </span>    <span class="Type">int</span> t, n;
+<span id="L139" class="LineNr">139 </span>    cin &gt;&gt; t;
+<span id="L140" class="LineNr">140 </span>
+<span id="L141" class="LineNr">141 </span>    <span class="Statement">while</span> (t--) {
+<span id="L142" class="LineNr">142 </span>        cin &gt;&gt; n;
+<span id="L143" class="LineNr">143 </span>        vector&lt;string&gt; v (n);
+<span id="L144" class="LineNr">144 </span>        rep (i, n) cin &gt;&gt; v[i];
+<span id="L145" class="LineNr">145 </span>    }
+<span id="L146" class="LineNr">146 </span>
+<span id="L147" class="LineNr">147 </span>    <span class="Statement">return</span> <span class="Constant">0</span>;
+<span id="L148" class="LineNr">148 </span>}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

@@ -6,7 +6,7 @@
  * LINK: https://www.codechef.com/FEB19B/problems/CHEFING
  *
  * DATE CREATED: 02-02-19 12:25:54 (+06)
- * LAST MODIFIED: 04-02-19 18:17:14 (+06)
+ * LAST MODIFIED: 05-02-19 17:00:31 (+06)
  *
  * VERDICT: Accepetd
  *
@@ -98,40 +98,32 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
-const int MAX_CHAR = 26; 
-  
-void commonCharacters(string str[], int n) 
-{ 
-    // primary array for common characters  
-    // we assume all characters are seen before. 
-    bool prim[MAX_CHAR]; 
-    memset(prim, true, sizeof(prim)); 
-  
-    // for each string 
-    for (int i = 0; i < n; i++) { 
-  
-        // secondary array for common characters 
-        // Initially marked false 
-        bool sec[MAX_CHAR] = { false }; 
-  
-        // for every character of ith string 
-        for (int j = 0; str[i][j]; j++) { 
-  
-            // if character is present in all  
-            // strings before, mark it. 
-            if (prim[str[i][j] - 'a']) 
-                sec[str[i][j] - 'a'] = true;  
-        } 
-  
-        // copy whole secondary array into primary 
-        memcpy(prim, sec, MAX_CHAR); 
-    } 
-  
-    // displaying common characters 
-    for (int i = 0; i < 26; i++) 
-        if (prim[i]) 
-            printf("%c ", i + 'a'); 
-} 
+const int MAX_CHAR = 26;
+
+int commonCharacters (vector<string> v) {
+    int n = (int) v.size();
+    bool prim[MAX_CHAR];
+    memset (prim, true, sizeof (prim));
+
+    for (int i = 0; i < n; i++) {
+        bool sec[MAX_CHAR] = {};
+
+        for (int j = 0; v[i][j]; j++) {
+            if (prim[v[i][j] - 'a'])
+                sec[v[i][j] - 'a'] = true;
+        }
+
+        memcpy (prim, sec, MAX_CHAR);
+    }
+
+    int cnt = 0;
+
+    for (int i = 0; i < 26; i++)
+        if (prim[i])
+            cnt++;
+
+    return cnt;
+}
 
 int main() {
     ios_base::sync_with_stdio (false); cin.tie (0); cout.tie (0);
@@ -142,6 +134,7 @@ int main() {
         cin >> n;
         vector<string> v (n);
         rep (i, n) cin >> v[i];
+        cout << commonCharacters (v) << '\n';
     }
 
     return 0;

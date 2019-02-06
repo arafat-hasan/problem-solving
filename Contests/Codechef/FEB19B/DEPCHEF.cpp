@@ -1,19 +1,19 @@
 /*
- * FILE: HMAPPY2.cpp
+ * FILE: DEPCHEF.cpp
  *
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
  *
- * LINK:
+ * LINK: https://www.codechef.com/FEB19B/problems/DEPCHEF
  *
- * DATE CREATED: 05-02-19 22:27:16 (+06)
- * LAST MODIFIED: 06-02-19 12:58:49 (+06)
+ * DATE CREATED: 06-02-19 14:10:56 (+06)
+ * LAST MODIFIED: 06-02-19 14:22:54 (+06)
  *
  * VERDICT: Accepetd
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 05-02-19     1.0         Deleted code is debugged code.
+ * 06-02-19     1.0         Deleted code is debugged code.
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -100,15 +100,27 @@ typedef vector<long long>   vl;
 
 int main() {
     ios_base::sync_with_stdio (false); cin.tie (0); cout.tie (0);
-    ll n, a, b, k, t;
+    int t, n;
     cin >> t;
 
     while (t--) {
-        cin >> n >> a >> b >> k;
-        ll both = (max (a, b) % min (a, b) == 0 ? max (a, b) : (a * b));
-        ll numA = n / a - n / both;
-        ll numB = n / b - n / both;
-        cout << (numA + numB >= k ? "Win" : "Lose") << endl;
+        cin >> n;
+        vi a (n), d (n);
+        rep (i, n) cin >> a[i];
+        rep (i, n) cin >> d[i];
+        int mx = -1;
+
+        for (int i = 0; i < n; i++) {
+            int left = (i - 1 < 0 ? n - 1 : i - 1);
+            int right = i + 1 == n ? 0 : i + 1;
+            int sum = a[left] + a[right];
+
+            if (sum < d[i] and mx < d[i]) {
+                mx = d[i];
+            }
+        }
+
+        cout << mx << '\n';
     }
 
     return 0;

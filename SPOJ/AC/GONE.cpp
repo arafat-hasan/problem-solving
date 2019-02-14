@@ -8,7 +8,7 @@
  * DATE CREATED: 13-02-19 23:31:02 (+06)
  * LAST MODIFIED: 14-02-19 01:45:53 (+06)
  *
- * VERDICT: Almost Accepted
+ * VERDICT: Accepetd
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description

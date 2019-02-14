@@ -3,17 +3,17 @@
  *
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
  *
- * LINK:
+ * LINK: https://www.spoj.com/problems/GONE/
  *
- * DATE CREATED: 12-02-19 17:04:09 (+06)
- * LAST MODIFIED:
+ * DATE CREATED: 13-02-19 23:31:02 (+06)
+ * LAST MODIFIED: 14-02-19 01:45:53 (+06)
  *
  * VERDICT: Almost Accepted
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 12-02-19     1.0         Deleted code is debugged code.
+ * 13-02-19     1.0         Deleted code is debugged code.
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -98,8 +98,66 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
-int main() {
-    ios_base::sync_with_stdio (false); cin.tie (0); cout.tie (0);
-    return 0;
+
+vector<int> num;
+int dp[12][100][2];
+bool isPrime[100];
+
+void sieve (int n) {
+    int root = (int) ceil (sqrt (n));
+    isPrime[0] = true; isPrime[1] = true;
+
+    for (int i = 4; i < n; i += 2) {
+        isPrime[i] = true;
+    }
+
+    for (int i = 3; i <= root; i += 2) {
+        if (!isPrime[i]) {
+            for (int j = i * i; j < n; j += 2 * i) {
+                isPrime[j] = true;
+            }
+        }
+    }
 }
 
+
+int digitDP (int pos, int sum, int flag) {
+    if (pos == (int) num.size()) return !isPrime[sum];
+
+    if (dp[pos][sum][flag] != -1) return dp[pos][sum][flag];
+
+    int res = 0, limit = flag ? 9 : num[pos];
+
+    for (int dgt = 0; dgt <= limit; dgt++) {
+        res += digitDP (pos + 1, sum + dgt, flag | (dgt < limit));
+    }
+
+    return dp[pos][sum][flag] = res;
+}
+
+int solve (int n) {
+    num.clear();
+
+    while (n > 0) {
+        num.push_back (n % 10);
+        n /= 10;
+    }
+
+    reverse (num.begin(), num.end());
+    memset (dp, -1, sizeof dp);
+    return digitDP (0, 0, 0);
+}
+
+int main() {
+    ios_base::sync_with_stdio (false); cin.tie (0); cout.tie (0);
+    int t, l, r;
+    sieve (100);
+    cin >> t;
+
+    while (t--) {
+        cin >> l >> r; l--;
+        cout << solve (r) - solve (l) << endl;
+    }
+
+    return 0;
+}

@@ -1,19 +1,19 @@
 /*
- * FILE: LUCIFER.cpp
+ * FILE: CD-624.cpp
  *
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
  *
- * LINK:
+ * LINK: https://uva.onlinejudge.org/external/6/624.pdf
  *
- * DATE CREATED: 14-02-19 12:38:07 (+06)
- * LAST MODIFIED:
+ * DATE CREATED: 15-02-19 23:58:33 (+06)
+ * LAST MODIFIED: 16-02-19 02:18:59 (+06)
  *
- * VERDICT: Almost Accepted
+ * VERDICT: Accepetd
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 14-02-19     1.0         Deleted code is debugged code.
+ * 15-02-19     1.0         Deleted code is debugged code.
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -96,88 +96,60 @@ typedef vector<long long>   vl;
 #define EPS             1e-7
 #define MAX             10000007 //1e7+7
 
+
+//////////////// BIT SET //////////////
+
+// 2^n
+#define bit(n)              (1 << (n))
+// Check ith bit of integer n, 0 or 1
+#define bitchk(n, i)        ((n & (1 << (i)))? 1 : 0)
+//set ith bit ON of the integer n
+#define bit_on(n, i)        n = (n | (1 << (i)))
+//set ith bit OFF of the intger n
+#define bit_off(n, i)       n = (n & ~(1 << (i)))
+// Toggle ith bit of integer n, set 0 if 1, set 1 if 0
+#define bit_toggle(n, i)    n = (n ^ ( 1 << (i)))
+// Set ith bit to x (x is bool, 1 or 0) of the integer n
+#define bit_setx(n, x, i)   n = (n ^ ((-(x) ^ n) & (1 << (i))))
+
 ////////////////////////// START HERE //////////////////////////
 
-vector<int> num;
-int dp;
-bool isPrime[100];
+vi v (21);
+int n, nTracks, sum, ans;
 
-void sieve (int n) {
-    int root = (int) ceil (sqrt (n));
-    isPrime[0] = isPrime[1] = true;
+void call (int pos, int total, int mask) {
 
-    for (int i = 4; i < n; i += 2) {
-        isPrime[i] = true;
+    if (total > n) return;
+
+    if (total > sum) {
+        ans = mask;
+        sum = total;
     }
 
-    for (int i = 3; i <= root; i += 2) {
-        if (!isPrime[i]) {
-            for (int j = i * i; j < n; j += 2 * i) {
-                isPrime[j] = true;
-            }
-        }
+    if (pos >= nTracks) {
+        return ;
     }
+
+    call (pos + 1, total + v[pos], mask | (1 << pos));
+    call (pos + 1, total, mask);
 }
 
-
-int digitDP (int pos, int oddSum, int evenSum, bool smallBefore,
-             bool anyNonZero) {
-    if (pos == (int) num.size()) {
-        int tmp = (evenSum - oddSum);
-        //debug1(tmp);
-        return !isPrime[tmp];
-    }
-
-    int res = 0, limit = smallBefore ? 9 : num[pos];
-
-    for (int dgt = 0; dgt <= limit; dgt++) {
-        if (anyNonZero | (dgt > 0)) {
-            if ((((int) num.size() - pos) & 1)) {
-                res += digitDP (pos + 1, oddSum + dgt, evenSum, \
-                                (limit < num[pos]) | smallBefore, true);
-
-            } else {
-                res += digitDP (pos + 1, oddSum, evenSum + dgt, \
-                                (limit < num[pos]) | smallBefore, true);
-            }
-
-        } else {
-            res += digitDP (pos + 1, oddSum, evenSum, \
-                            (limit < num[pos]) | smallBefore, false);
-        }
-    }
-
-    return res;
-}
-
-int solve (int n) {
-    num.clear();
-
-    while (n > 0) {
-        num.push_back (n % 10);
-        n /= 10;
-    }
-
-    reverse (num.begin(), num.end());
-    return digitDP (0, 0, 0, 0, 0);
-}
 
 int main() {
     ios_base::sync_with_stdio (false); cin.tie (0); cout.tie (0);
-    int t, l, r;
-    sieve (100);
-    //debug1(solve(151));
-    //for (int i = 0; i < 100; i++) {
-    //    debug2(i, isPrime[i]);
-    //}
-    cin >> t;
 
-    while (t--) {
-        cin >> l >> r; l--;
-        debug2 (r, l);
-        debug2 (solve (r), solve (l));
-        //debug2 (solve (r), solve (l));
-        cout << solve (r) - solve (l) << endl;
+    while (cin >> n >> nTracks) {
+        rep (i, nTracks) cin >> v[i];
+        ans = -1;
+        sum = -1;
+        call (0, 0, 0);
+
+        for (int i = 0; i < nTracks; i++) {
+            if ((ans >> i) % 2)
+                cout << v[i] << ' ';
+        }
+
+        cout << "sum:" << sum << endl;
     }
 
     return 0;

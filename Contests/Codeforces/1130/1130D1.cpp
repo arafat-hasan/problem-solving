@@ -1,19 +1,19 @@
 /*
- * FILE: 1130C.cpp
+ * FILE: 1130D1.cpp
  *
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
  *
- * LINK: https://codeforces.com/contest/1130/problem/c
+ * LINK:
  *
- * DATE CREATED: 24-02-19 22:41:43 (+06)
- * LAST MODIFIED: 25-02-19 19:42:48 (+06)
+ * DATE CREATED: 25-02-19 21:27:24 (+06)
+ * LAST MODIFIED:
  *
- * VERDICT: Accepetd
+ * VERDICT: Almost Accepted
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * 24-02-19     1.0         Deleted code is debugged code.
+ * 25-02-19     1.0         Deleted code is debugged code.
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -96,60 +96,54 @@ typedef vector<long long>   vl;
 #define EPS             1e-7
 #define MAX             10000007 //1e7+7
 
-int dx[] = {1, 0, -1, 0};
-int dy[] = {0, 1, 0, -1}; //4 Direction
-
 ////////////////////////// START HERE //////////////////////////
 
-char mat[51][51];
-int vis[51][51];
-int tx, ty, n;
+vector<int> num;
+int k;
 
-void dfs (int sx, int sy, vpii &v) {
-    v.pb ({sx, sy});
-    vis[sx][sy] = 1;
+int digitDP (int pos, int sum, int rem, bool flag) {
+    if (pos == (int) num.size()) {
+        if (sum % k == 0 and rem == 0) return 1;
 
-    if (sx == tx and sy == ty) return;
-
-    for (int i = 0; i < 4; i++) {
-        int tmpX = sx + dx[i];
-        int tmpY = sy + dy[i];
-
-        if (tmpX >= n or tmpY >= n or tmpX < 0 or tmpY < 0) continue;
-
-        if (mat[tmpX][tmpY] != mat[sx][sy]) continue;
-
-        if (vis[tmpX][tmpY] != 1)
-            dfs (tmpX, tmpY, v);
+        return 0;
     }
+
+    int res = 0, limit = flag ? 9 : num[pos];
+
+    for (int dgt = 0; dgt < limit; dgt++) {
+        bool nFlag = dgt < limit ? 1 : flag;
+        int nRem = (rem + (((dgt % k * (int) pow (10, (int)num.size() - pos - 1))\
+                            % k)) % k) % k;
+        res += digitDP (pos + 1, sum + dgt, nRem, nFlag);
+    }
+
+    return res;
+}
+
+int solve (int n) {
+    num.clear();
+
+    while (n > 0) {
+        num.pb (n % 10);
+        n /= 10;
+    }
+
+    reverse (all (num));
+    return digitDP (0, 0, 0, 0);
 }
 
 int main() {
     ios_base::sync_with_stdio (false); cin.tie (0); cout.tie (0);
-    int r1, c1, r2, c2;
-    cin >> n >> r1 >> c1 >> r2 >> c2;
-    r1--; r2--; c1--; c2--;
-    rep (i, n) rep (j, n) cin >> mat[i][j];
-    vpii sqrsS, sqrsD;
-    tx = r2; ty = c2;
-    dfs (r1, c1, sqrsS);
-    tx = r1; ty = c1;
-    fill (vis, 0);
-    dfs (r2, c2, sqrsD);
-    ll mn = 1e18;
+    int t, a, b, cs = 0;
+    cin >> t;
 
-    for (int i = 0; i < (int) sqrsS.size(); i++) {
-        int sF = sqrsS[i].first;
-        int sS = sqrsS[i].second;
-
-        for (int j = 0; j < (int) sqrsD.size(); j++) {
-            int dF = sqrsD[j].first;
-            int dS = sqrsD[j].second;
-            ll tmp = (sF - dF) * (sF - dF) + (sS - dS) * (sS - dS);
-            mn = min (mn, tmp);
-        }
+    while (t--) {
+        cin >> a >> b >> k;
+        //b--;
+        //cout << "Case " << ++cs << ": ";
+        //cout << solve (b) - solve (a) << endl;
+        debug1(solve(a));
     }
 
-    cout << mn << endl;
     return 0;
 }

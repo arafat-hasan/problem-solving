@@ -45,6 +45,7 @@
 #include <deque>
 #include <vector>
 #include <tuple>
+#include <iterator> // std::istream_iterator
 #include <stdint.h> //uint32_t
 #include <functional>
 #include <bitset>

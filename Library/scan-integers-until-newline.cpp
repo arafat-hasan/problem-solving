@@ -1,19 +1,19 @@
 /*
- * FILE: {{untitled}}
+ * FILE: scan-integers-until-newline.cpp
  *
- * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
+ * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
  *
  * LINK:
  *
- * DATE CREATED: {{long_date}}
- * LAST MODIFIED: __last_modified
+ * DATE CREATED: 05-03-19 18:52:14 (+06)
+ * LAST MODIFIED:
  *
- * DESCRIPTION:
+ * VERDICT: Almost Accepted
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {{short_date}}     1.0         {{File Created}}
+ * 05-03-19     1.0         Deleted code is debugged code.
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -40,6 +40,7 @@
 #include <list>
 #include <map>
 #include <unordered_map>
+#include <unordered_set>
 #include <queue>
 #include <deque>
 #include <vector>
@@ -62,8 +63,6 @@ typedef vector<int>         vi;
 typedef vector<long long>   vl;
 
 #define _USE_MATH_DEFINES
-
-#define _FastIO        ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
 
 #define forr(i, a, b)   for (__typeof (a) i = (a); i <= (b); i++)
 #define rof(i, b, a)    for (__typeof (a) i = (b); i >= (a); i--)
@@ -101,7 +100,15 @@ typedef vector<long long>   vl;
 ////////////////////////// START HERE //////////////////////////
 
 int main() {
-    _FastIO;
+    std::string line;
+    std::vector< std::vector<int> > all_integers;
+
+    while ( getline ( std::cin, line ) ) {
+        std::istringstream is ( line );
+        all_integers.push_back (
+                        std::vector<int> ( std::istream_iterator<int> (is),
+                                           std::istream_iterator<int>() ) );
+    }
+
     return 0;
 }
-

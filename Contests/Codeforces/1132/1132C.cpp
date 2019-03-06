@@ -114,7 +114,6 @@ int main() {
 
         if (v[i].first < left) left = v[i].first, cnt++;
         
-        if(v[i].first )
     }
 
     return 0;

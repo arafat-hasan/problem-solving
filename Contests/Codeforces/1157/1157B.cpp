@@ -1,19 +1,19 @@
 /*
- * FILE: {untitled}
+ * FILE: 1157B.cpp
  *
- * @author: {developer} <{mail}>
+ * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
- * LINK:
+ * LINK: https://codeforces.com/contest/1157/problems
  *
- * DATE CREATED: {datetime}
- * LAST MODIFIED: 
+ * DATE CREATED: {{long_date}}
+ * LAST MODIFIED: 26-04-19 21:22:10 (+06)
  *
- * VERDICT:
+ * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {date}     {version}         {description}
+ * {{short_date}}     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -63,6 +63,8 @@ typedef vector<long long>   vl;
 
 #define _USE_MATH_DEFINES
 
+#define _FastIO        ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+
 #define forr(i, a, b)   for (__typeof (a) i = (a); i <= (b); i++)
 #define rof(i, b, a)    for (__typeof (a) i = (b); i >= (a); i--)
 #define rep(i, n)       for (__typeof (n) i = 0; i < (n); i++)
@@ -99,7 +101,23 @@ typedef vector<long long>   vl;
 ////////////////////////// START HERE //////////////////////////
 
 int main() {
-	ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+    _FastIO;
+    int n, tmp;
+    string str;
+    map<int, int> mp;
+    cin >> n >> str;
+    rep (i, 9) {
+        cin >> tmp;
+        mp[i] = tmp;
+    }
+
+    for (int i = 0; i < n; i++) {
+        tmp = (int) (str[i] - '0');
+
+        if (tmp < mp[tmp - 1])
+            str[i] = (char) (mp[tmp - 1] + '0');
+    }
+
+    cout << str << endl;
     return 0;
 }
-

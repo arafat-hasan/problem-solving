@@ -1,19 +1,19 @@
 /*
- * FILE: {untitled}
+ * FILE: 1150C.cpp
  *
- * @author: {developer} <{mail}>
+ * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
  *
- * LINK:
+ * LINK: https://codeforces.com/contest/1150/problem/C
  *
- * DATE CREATED: {datetime}
- * LAST MODIFIED: 
+ * DATE CREATED: 29-04-19 21:41:02 (+06)
+ * LAST MODIFIED: 29-04-19 22:19:47 (+06)
  *
- * VERDICT:
+ * VERDICT: Almost Accepted
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {date}     {version}         {description}
+ * 29-04-19     1.0         Deleted code is debugged code.
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -95,11 +95,82 @@ typedef vector<long long>   vl;
 #define MOD             1000000007
 #define EPS             1e-7
 #define MAX             10000007 //1e7+7
+#define MAXS            10000007 //1e7+7
 
 ////////////////////////// START HERE //////////////////////////
 
-int main() {
-	ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
-    return 0;
+bool isPrime[MAXS]; //for sieve
+
+void sieve (int n) {
+    int i, j;
+    double root = sqrt (n);
+    isPrime[0] = isPrime[1] = 1;
+
+    for (i = 4; i < n; i += 2)
+        isPrime[i] = 1;
+
+    for (i = 3, j = 0; i <= root; i += 2) {
+        if (!isPrime[i]) {
+            for (j = i * i; j < n; j += 2 * i)
+                isPrime[j] = 1;
+        }
+    }
 }
 
+int main() {
+    ios_base::sync_with_stdio (false); cin.tie (0); cout.tie (0);
+    int n;
+    sieve (MAXS);
+    cin >> n;
+    int twos = 0, ones = 0;
+    int sum = 0;
+    rep (i, n) {
+        int tmp;
+        cin >> tmp;
+        sum += tmp;
+        ones += tmp == 1;
+        twos += tmp == 2;
+    }
+    vi primes;
+
+    for (int i = 0; i <= sum; i++) {
+        if (isPrime[i] == 0) {
+            primes.pb (i);
+        }
+    }
+
+    vi ans;
+    int curr = 0, nxt = 0;
+
+    for (int i = 0; i < (int) primes.size(); i++) {
+        nxt = primes[i];
+
+        while (true) {
+            if (twos == 0 or nxt - curr == 1 or nxt == curr) break;
+
+            curr += 2;
+            ans.pb (2);
+            twos--;
+        }
+
+        while (true) {
+            if (ones == 0 or nxt == curr) break;
+
+            curr++;
+            ans.pb (1);
+            ones--;
+        }
+    }
+
+    for (int i = 0; i < twos; i++) {
+        ans.pb (2);
+    }
+
+    for (int i = 0; i < ones; i++) {
+        ans.pb (1);
+    }
+
+    rep (i, n) cout << ans[i] << ' ';
+    cout << endl;
+    return 0;
+}

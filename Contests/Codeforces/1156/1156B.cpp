@@ -1,19 +1,19 @@
 /*
- * FILE: {untitled}
+ * FILE: 1156B.cpp
  *
- * @author: {developer} <{mail}>
+ * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
  *
- * LINK:
+ * LINK: https://codeforces.com/contest/1156/problem/B
  *
- * DATE CREATED: {datetime}
- * LAST MODIFIED: 
+ * DATE CREATED: 01-05-19 21:11:16 (+06)
+ * LAST MODIFIED: 01-05-19 21:17:27 (+06)
  *
  * VERDICT:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {date}     {version}         {description}
+ * 01-05-19     1.0         Deleted code is debugged code.
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -99,7 +99,69 @@ typedef vector<long long>   vl;
 ////////////////////////// START HERE //////////////////////////
 
 int main() {
-	ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+    ios_base::sync_with_stdio (false); cin.tie (0); cout.tie (0);
+    int t;
+    cin >> t;
+
+    while (t--) {
+        string str;
+        cin >> str;
+        map<char, int> mp;
+
+        for (int i = 0; i < (int) str.size(); i++) {
+            mp[str[i]]++;
+        }
+
+        string ans, ansBak;
+
+        for (int i = 'a'; i <= 'z'; i += 2) {
+            for (int j = 0; j < mp[ (char) i]; j++) {
+                ans.pb ((char) i);
+            }
+        }
+
+        ansBak = ans;
+        //debug1 (ans);
+
+        for (int i = 'b'; i <= 'z'; i += 2) {
+            for (int j = 0; j < mp[ (char) i]; j++) {
+                ans.pb ((char) i);
+            }
+        }
+
+        for (int i = 'z'; i >= 'b'; i -= 2) {
+            for (int j = 0; j < mp[ (char) i]; j++) {
+                ansBak.pb ((char) i);
+            }
+        }
+
+        bool flag1 = true, flag2 = true;
+
+        for (int i = 1; i < (int) ans.size(); i++) {
+            if (abs (ans[i] - ans[i - 1]) == 1) {
+                flag1 = false;
+            }
+
+            if (abs (ansBak[i] - ansBak[i - 1]) == 1) {
+                flag2 = false;
+            }
+        }
+
+        debug2 (ans, ansBak);
+        debug2 (flag1, flag2);
+        ckk;
+
+        if (flag1 and flag2) {
+            cout << ans << endl;
+
+        } else if (flag1) {
+            cout << ans << endl;
+
+        } else if (flag2) {
+            cout << ansBak << endl;
+
+        } else cout << "No Answer" << endl;
+    }
+
     return 0;
 }
-

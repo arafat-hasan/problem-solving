@@ -1,19 +1,19 @@
 /*
- * FILE: {untitled}
+ * FILE: 1157A.cpp
  *
- * @author: {developer} <{mail}>
+ * @author: Arafat Hasan Jenin <arafathasanjenin[at]gmail[dot]com>
  *
- * LINK:
+ * LINK: https://codeforces.com/contest/1157/problems
  *
- * DATE CREATED: {datetime}
- * LAST MODIFIED: 
+ * DATE CREATED: {{long_date}}
+ * LAST MODIFIED: 26-04-19 21:13:07 (+06)
  *
- * VERDICT:
+ * DESCRIPTION:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {date}     {version}         {description}
+ * {{short_date}}     1.0         {{File Created}}
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -63,6 +63,8 @@ typedef vector<long long>   vl;
 
 #define _USE_MATH_DEFINES
 
+#define _FastIO        ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+
 #define forr(i, a, b)   for (__typeof (a) i = (a); i <= (b); i++)
 #define rof(i, b, a)    for (__typeof (a) i = (b); i >= (a); i--)
 #define rep(i, n)       for (__typeof (n) i = 0; i < (n); i++)
@@ -99,7 +101,20 @@ typedef vector<long long>   vl;
 ////////////////////////// START HERE //////////////////////////
 
 int main() {
-	ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+    _FastIO;
+    int n;
+    cin >> n;
+    int zeroCnt = 1, foo = n, tmp = -1;
+
+    while (foo > 0) {
+        zeroCnt += (foo % 10 == 0);
+        foo /= 10;
+    }
+
+    tmp = (10 - n % 10) % 10;
+
+    if (tmp == 0) tmp++;
+
+    cout << (zeroCnt * 9) + tmp << endl;
     return 0;
 }
-

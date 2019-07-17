@@ -1,19 +1,19 @@
 /*
- * FILE: {untitled}
+ * FILE: 1150A.cpp
  *
- * @author: {developer} <{mail}>
+ * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
  *
- * LINK:
+ * LINK: https://codeforces.com/contest/1150/problem/0
  *
- * DATE CREATED: {datetime}
- * LAST MODIFIED: 
+ * DATE CREATED: 29-04-19 20:47:12 (+06)
+ * LAST MODIFIED: 29-04-19 20:53:29 (+06)
  *
- * VERDICT:
+ * VERDICT: Almost Accepted
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {date}     {version}         {description}
+ * 29-04-19     1.0         Deleted code is debugged code.
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -99,7 +99,26 @@ typedef vector<long long>   vl;
 ////////////////////////// START HERE //////////////////////////
 
 int main() {
-	ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+    ios_base::sync_with_stdio (false); cin.tie (0); cout.tie (0);
+    int n, m, r;
+    cin >> n >> m >> r;
+    int mn = INT_MAX, tmp;
+    rep (i, n) {
+        cin >> tmp;
+        mn = min (tmp, mn);
+    }
+    int mx = INT_MIN;
+    rep (i, m) {
+        cin >> tmp;
+        mx = max (tmp, mx);
+    }
+
+    if (mx < mn) {
+        cout << r << endl;
+
+    } else {
+        cout << (r / mn) * mx  + (r % mn) << endl;
+    }
+
     return 0;
 }
-

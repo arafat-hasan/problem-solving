@@ -1,19 +1,19 @@
 /*
- * FILE: {untitled}
+ * FILE: 1156A.cpp
  *
- * @author: {developer} <{mail}>
+ * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
  *
- * LINK:
+ * LINK: https://codeforces.com/contest/1156/problem/0
  *
- * DATE CREATED: {datetime}
- * LAST MODIFIED: 
+ * DATE CREATED: 01-05-19 20:47:37 (+06)
+ * LAST MODIFIED: 01-05-19 20:55:03 (+06)
  *
  * VERDICT:
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {date}     {version}         {description}
+ * 01-05-19     1.0         Deleted code is debugged code.
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -99,7 +99,35 @@ typedef vector<long long>   vl;
 ////////////////////////// START HERE //////////////////////////
 
 int main() {
-	ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+    ios_base::sync_with_stdio (false); cin.tie (0); cout.tie (0);
+    int n;
+    cin >> n;
+    vi v (n);
+    rep (i, n) cin >> v[i];
+    int pre = -1, points = 0;
+    rep (i, n) {
+        if (i == 0) {
+            pre = v[i];
+            continue;
+        }
+
+        if (pre + v[i] == 5) {
+            points = -1;
+            break;
+        }
+
+        if (v[i] != 1) {
+            points += v[i] + 1;
+
+        } else {
+            points += pre + 1;
+        }
+
+        pre = v[i];
+    }
+
+    if (points == -1) return ! (cout << "Infinite\n");
+
+    cout << "Finite\n" << points << "\n";
     return 0;
 }
-

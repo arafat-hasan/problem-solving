@@ -1,19 +1,19 @@
 /*
- * FILE: {untitled}
+ * FILE: 1150B.cpp
  *
- * @author: {developer} <{mail}>
+ * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
  *
- * LINK:
+ * LINK: https://codeforces.com/contest/1150/problem/B
  *
- * DATE CREATED: {datetime}
- * LAST MODIFIED: 
+ * DATE CREATED: 29-04-19 21:03:12 (+06)
+ * LAST MODIFIED: 29-04-19 21:30:29 (+06)
  *
- * VERDICT:
+ * VERDICT: Almost Accepted
  *
  * DEVELOPMENT HISTORY:
  * Date         Version     Description
  * --------------------------------------------------------------------
- * {date}     {version}         {description}
+ * 29-04-19     1.0         Deleted code is debugged code.
  *
  *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
  *              _/  _/        _/_/    _/    _/    _/_/    _/
@@ -98,8 +98,47 @@ typedef vector<long long>   vl;
 
 ////////////////////////// START HERE //////////////////////////
 
-int main() {
-	ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
-    return 0;
+char mat[51][51];
+int n;
+
+bool isFitAble (int x, int y) {
+    if (x - 1 < 0 or x + 1 >= n or y - 1 < 0 or y + 1 >= n) return false;
+
+    if (mat[x][y - 1] == '.'
+        and mat[x - 1][y] == '.'
+        and mat[x + 1][y] == '.'
+        and mat[x][y + 1] == '.'
+        and mat[x][y] == '.'
+       ) {
+        return true;
+    }
+
+    return false;
 }
 
+int main() {
+    ios_base::sync_with_stdio (false); cin.tie (0); cout.tie (0);
+    cin >> n;
+    rep (i, n) {
+        rep (j, n) {
+            cin >> mat[i][j];
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (isFitAble (i, j)) {
+                mat[i][j - 1] = '#';
+                mat[i - 1][j] = '#';
+                mat[i + 1][j] = '#';
+                mat[i][j + 1] = '#';
+                mat[i][j] = '#';
+            }
+        }
+    }
+
+    rep (i, n) rep (j, n)  if (mat[i][j] == '.') return ! (cout << "NO\n");
+
+    cout << "YES\n";
+    return 0;
+}

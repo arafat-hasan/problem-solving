@@ -1,0 +1,175 @@
+/*
+ * FILE: G.cpp
+ *
+ * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
+ *
+ * LINK:
+ *
+ * DATE CREATED: 28-09-19 15:48:27 (+06)
+ * LAST MODIFIED:
+ *
+ * VERDICT:
+ *
+ * DEVELOPMENT HISTORY:
+ * Date         Version     Description
+ * --------------------------------------------------------------------
+ * 28-09-19     1.0         Deleted code is debugged code.
+ *
+ *               _/  _/_/_/_/  _/      _/  _/_/_/  _/      _/
+ *              _/  _/        _/_/    _/    _/    _/_/    _/
+ *             _/  _/_/_/    _/  _/  _/    _/    _/  _/  _/
+ *      _/    _/  _/        _/    _/_/    _/    _/    _/_/
+ *       _/_/    _/_/_/_/  _/      _/  _/_/_/  _/      _/
+ */
+
+///////////////////////////////////////////////////////////////////////
+
+#include <iostream>
+#include <climits>
+#include <cmath>
+#include <cstring>
+#include <cctype>
+#include <cstdio>
+#include <cstdlib>
+#include <iomanip>
+#include <utility>
+#include <sstream>
+#include <algorithm>
+#include <stack>
+#include <set>
+#include <list>
+#include <map>
+#include <unordered_map>
+#include <queue>
+#include <deque>
+#include <vector>
+#include <tuple>
+#include <iterator> // std::istream_iterator
+#include <stdint.h> //uint32_t
+#include <functional>
+#include <bitset>
+#include <unistd.h> // unsigned int sleep(unsigned int seconds);
+
+using namespace std;
+
+typedef long long           ll;
+typedef double              lf;
+typedef long double         llf;
+typedef unsigned long long  ull;
+typedef pair<int, int>      pii;
+typedef vector<pii>         vpii;
+typedef vector<int>         vi;
+typedef vector<long long>   vl;
+
+#define _USE_MATH_DEFINES
+
+#define forr(i, a, b)   for (__typeof (a) i = (a); i <= (b); i++)
+#define rof(i, b, a)    for (__typeof (a) i = (b); i >= (a); i--)
+#define rep(i, n)       for (__typeof (n) i = 0; i < (n); i++)
+#define forit(i, s)     for (__typeof ((s).end()) i = (s).begin(); i != (s).end(); ++i)
+#define all(ar)         ar.begin(), ar.end()
+#define fill(a, val)    memset((a), (val), sizeof((a)))
+#define clr(a)          memset((a), 0, sizeof((a)))
+#define sz(a)           (int) a.size()
+
+#define pb              push_back
+
+#ifndef ONLINE_JUDGE
+#define nl              cerr << '\n'
+#define sp              cerr << ' '
+#define ckk             cerr << "###############\n"
+#define debug1(x)       cerr << #x << ": " << (x) << '\n'
+#define debug2(x, y)    cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << '\n'
+#define debug3(x, y, z) cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << '\t' << #z << ": " << (z) << '\n'
+#else
+#define nl
+#define sp
+#define ckk
+#define debug1(x)
+#define debug2(x, y)
+#define debug3(x, y, z)
+#endif
+
+#define PI              acos(-1.0)
+#define INF             0x7fffffff
+#define MOD             1000000007
+#define EPS             1e-7
+#define MAX             10000007 //1e7+7
+
+////////////////////////// START HERE //////////////////////////
+
+
+int phi_single (int n) {
+    int res = n;   // Initialize result as n
+
+    // Consider all prime factors of n and subtract their
+    // multiples from result
+    for (int p = 2; p * p <= n; ++p) {
+        // Check if p is a prime factor.
+        if (n % p == 0) {
+            // If yes, then update n and result
+            while (n % p == 0)
+                n /= p;
+
+            res -= res / p;
+        }
+    }
+
+    // If n has a prime factor greater than sqrt(n)
+    // (There can be at-most one such prime factor)
+    if (n > 1)
+        res -= res / n;
+
+    return res;
+}
+
+// Return the GCD of two numbers.
+int gcd(int a, int b)
+{
+    return b ? gcd(b, a % b) : a;
+}
+
+// Return the count of pairs having GCD equal to g.
+int countGCD(int L, int R, int g)
+{
+    // Setting the value of L, R.
+    L = (L + g - 1) / g;
+    R = R/ g;
+    debug1(R);
+
+    //// For each possible pair check if GCD is 1.
+    //int ans = 0;
+    //for (int i = L; i <= R; i++)
+    //    for (int j = L; j <= R; j++)
+    //        if (gcd(i, j) == 1)
+    //            ans++;
+    //int ans = phi_single(R);
+    
+    ll sum = 0;
+    for (int i = 1; i < R; i++) {
+       sum += phi_single(i);
+    }
+
+    return ans;
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+    int L = 1, R = 25, g = 4;
+    cout << countGCD(L, R, g) << endl;
+    //int n;
+    //while(1){
+    //    cin >> n;
+    //    if(n == 0) break;
+    //    for (int g = 1; g <= n; g++) {
+    //        int p = countGCD(1, n, g);
+    //        debug3(n, g, p);
+    //    }
+    //    ckk;
+    //    ckk;
+    //}
+    return 0;
+}
+
+

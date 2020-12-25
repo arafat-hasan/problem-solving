@@ -623,10 +623,84 @@ void swap (int *x, int *y) {
 }
 
 
-long double fibbonacci (long double f) {
-    return (pow ( ( (1 + sqrt (5) ) / 2), f) - pow ( ( (1 - sqrt (5) ) / 2),
-            f) ) / sqrt (5);
-}
+class fibo {
+  // Firsr approach
+  // function that returns nth Fibonacci number
+  // Time Complexity: O(Logn)
+  // Extra Space: O(Logn) if we consider the function call stack size, otherwise
+  // O(1).
+ public:
+  int fib(int n) {
+    int F[2][2] = {{1, 1}, {1, 0}};
+    if (n == 0) return 0;
+    power(F, n - 1);
+    return F[0][0];
+  }
+
+ private:
+  void power(int F[2][2], int n) {
+    if (n == 0 || n == 1) return;
+    int M[2][2] = {{1, 1}, {1, 0}};
+
+    power(F, n / 2);
+    multiply(F, F);
+
+    if (n % 2 != 0) multiply(F, M);
+  }
+
+  void multiply(int F[2][2], int M[2][2]) {
+    int x = F[0][0] * M[0][0] + F[0][1] * M[1][0];
+    int y = F[0][0] * M[0][1] + F[0][1] * M[1][1];
+    int z = F[1][0] * M[0][0] + F[1][1] * M[1][0];
+    int w = F[1][0] * M[0][1] + F[1][1] * M[1][1];
+
+    F[0][0] = x;
+    F[0][1] = y;
+    F[1][0] = z;
+    F[1][1] = w;
+  }
+
+  // Second approach
+  // Below is one more interesting recurrence formula that can be used to find
+  // n’th Fibonacci Number in O(Log n) time.
+  // If n is even then k = n/2:
+  // F(n) = [2*F(k-1) + F(k)]*F(k)
+  // If n is odd then k = (n + 1)/2
+  // F(n) = F(k)*F(k) + F(k-1)*F(k-1)
+  // Time complexity of this solution is O(Log n) as we divide the problem to
+  // half in every recursive call.
+
+  // Create an array for memoization
+  int f[1000] = {0};  // Change 1000 here
+
+  // Returns n'th fuibonacci number using table f[]
+ public:
+  int fib2(int n) {
+    // Base cases
+    if (n == 0) return 0;
+    if (n == 1 || n == 2) return (f[n] = 1);
+
+    // If fib(n) is already computed
+    if (f[n]) return f[n];
+
+    int k = (n & 1) ? (n + 1) / 2 : n / 2;
+
+    // Applyting above formula [Note value n&1 is 1
+    // if n is odd, else 0.
+    f[n] = (n & 1) ? (fib2(k) * fib2(k) + fib2(k - 1) * fib2(k - 1))
+                   : (2 * fib2(k - 1) + fib2(k)) * fib2(k);
+
+    return f[n];
+  }
+
+  // Another approach:(Using formula)
+  // Time Complexity: O(1)
+  // Space Complexity: O(1)
+  int fib3(int n) {
+    double phi = (1 + sqrt(5)) / 2;
+    return (int)round(pow(phi, n) / sqrt(5));
+  }
+};
 
 
 int gcd (int a, int b)  {
@@ -1273,6 +1347,106 @@ class Sparse_table {
         }
 };
 ////////////////////////// SPARSE TABLE END //////////////////////////
+
+
+
+class SegmentTree {
+  static const int mx = 100001;
+  int tree[mx * 3];
+
+ public:
+  int arr[mx];
+
+  void init(int node, int b, int e) {
+    if (b == e) {
+      tree[node] = arr[b];
+      return;
+    }
+
+    int Left = node * 2;
+    int Right = node * 2 + 1;
+    int mid = (b + e) / 2;
+    init(Left, b, mid);
+    init(Right, mid + 1, e);
+    tree[node] = min(tree[Left], tree[Right]);  // sum -> use '+' instead of min
+  }
+
+  int query(int node, int b, int e, int i, int j) {
+    if (i > e || j < b) return INT_MAX;  // out of range (for sum -> return 0)
+    if (b >= i && e <= j) return tree[node];  // relevant segment
+    int Left = node * 2;                      // break it down
+    int Right = node * 2 + 1;
+    int mid = (b + e) / 2;
+    int p1 = query(Left, b, mid, i, j);
+    int p2 = query(Right, mid + 1, e, i, j);
+    return min(p1, p2);  // sum -> use '+' instead of min
+  }
+
+  void update(int node, int b, int e, int i, int newvalue) {
+    if (i > e || i < b) return;  // out of range
+    if (b >= i && e <= i) {      // relevant segment
+      tree[node] = newvalue;
+      return;
+    }
+
+    int Left = node * 2;  // break it down
+    int Right = node * 2 + 1;
+    int mid = (b + e) / 2;
+    update(Left, b, mid, i, newvalue);
+    update(Right, mid + 1, e, i, newvalue);
+    tree[node] = min(tree[Left], tree[Right]);  // sum -> use '+' instead of min
+  }
+};
+
+struct FenwickTree {  // One based
+  vector<int> bit;  // binary indexed tree
+  int MaxIdx;
+
+  FenwickTree(int n) {
+    MaxIdx = n;
+    bit.assign(n + 1, 0);
+  }
+
+  FenwickTree(vector<int> a) : FenwickTree((int)a.size()) {
+    for (size_t i = 0; i < a.size(); i++) update((int)i + 1, a[i]);
+  }
+
+  int read(int idx) {
+    int sum = 0;
+    while (idx > 0) {
+      sum += bit[idx];
+      idx -= (idx & -idx);
+    }
+    return sum;
+  }
+
+  int read(int l, int r) { return read(r) - read(l - 1); }
+
+  int readSingle(int idx) {
+    int sum = bit[idx];  // this sum will be decreased
+    if (idx > 0) {       // the special case
+      int z = idx - (idx & -idx);
+      idx--;  // idx is not important anymore, so instead y, you can use idx
+      while (idx != z) {  // at some iteration idx (y) will become z
+        sum -= bit[idx];
+        // substruct tree frequency which is between y and "the same path"
+        idx -= (idx & -idx);
+      }
+    }
+    return sum;
+  }
+
+  void scale(int c) {
+    for (int i = 1; i <= MaxIdx; i++) bit[i] = bit[i] / c;
+  }
+
+  void update(int idx, int val) {
+    while (idx <= MaxIdx) {
+      bit[idx] += val;
+      idx += (idx & -idx);
+    }
+  }
+};
 
 
 ////////////////////////// INIX TO POSTFIX //////////////////////////

@@ -1,14 +1,13 @@
 /*
- * FILE: same-tree.cpp
+ * FILE: maximum-depth-of-binary-tree.cpp
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
- * LINK: https://leetcode.com/problems/same-tree/
- * DATE CREATED: 03-02-21 17:13:34 (+06)
- * LAST MODIFIED: 03-02-21 18:01:24 (+06)
- * VERDICT:
+ * LINK: https://leetcode.com/problems/maximum-depth-of-binary-tree/
+ * DATE CREATED: 03-02-21 18:35:48 (+06)
+ * LAST MODIFIED: 03-02-21 18:38:11 (+06)
+ * VERDICT: Accepetd
  * VERSION: 1.0
  * DESCRIPTION: Deleted code is debugged code.
  */
-
 
 /**
  * Definition for a binary tree node.
@@ -24,10 +23,11 @@
  */
 class Solution {
  public:
-  bool isSameTree(TreeNode* p, TreeNode* q) {
-    if (p == NULL or q == NULL) return p == q;
-    return p->val == q->val and isSameTree(p->left, q->left) and
-           isSameTree(p->right, q->right);
+  int maxDepth(TreeNode* root) { return solve(root); }
+
+ private:
+  int solve(TreeNode* root) {
+    if (root == NULL) return 0;
+    return max(solve(root->left), solve(root->right)) + 1;
   }
 };
-

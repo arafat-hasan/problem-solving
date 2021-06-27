@@ -24,5 +24,5 @@ Stackoverflow: [arafat_hasan](https://stackoverflow.com/users/7829174/arafat-has
 GitHub: [arafat-hasan](https://github.com/arafat-hasan/)  
 Linkedin: [arafat-hasan](https://www.linkedin.com/in/arafat-hasan)  
 Facebook: [arafathasanjenin](https://facebook.com/arafathasanjenin)  
-Twitter: [AHJenin](https://twitter.com/AHJenin)  
+Twitter: [Arafat_HJ](https://twitter.com/Arafat_HJ)  
 

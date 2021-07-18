@@ -1694,6 +1694,19 @@ class Subsecuence {
     }
     return res.size();
   }
+
+
+  int lengthOfLIS2(vector<int>& nums) {
+    vector<int> lis(nums.size(), 1);
+    for (size_t i = 1; i < nums.size(); ++i) {
+      for (size_t j = 0; j < i; ++j) {
+        if (nums[j] < nums[i] and lis[i] < lis[j] + 1) {
+          lis[i] = lis[j] + 1;
+        }
+      }
+    }
+    return *max_element(lis.begin(), lis.end());
+  }
   //////////////////////////////////// LIS END /////////////////////////////////
 };
 

@@ -1,3 +1,15 @@
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
+!/**/
+
+
+
 # Compiled Object files
 *.slo
 *.lo
@@ -45,3 +57,5 @@ Codeforces/NC/
 **/input.txt
 **/output.txt
 .vscode
+
+

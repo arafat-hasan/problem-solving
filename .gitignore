@@ -45,3 +45,5 @@ Codeforces/NC/
 **/input.txt
 **/output.txt
 .vscode
+
+*.dsYM/

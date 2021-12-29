@@ -44,8 +44,8 @@ Codeforces/NC/
 
 **/input.txt
 **/output.txt
-**/in.txt
-**/out.txt
+**/*.in.txt
+**/*.out.txt
 .vscode
 
 *.dsYM/

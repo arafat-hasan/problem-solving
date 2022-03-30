@@ -1,11 +1,10 @@
 /*
- * FILE: maximum-sum-circular-subarray.cpp
+ * FILE: 1624A.cpp
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
- * LINK: https://leetcode.com/problems/maximum-sum-circular-subarray
- * DATE CREATED: 28 Oct 2021
- * LAST MODIFIED: 28-10-21 12:12:20 (+06)
+ * LINK: https://codeforces.com/contest/1624/problem/A
+ * DATE CREATED: 10-01-22 22:00:05 (+06)
+ * LAST MODIFIED: 10-01-22 22:08:09 (+06)
  * VERDICT: Accepetd
- * DESCRIPTION: Deleted code is debugged code.
  */
 
 #include <stdint.h>  //uint32_t
@@ -85,33 +84,22 @@ typedef vector<long long> vl;
 #define EPS 1e-7
 #define MAX 10000007  // 1e7+7
 
-class Solution {
- public:
-  int maxSubarraySumCircular(vector<int>& nums) {
-    if (nums.size() == 0) return 0;
-    int sum = nums[0];
-    int maxSoFar = nums[0];
-    int maxTotal = nums[0];
-    int minSoFar = nums[0];
-    int minTotal = nums[0];
-    for (int i = 1; i < (int)nums.size(); i++) {
-      maxSoFar = max(nums[i], maxSoFar + nums[i]);
-      maxTotal = max(maxTotal, maxSoFar);
-
-      minSoFar = min(nums[i], minSoFar + nums[i]);
-      minTotal = min(minTotal, minSoFar);
-      sum += nums[i];
-    }
-    
-    return sum == minTotal? maxTotal : max(sum - minTotal, maxTotal);
-  }
-};
-
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(0);
   cout.tie(0);
-  Solution obj;
-  vector<int> v{5, -3, 5};
-  cout << obj.maxSubarraySumCircular(v);
+  int t;
+  cin >> t;
+  while (t--) {
+    int n, tmp;
+    int minElem = INT_MAX, maxElem = -INT_MIN;
+    cin >> n;
+    for (int i = 0; i < n; ++i) {
+      cin >> tmp;
+      maxElem = maxElem < tmp ? tmp : maxElem;
+      minElem = minElem > tmp ? tmp : minElem;
+    }
+    cout << maxElem - minElem << endl;
+  }
+  return 0;
 }

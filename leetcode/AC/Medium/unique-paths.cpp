@@ -1,11 +1,10 @@
 /*
- * FILE: maximum-sum-circular-subarray.cpp
+ * FILE: unique-paths.cpp
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
- * LINK: https://leetcode.com/problems/maximum-sum-circular-subarray
- * DATE CREATED: 28 Oct 2021
- * LAST MODIFIED: 28-10-21 12:12:20 (+06)
+ * LINK: https://leetcode.com/problems/unique-paths/
+ * DATE CREATED: Nov 17, 2021
+ * LAST MODIFIED: Nov 17 2021
  * VERDICT: Accepetd
- * DESCRIPTION: Deleted code is debugged code.
  */
 
 #include <stdint.h>  //uint32_t
@@ -87,23 +86,19 @@ typedef vector<long long> vl;
 
 class Solution {
  public:
-  int maxSubarraySumCircular(vector<int>& nums) {
-    if (nums.size() == 0) return 0;
-    int sum = nums[0];
-    int maxSoFar = nums[0];
-    int maxTotal = nums[0];
-    int minSoFar = nums[0];
-    int minTotal = nums[0];
-    for (int i = 1; i < (int)nums.size(); i++) {
-      maxSoFar = max(nums[i], maxSoFar + nums[i]);
-      maxTotal = max(maxTotal, maxSoFar);
+  int uniquePaths(int m, int n) {
+    vector<bool> visited(m*n, false);
+    int pathCount = 0;
+    countPaths(Point{0, 0}, Point{m, n}, &visited);
+    return pathCount;
+  }
 
-      minSoFar = min(nums[i], minSoFar + nums[i]);
-      minTotal = min(minTotal, minSoFar);
-      sum += nums[i];
-    }
-    
-    return sum == minTotal? maxTotal : max(sum - minTotal, maxTotal);
+ private:
+  struct Point {
+    int x, y;
+  };
+  void countPaths(Point src, Point des, bool * visited) {
+    visited[src] = true;
   }
 };
 
@@ -112,6 +107,8 @@ int main() {
   cin.tie(0);
   cout.tie(0);
   Solution obj;
-  vector<int> v{5, -3, 5};
-  cout << obj.maxSubarraySumCircular(v);
+
+  cout << obj.uniquePaths(3, 7) << endl;
+
+  return 0;
 }

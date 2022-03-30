@@ -1,14 +1,15 @@
 /*
- * FILE: rotate-array.cpp
+ * FILE: surrounded-regions.cpp
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
- * LINK: https://leetcode.com/problems/rotate-array
- * DATE CREATED: 28-10-21 00:22:14 (+06)
- * LAST MODIFIED: 28-10-21 01:25:00 (+06)
+ * LINK: https://leetcode.com/problems/surrounded-regions
+ * DATE CREATED: 02-11-21 00:51:00 (+06)
+ * LAST MODIFIED: 02-11-21 00:51:50 (+06)
  * VERDICT: Accepetd
  */
 
 #include <stdint.h>  //uint32_t
 #include <unistd.h>  // unsigned int sleep(unsigned int seconds);
+
 #include <algorithm>
 #include <bitset>
 #include <cctype>
@@ -83,19 +84,36 @@ typedef vector<long long> vl;
 #define EPS 1e-7
 #define MAX 10000007  // 1e7+7
 
-////////////////////////// START HERE //////////////////////////
-
 class Solution {
-public:
-    void rotate(vector<int>& nums, int k) {
-       int len = (int) nums.size();
-       k %= len;
-       vector<int> tmp = nums;
+ public:
+  void solve(vector<vector<char>>& board) {
+    int i, j;
+    int row = board.size();
+    if (!row) return;
+    int col = board[0].size();
 
-       for(int i = len - k, j = 0; j < len; i++, j++){
-         if(i == len) i = 0;
-         nums[j] = tmp[i];
-       }
+    for (i = 0; i < row; i++) {
+      check(board, i, 0, row, col);
+      if (col > 1) check(board, i, col - 1, row, col);
     }
+    for (j = 1; j + 1 < col; j++) {
+      check(board, 0, j, row, col);
+      if (row > 1) check(board, row - 1, j, row, col);
+    }
+    for (i = 0; i < row; i++)
+      for (j = 0; j < col; j++)
+        if (board[i][j] == 'O') board[i][j] = 'X';
+    for (i = 0; i < row; i++)
+      for (j = 0; j < col; j++)
+        if (board[i][j] == '1') board[i][j] = 'O';
+  }
+  void check(vector<vector<char>>& vec, int i, int j, int row, int col) {
+    if (vec[i][j] == 'O') {
+      vec[i][j] = '1';
+      if (i > 1) check(vec, i - 1, j, row, col);
+      if (j > 1) check(vec, i, j - 1, row, col);
+      if (i + 1 < row) check(vec, i + 1, j, row, col);
+      if (j + 1 < col) check(vec, i, j + 1, row, col);
+    }
+  }
 };
-

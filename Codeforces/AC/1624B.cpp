@@ -1,12 +1,10 @@
 /*
- * FILE: is-subsequence.cpp
+ * FILE: 1624B.cpp
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
- * LINK: https://leetcode.com/problems/is-subsequence/
- * DATE CREATED: 26-01-21 01:19:52 (+06)
- * LAST MODIFIED: 26-01-21 01:29:14 (+06)
+ * LINK: https://codeforces.com/contest/1624/problem/B
+ * DATE CREATED: 10-01-22 22:24:04 (+06)
+ * LAST MODIFIED: 11-01-22 01:31:11 (+06)
  * VERDICT: Accepetd
- * VERSION: 1.0
- * DESCRIPTION: Deleted code is debugged code.
  */
 
 #include <stdint.h>  //uint32_t
@@ -86,29 +84,27 @@ typedef vector<long long> vl;
 #define EPS 1e-7
 #define MAX 10000007  // 1e7+7
 
-////////////////////////// START HERE //////////////////////////
-
-class Solution {
- public:
-  bool isSubsequence(string s, string t) {
-    if ((int)t.size() == 0 and (int) s.size() == 0) return true;
-    bool flag = false;
-    for (int i = 0, subPos = 0; i < (int)t.size(); ++i) {
-      if (t[i] == s[subPos]) {
-        subPos++;
-      }
-      if (subPos == (int)s.size()) {
-        flag = true;
-        break;
-      }
-    }
-    return flag;
-  }
-};
-
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(0);
   cout.tie(0);
+  int t, a, b, c;
+  cin >> t;
+  while (t--) {
+    cin >> a >> b >> c;
+    if (
+        (((b + (b - a)) % c == 0) && (b + (b - a)) > 0 && b >= a) ||  // 20 25 30 : a, b correct
+        (((b - (a - b)) % c == 0) && (b - (a - b)) > 0 && a >= b) ||  // 30 25 20 : a, b correct
+        (((b - (c - b)) % a == 0) && (b - (c - b)) > 0 && c >= b) ||  // 20 25 30 : b, c correct
+        (((b + (b - c)) % a == 0) && (b + (b - c)) > 0 && b >= c) ||  // 30 25 20 : b, c correct
+        ((((a + c) / 2) % b == 0) && ((a + c) / 2) > 0 && (a + c) % 2 != 1)      // 20 25 30 :  a, c correct
+    ) {
+      cout << "Yes" << endl;
+    } else {
+      cout << "No" << endl;
+    }
+
+
+  }
   return 0;
 }

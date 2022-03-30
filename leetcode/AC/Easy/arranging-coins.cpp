@@ -1,16 +1,14 @@
 /*
- * FILE: maximum-sum-circular-subarray.cpp
+ * FILE: arranging-coins.cpp
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
- * LINK: https://leetcode.com/problems/maximum-sum-circular-subarray
- * DATE CREATED: 28 Oct 2021
- * LAST MODIFIED: 28-10-21 12:12:20 (+06)
- * VERDICT: Accepetd
- * DESCRIPTION: Deleted code is debugged code.
+ * LINK: https://leetcode.com/problems/arranging-coins
+ * DATE CREATED: 05-11-21 17:27:12 (+06)
+ * LAST MODIFIED: 05-11-21 17:27:28 (+06)
+ * VERDICT: AC
  */
 
 #include <stdint.h>  //uint32_t
 #include <unistd.h>  // unsigned int sleep(unsigned int seconds);
-
 #include <algorithm>
 #include <bitset>
 #include <cctype>
@@ -85,33 +83,12 @@ typedef vector<long long> vl;
 #define EPS 1e-7
 #define MAX 10000007  // 1e7+7
 
+
 class Solution {
- public:
-  int maxSubarraySumCircular(vector<int>& nums) {
-    if (nums.size() == 0) return 0;
-    int sum = nums[0];
-    int maxSoFar = nums[0];
-    int maxTotal = nums[0];
-    int minSoFar = nums[0];
-    int minTotal = nums[0];
-    for (int i = 1; i < (int)nums.size(); i++) {
-      maxSoFar = max(nums[i], maxSoFar + nums[i]);
-      maxTotal = max(maxTotal, maxSoFar);
-
-      minSoFar = min(nums[i], minSoFar + nums[i]);
-      minTotal = min(minTotal, minSoFar);
-      sum += nums[i];
+public:
+    int arrangeCoins(int n) {
+        int i = 1;
+        while(n >= i) n -= i, i++;
+        return i - 1;
     }
-    
-    return sum == minTotal? maxTotal : max(sum - minTotal, maxTotal);
-  }
 };
-
-int main() {
-  ios_base::sync_with_stdio(false);
-  cin.tie(0);
-  cout.tie(0);
-  Solution obj;
-  vector<int> v{5, -3, 5};
-  cout << obj.maxSubarraySumCircular(v);
-}

@@ -1,11 +1,10 @@
 /*
- * FILE: maximum-sum-circular-subarray.cpp
+ * FILE: complement-of-base-10-integer.cpp
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
- * LINK: https://leetcode.com/problems/maximum-sum-circular-subarray
- * DATE CREATED: 28 Oct 2021
- * LAST MODIFIED: 28-10-21 12:12:20 (+06)
+ * LINK: https://leetcode.com/problems/complement-of-base-10-integer/
+ * DATE CREATED: 04-01-22 18:48:02 (+06)
+ * LAST MODIFIED: 05-01-22 02:16:27 (+06)
  * VERDICT: Accepetd
- * DESCRIPTION: Deleted code is debugged code.
  */
 
 #include <stdint.h>  //uint32_t
@@ -85,25 +84,33 @@ typedef vector<long long> vl;
 #define EPS 1e-7
 #define MAX 10000007  // 1e7+7
 
+// 2^n
+#define bit(n) (1 << (n))
+// Check ith bit of integer n, 0 or 1
+#define bitchk(n, i) ((n & (1 << (i))) ? 1 : 0)
+// set ith bit ON of the integer n
+#define bit_on(n, i) n = (n | (1 << (i)))
+// set ith bit OFF of the intger n
+#define bit_off(n, i) n = (n & ~(1 << (i)))
+// Toggle ith bit of integer n, set 0 if 1, set 1 if 0
+#define bit_toggle(n, i) n = (n ^ (1 << (i)))
+// Set ith bit to x (x is bool, 1 or 0) of the integer n
+#define bit_setx(n, x, i) n = (n ^ ((-(x) ^ n) & (1 << (i))))
+
 class Solution {
  public:
-  int maxSubarraySumCircular(vector<int>& nums) {
-    if (nums.size() == 0) return 0;
-    int sum = nums[0];
-    int maxSoFar = nums[0];
-    int maxTotal = nums[0];
-    int minSoFar = nums[0];
-    int minTotal = nums[0];
-    for (int i = 1; i < (int)nums.size(); i++) {
-      maxSoFar = max(nums[i], maxSoFar + nums[i]);
-      maxTotal = max(maxTotal, maxSoFar);
-
-      minSoFar = min(nums[i], minSoFar + nums[i]);
-      minTotal = min(minTotal, minSoFar);
-      sum += nums[i];
+  int bitwiseComplement(int n) {
+    if(!n) return 1;
+    bool flag = false;
+    for (int i = 30; i >= 0; i--) {
+      if (bitchk(n, i) == 1) {
+        flag = true;
+      }
+      if (flag) {
+        bit_toggle(n, i);
+      }
     }
-    
-    return sum == minTotal? maxTotal : max(sum - minTotal, maxTotal);
+    return n;
   }
 };
 
@@ -111,7 +118,13 @@ int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(0);
   cout.tie(0);
+  int t, n;
   Solution obj;
-  vector<int> v{5, -3, 5};
-  cout << obj.maxSubarraySumCircular(v);
+  cin >> t;
+  while (t--) {
+    cin >> n;
+    cout << obj.bitwiseComplement(n) << endl;
+  }
+  cout << INT_MAX;
+  return 0;
 }

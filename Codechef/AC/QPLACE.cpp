@@ -1,11 +1,10 @@
 /*
- * FILE: maximum-sum-circular-subarray.cpp
+ * FILE: QPLACE.cpp
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
- * LINK: https://leetcode.com/problems/maximum-sum-circular-subarray
- * DATE CREATED: 28 Oct 2021
- * LAST MODIFIED: 28-10-21 12:12:20 (+06)
+ * LINK: https://www.codechef.com/SNCK1B21/problems/QPLACE
+ * DATE CREATED: 29-10-21 23:49:53 (+06)
+ * LAST MODIFIED: 30-10-21 00:16:33 (+06)
  * VERDICT: Accepetd
- * DESCRIPTION: Deleted code is debugged code.
  */
 
 #include <stdint.h>  //uint32_t
@@ -85,33 +84,41 @@ typedef vector<long long> vl;
 #define EPS 1e-7
 #define MAX 10000007  // 1e7+7
 
-class Solution {
- public:
-  int maxSubarraySumCircular(vector<int>& nums) {
-    if (nums.size() == 0) return 0;
-    int sum = nums[0];
-    int maxSoFar = nums[0];
-    int maxTotal = nums[0];
-    int minSoFar = nums[0];
-    int minTotal = nums[0];
-    for (int i = 1; i < (int)nums.size(); i++) {
-      maxSoFar = max(nums[i], maxSoFar + nums[i]);
-      maxTotal = max(maxTotal, maxSoFar);
-
-      minSoFar = min(nums[i], minSoFar + nums[i]);
-      minTotal = min(minTotal, minSoFar);
-      sum += nums[i];
+void solve() {
+  int n;
+  cin >> n;
+  if (n == 3) {
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (i == 1 and j == 1)
+          cout << "Q";
+        else
+          cout << ".";
+      }
+      cout << '\n';
     }
-    
-    return sum == minTotal? maxTotal : max(sum - minTotal, maxTotal);
+
+  } else {
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (i == j and (i != 1 and i != 3))
+          cout << "Q";
+        else
+          cout << ".";
+      }
+      cout << '\n';
+    }
   }
-};
+}
 
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(0);
   cout.tie(0);
-  Solution obj;
-  vector<int> v{5, -3, 5};
-  cout << obj.maxSubarraySumCircular(v);
+  int t;
+  cin >> t;
+  while (t--) {
+    solve();
+  }
+  return 0;
 }

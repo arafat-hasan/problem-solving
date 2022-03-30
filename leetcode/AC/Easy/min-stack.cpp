@@ -1,11 +1,10 @@
 /*
- * FILE: maximum-sum-circular-subarray.cpp
+ * FILE: min-stack.cpp
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
- * LINK: https://leetcode.com/problems/maximum-sum-circular-subarray
- * DATE CREATED: 28 Oct 2021
- * LAST MODIFIED: 28-10-21 12:12:20 (+06)
- * VERDICT: Accepetd
- * DESCRIPTION: Deleted code is debugged code.
+ * LINK: https://leetcode.com/problems/min-stack
+ * DATE CREATED: 25-10-21 17:38:04 (+06)
+ * LAST MODIFIED:
+ * VERDICT:
  */
 
 #include <stdint.h>  //uint32_t
@@ -85,33 +84,20 @@ typedef vector<long long> vl;
 #define EPS 1e-7
 #define MAX 10000007  // 1e7+7
 
-class Solution {
+class MinStack {
+ private:
+  stack<int> s1;
+  stack<int> s2;
+
  public:
-  int maxSubarraySumCircular(vector<int>& nums) {
-    if (nums.size() == 0) return 0;
-    int sum = nums[0];
-    int maxSoFar = nums[0];
-    int maxTotal = nums[0];
-    int minSoFar = nums[0];
-    int minTotal = nums[0];
-    for (int i = 1; i < (int)nums.size(); i++) {
-      maxSoFar = max(nums[i], maxSoFar + nums[i]);
-      maxTotal = max(maxTotal, maxSoFar);
-
-      minSoFar = min(nums[i], minSoFar + nums[i]);
-      minTotal = min(minTotal, minSoFar);
-      sum += nums[i];
-    }
-    
-    return sum == minTotal? maxTotal : max(sum - minTotal, maxTotal);
+  void push(int x) {
+    s1.push(x);
+    if (s2.empty() || x <= getMin()) s2.push(x);
   }
+  void pop() {
+    if (s1.top() == getMin()) s2.pop();
+    s1.pop();
+  }
+  int top() { return s1.top(); }
+  int getMin() { return s2.top(); }
 };
-
-int main() {
-  ios_base::sync_with_stdio(false);
-  cin.tie(0);
-  cout.tie(0);
-  Solution obj;
-  vector<int> v{5, -3, 5};
-  cout << obj.maxSubarraySumCircular(v);
-}

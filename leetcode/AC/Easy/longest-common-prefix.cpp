@@ -1,11 +1,10 @@
 /*
- * FILE: maximum-sum-circular-subarray.cpp
+ * FILE: longest-common-prefix.cpp
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
- * LINK: https://leetcode.com/problems/maximum-sum-circular-subarray
- * DATE CREATED: 28 Oct 2021
- * LAST MODIFIED: 28-10-21 12:12:20 (+06)
+ * LINK: https://leetcode.com/problems/longest-common-prefix/
+ * DATE CREATED: 28-12-21 23:11:11 (+06)
+ * LAST MODIFIED: 29-12-21 00:13:36 (+06)
  * VERDICT: Accepetd
- * DESCRIPTION: Deleted code is debugged code.
  */
 
 #include <stdint.h>  //uint32_t
@@ -87,23 +86,22 @@ typedef vector<long long> vl;
 
 class Solution {
  public:
-  int maxSubarraySumCircular(vector<int>& nums) {
-    if (nums.size() == 0) return 0;
-    int sum = nums[0];
-    int maxSoFar = nums[0];
-    int maxTotal = nums[0];
-    int minSoFar = nums[0];
-    int minTotal = nums[0];
-    for (int i = 1; i < (int)nums.size(); i++) {
-      maxSoFar = max(nums[i], maxSoFar + nums[i]);
-      maxTotal = max(maxTotal, maxSoFar);
-
-      minSoFar = min(nums[i], minSoFar + nums[i]);
-      minTotal = min(minTotal, minSoFar);
-      sum += nums[i];
+  string longestCommonPrefix(vector<string> &strs) {
+    string currentString = strs[0];
+    for (int i = 1; i < (int) strs.size(); i++) {
+      currentString = match(currentString, strs[i]);
     }
-    
-    return sum == minTotal? maxTotal : max(sum - minTotal, maxTotal);
+    return currentString;
+  }
+
+ private:
+  string match(string &a, string &b) {
+    for (int i = 0; i < (int) a.size() and i < (int) b.size(); i++) {
+      if (a[i] != b[i]) {
+        return a.substr(0, i);
+      }
+    }
+    return min(a, b);
   }
 };
 
@@ -112,6 +110,12 @@ int main() {
   cin.tie(0);
   cout.tie(0);
   Solution obj;
-  vector<int> v{5, -3, 5};
-  cout << obj.maxSubarraySumCircular(v);
+  int n;
+  cin >> n;
+  vector<string> v(n);
+  for (int i = 0; i < n; i++) {
+    cin >> v[i];
+  }
+  cout << obj.longestCommonPrefix(v) << endl;
+  return 0;
 }

@@ -1,12 +1,10 @@
 /*
- * FILE: maximum-subarray.cpp
+ * FILE: find-the-town-judge.cpp
  * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
- * LINK:
- * DATE CREATED: 26-01-21 00:21:57 (+06)
- * LAST MODIFIED:
- * VERDICT:
- * VERSION: 1.0
- * DESCRIPTION: Deleted code is debugged code.
+ * LINK: https://leetcode.com/problems/find-the-town-judge/
+ * DATE CREATED: 03-01-22 18:21:20 (+06)
+ * LAST MODIFIED: 03-01-22 22:05:46 (+06)
+ * VERDICT: Accepetd
  */
 
 #include <stdint.h>  //uint32_t
@@ -86,39 +84,30 @@ typedef vector<long long> vl;
 #define EPS 1e-7
 #define MAX 10000007  // 1e7+7
 
-////////////////////////// START HERE //////////////////////////
-
 class Solution {
  public:
-  int maxSubArray(vector<int>& nums) {
-    int sum = 0, maxSum = INT_MIN, finish = -1, local_start = 0, start = 0;
-    for (int i = 0; i < (int)nums.size(); ++i) {
-      sum += nums[i];
+  int findJudge(int n, vector<vector<int>>& trust) {
+    if(trust.size() == 0 and n == 1) return 1;
+    map<int, vector<int>> trustedBy;
+    map<int, vector<int>> trustTo;
+    for (auto i : trust) {
+      trustedBy[i[1]].push_back(i[0]);
+      trustTo[i[0]].push_back(i[1]);
+    }
 
-      if (sum < 0) {
-        local_start = i + 1;
-        sum = 0;
-      } else if (maxSum < sum) {
-        start = local_start;
-        maxSum = sum;
-        finish = i;
+    vector<int> trustedByAllIdx;
+    for (auto i : trustedBy) {
+      if (i.second.size() == n - 1) trustedByAllIdx.push_back(i.first);
+    }
+
+    int judgeCount = 0, ansIdx;
+    for (int i : trustedByAllIdx) {
+      if (trustTo[i].size() == 0) {
+        judgeCount++;
+        ansIdx = i;
       }
     }
-
-    if (finish != -1) {
-      return maxSum;
-    }
-
-    maxSum = nums[0];
-    start = finish = 0;
-
-    for (int i = 1; i < (int)nums.size(); ++i) {
-      if (maxSum < nums[i]) {
-        maxSum = nums[i];
-        start = finish = i;
-      }
-    }
-    return maxSum;
+    return (judgeCount == 1 ? ansIdx : -1);
   }
 };
 
@@ -126,5 +115,16 @@ int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(0);
   cout.tie(0);
+  Solution obj;
+  int n, trustPair;
+  cin >> n >> trustPair;
+  vector<vector<int>> trust(trustPair);
+  for (int i = 0; i < trustPair; i++) {
+    int a, b;
+    cin >> a >> b;
+    trust[i] = {a, b};
+  }
+  cout << obj.findJudge(n, trust) << endl;
+
   return 0;
 }

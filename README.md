@@ -1,17 +1,10 @@
-# ACM 
-ACM type problems solved by me.
-
-<br><br>
-
 **Arafat Hasan Jenin** *<opendoor.arafat[at]gmail[dot]com>*  
-Mawlana Bhashani Science and Technology University  
-Santosh, Tangail  
 *From Rangpur, Bangladesh*
 
 
 <br><br>
 
-#### My IDs in commpetitive programming platforms
+#### My IDs in various problem solving platforms
 Codeforce: [arafat_hasan](http://codeforces.com/profile/arafat_hasan/)  
 Uva: [arafat_hasan](http://uhunt.onlinejudge.org/id/859424/)  
 HackerRank: [arafat_hasan](https://www.hackerrank.com/arafat_hasan/)  

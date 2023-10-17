@@ -31,6 +31,10 @@ class Graph {
       if (i == 0) return false;
     return true;
   }
+
+  void refreshColor() {
+    for (int i = 0; i < verticesCount; i++) color->at(i) = 0;
+  }
 };
 
 class Solution {
@@ -43,6 +47,10 @@ class Solution {
       if (rightChild[i] != -1) graph.addEdge(i, rightChild[i]);
     }
 
-    return graph.depthFirstSearch(0) && graph.isAllNodeVisited();
+    for (int i = 0; i < n; i++) {
+      graph.refreshColor();
+      if (graph.depthFirstSearch(i) && graph.isAllNodeVisited()) return true;
+    }
+    return false;
   }
 };

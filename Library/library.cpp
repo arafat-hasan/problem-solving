@@ -282,35 +282,6 @@ class UNION_FIND {
 };
 ////////////////////////// UNION FIND END //////////////////////////
 
-////////////////////////// DFS //////////////////////////
-
-class DFS {
-  vector<int> adj[100];  // for BFS & bfs_vis
-  int finish[100], discover[100], color[100], time_cnt = 0;
-  // discovery time and finishing time for DFS
-
-  void dfs(int u) {
-    int i, v, sz;
-    time_cnt++;
-    discover[u] = time_cnt;
-    color[u] = 1;  /// Gray = visiting = 1, black = visited = 2;
-    sz = (int)adj[u].size();
-
-    for (i = 0; i < sz; i++) {
-      v = adj[u][i];
-
-      if (color[v] == 0) {
-        dfs(v);
-      }
-    }
-
-    color[u] = 2;
-    time_cnt++;
-    finish[u] = time_cnt;
-  }
-};
-////////////////////////// DFS END //////////////////////////
-
 class Topsort {
   int indegree[MAX];
   vector<int> adj[MAX], tops;

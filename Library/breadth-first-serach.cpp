@@ -1,3 +1,11 @@
+/*
+ * FILE: breadth-first-search.cpp
+ * @author: Arafat Hasan Jenin <opendoor.arafat[at]gmail[dot]com>
+ * LINK:
+ * DATE CREATED: 17-10-23 13:53:31 (+06)
+ * LAST MODIFIED: 17-10-23 15:53:19 (+06)
+ */
+
 #include <iostream>
 #include <list>
 #include <queue>
@@ -7,10 +15,9 @@ class Graph {
   std::list<int> *adj;
 
  public:
-  Graph(int verticesCount) {
-    this->verticesCount = verticesCount;
-    adj = new std::list<int>[verticesCount];
-  }
+  Graph(int _verticesCount)
+      : verticesCount(_verticesCount),
+        adj(new std::list<int>[verticesCount]) {}
 
   void addEdge(int v, int w) { adj[v].push_back(w); }
 
@@ -46,24 +53,18 @@ int main() {
   graph.addEdge(2, 0);
   graph.addEdge(2, 3);
   graph.addEdge(3, 3);
-  std::cout << "Following bradth first serach: starting from vertex 2"
+  std::cout << "Following breadth first serach: starting from vertex 2"
             << std::endl;
   graph.breadthFirstSearch(2);
   return 0;
 }
 
-
 /*
- * 
+ *
  *      0
- *    ╱    ╲ 
- *   ╱      ╲ 
+ *    ╱    ╲
+ *   ╱      ╲
  *  1 ─────── 2 ────── 3 ───┐
  *                     │    │
  *                     └────┘
  */
-         
-        
-       
-
-

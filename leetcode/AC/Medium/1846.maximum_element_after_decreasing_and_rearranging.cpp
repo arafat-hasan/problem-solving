@@ -1,13 +1,3 @@
-class Solution_3 {
- public:
-  int maximumElementAfterDecrementingAndRearranging(vector<int>& arr) {
-    int maxval = *max_element(begin(arr), end(arr));
-    int arrsize = (int) arr.size();
-    cout << maxval <<  ' ' << arrsize << endl;
-    return maxval > arrsize? arrsize : maxval;
-  }
-};
-
 class Solution {
  public:
   int maximumElementAfterDecrementingAndRearranging(vector<int>& arr) {
@@ -22,3 +12,4 @@ class Solution {
     return arr[arr.size() - 1];
   }
 };
+

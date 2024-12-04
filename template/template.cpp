@@ -90,7 +90,7 @@ int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(0);
   cout.tie(0);
-  cerr << "Problem name is $(PROBLEM)" << endl;
+
   return 0;
 }
 

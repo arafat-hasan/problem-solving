@@ -1,16 +1,17 @@
 /*
  * Problem: $(PROBLEM)
- * URL: $(URL)
+ * Url: $(URL)
  * Judge: $(JUDGE)
  * Contest: $(CONTEST)
- * DATE CREATED: $(DATE)
+ * Date Created: $(DATE)
  * Memory Limit: $(MEMLIM)
  * Time Limit: $(TIMELIM)
- * VERDICT: undefined
+ * Verdict: undefined
  */
 
 #include <stdint.h>  //uint32_t
 #include <unistd.h>  // unsigned int sleep(unsigned int seconds);
+
 #include <algorithm>
 #include <bitset>
 #include <cctype>
@@ -85,7 +86,6 @@ typedef vector<long long> vl;
 #define EPS 1e-7
 #define MAX 10000007  // 1e7+7
 
-
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(0);
@@ -93,4 +93,3 @@ int main() {
 
   return 0;
 }
-

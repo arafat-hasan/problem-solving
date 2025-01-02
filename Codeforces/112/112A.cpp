@@ -1,12 +1,12 @@
 /*
- * Problem: $(PROBLEM)
- * Url: $(URL)
- * Judge: $(JUDGE)
- * Contest: $(CONTEST)
- * Date Created: $(DATE)
- * Memory Limit: $(MEMLIM)
- * Time Limit: $(TIMELIM)
- * Verdict: undefined
+ * Problem: A. Petya and Strings
+ * Url: https://codeforces.com/problemset/problem/112/A
+ * Judge: Codeforces
+ * Contest: Codeforces Beta Round 85 (Div. 2 Only)
+ * Date Created: Thu 02 Jan 2025 13:50:28 +06
+ * Memory Limit: 256
+ * Time Limit: 2000
+ * Verdict: Accepted
  */
 
 #include <stdint.h>  //uint32_t
@@ -90,6 +90,15 @@ int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(0);
   cout.tie(0);
-
+  string str1, str2;
+  cin >> str1 >> str2;
+  transform(str1.begin(), str1.end(), str1.begin(), ::tolower);
+  transform(str2.begin(), str2.end(), str2.begin(), ::tolower);
+  cerr << str1 << ' ' << str2 << endl;
+  int res = !(str1 == str2);
+  if (res == 1) {
+    res = str1 > str2 ? 1 : -1;
+  }
+  cout << res << endl;
   return 0;
 }

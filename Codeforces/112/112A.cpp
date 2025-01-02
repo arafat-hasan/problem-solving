@@ -6,11 +6,11 @@
  * Date Created: Thu 02 Jan 2025 13:50:28 +06
  * Memory Limit: 256
  * Time Limit: 2000
- * Verdict: undefined
+ * Verdict: Accepted
  */
 
-#include <stdint.h> //uint32_t
-#include <unistd.h> // unsigned int sleep(unsigned int seconds);
+#include <stdint.h>  //uint32_t
+#include <unistd.h>  // unsigned int sleep(unsigned int seconds);
 
 #include <algorithm>
 #include <bitset>
@@ -24,7 +24,7 @@
 #include <functional>
 #include <iomanip>
 #include <iostream>
-#include <iterator> // std::istream_iterator
+#include <iterator>  // std::istream_iterator
 #include <list>
 #include <map>
 #include <queue>
@@ -52,7 +52,7 @@ typedef vector<long long> vl;
 #define forr(i, a, b) for (__typeof(a) i = (a); i <= (b); i++)
 #define rof(i, b, a) for (__typeof(a) i = (b); i >= (a); i--)
 #define rep(i, n) for (__typeof(n) i = 0; i < (n); i++)
-#define forit(i, s)                                                            \
+#define forit(i, s) \
   for (__typeof((s).end()) i = (s).begin(); i != (s).end(); ++i)
 #define all(ar) ar.begin(), ar.end()
 #define fill(a, val) memset((a), (val), sizeof((a)))
@@ -66,7 +66,7 @@ typedef vector<long long> vl;
 #define sp cerr << ' '
 #define ckk cerr << "###############\n"
 #define debug1(x) cerr << #x << ": " << (x) << '\n'
-#define debug2(x, y)                                                           \
+#define debug2(x, y) \
   cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << '\n'
 #define debug3(x, y, z)                                                        \
   cerr << #x << ": " << (x) << '\t' << #y << ": " << (y) << '\t' << #z << ": " \
@@ -84,7 +84,7 @@ typedef vector<long long> vl;
 #define INF 0x7fffffff
 #define MOD 1000000007
 #define EPS 1e-7
-#define MAX 10000007 // 1e7+7
+#define MAX 10000007  // 1e7+7
 
 int main() {
   ios_base::sync_with_stdio(false);

@@ -86,7 +86,7 @@ typedef vector<long long> vl;
 #define EPS 1e-7
 #define MAX 10000007  // 1e7+7
 
-int main() {
+int main2() {
   ios_base::sync_with_stdio(false);
   cin.tie(0);
   cout.tie(0);
@@ -100,5 +100,27 @@ int main() {
     res = str1 > str2 ? 1 : -1;
   }
   cout << res << endl;
+  return 0;
+}
+
+int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(0);
+  cout.tie(0);
+  string str1, str2;
+  cin >> str1 >> str2;
+  bool flag = false;
+  for (int i = 0; i < (int)str1.size(); i++) {
+    if (tolower(str1[i]) > tolower(str2[i])) {
+      flag = true;
+      cout << 1 << endl;
+      break;
+    } else if (tolower(str1[i]) < tolower(str2[i])) {
+      flag = true;
+      cout << -1 << endl;
+      break;
+    }
+  }
+  if (!flag) cout << 0 << endl;
   return 0;
 }

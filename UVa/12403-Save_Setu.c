@@ -1,7 +1,7 @@
 /***********************************************************************
-*   FILE NAME: Birthday Cake Candles.c
+*   FILE NAME: Save Setu-12403.c
 *
-*   PURPOSE:    HackerRank Contest problem.
+*   PURPOSE:	Uva
 *
 *   @author: Md. Arafat Hasan Jenin
 *   EMAIL:  OpenDoor.Arafat@gmail.com
@@ -9,21 +9,23 @@
 *   DEVELOPMENT HISTORY:
 *       Date        Change          Version     Description
 * -------------------------------------------------------------------
-*    26 Jul 2016    New             0.0         Completed
+*    05 Aug 2016    New             1.0         Completed, Accepted
 ***********************************************************************/
+
 #include<stdio.h>
 int main() {
-    int n,i,mx=0,cnt;
-    scanf("%d",&n);
-    for(; n>0; n--) {
-        scanf("%d",&i);
-        if(mx<i) {
-            mx=i;
-            cnt=0;
-        }
-        if(mx==i)
-            cnt++;
+    int t;
+    double ac=0,tk;
+    char ch[7];
+    scanf("%d",&t);
+    while(t) {
+        scanf("%s",ch);
+        if(ch[0]=='d') {
+            scanf("%lf",&tk);
+            ac+=tk;
+        } else
+            printf("%.0lf\n",ac);
+        t--;
     }
-    printf("%d",cnt);
     return 0;
 }

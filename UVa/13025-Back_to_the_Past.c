@@ -1,7 +1,7 @@
 /***********************************************************************
-*   FILE NAME: Birthday Cake Candles.c
+*   FILE NAME: Back_to_the_Past-13025.c
 *
-*   PURPOSE:    HackerRank Contest problem.
+*   PURPOSE:
 *
 *   @author: Md. Arafat Hasan Jenin
 *   EMAIL:  OpenDoor.Arafat@gmail.com
@@ -9,21 +9,11 @@
 *   DEVELOPMENT HISTORY:
 *       Date        Change          Version     Description
 * -------------------------------------------------------------------
-*    26 Jul 2016    New             0.0         Completed
+*    03 Jul 2016    New             1.0         Completed, Accepted
 ***********************************************************************/
+
 #include<stdio.h>
 int main() {
-    int n,i,mx=0,cnt;
-    scanf("%d",&n);
-    for(; n>0; n--) {
-        scanf("%d",&i);
-        if(mx<i) {
-            mx=i;
-            cnt=0;
-        }
-        if(mx==i)
-            cnt++;
-    }
-    printf("%d",cnt);
+    printf("May 29, 2013 Wednesday\n");
     return 0;
 }

@@ -1,7 +1,7 @@
 /***********************************************************************
-*   FILE NAME: Birthday Cake Candles.c
+*   FILE NAME:	Medians-10347.c
 *
-*   PURPOSE:    HackerRank Contest problem.
+*   PURPOSE:
 *
 *   @author: Md. Arafat Hasan Jenin
 *   EMAIL:  OpenDoor.Arafat@gmail.com
@@ -9,21 +9,20 @@
 *   DEVELOPMENT HISTORY:
 *       Date        Change          Version     Description
 * -------------------------------------------------------------------
-*    26 Jul 2016    New             0.0         Completed
+*    06 Aug 2016    New             1.0         Completed, Accepted
 ***********************************************************************/
+
 #include<stdio.h>
+#include<math.h>
 int main() {
-    int n,i,mx=0,cnt;
-    scanf("%d",&n);
-    for(; n>0; n--) {
-        scanf("%d",&i);
-        if(mx<i) {
-            mx=i;
-            cnt=0;
-        }
-        if(mx==i)
-            cnt++;
+    double m1,m2,m3,a,t=0;
+    while(t<1000&&scanf("%lf %lf %lf",&m1,&m2,&m3)==3) {
+        t++;
+        a=sqrt(((m1+m2+m3)/2)*(((m1+m2+m3)/2)-m1)*(((m1+m2+m3)/2)-m2)*(((m1+m2+m3)/2)-m3))*4/3;
+        if(a>0)
+            printf("%.3lf\n",a);
+        else
+            printf("-1.000\n");
     }
-    printf("%d",cnt);
     return 0;
 }

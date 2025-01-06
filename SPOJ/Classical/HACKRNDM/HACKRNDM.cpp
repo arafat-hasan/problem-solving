@@ -1,11 +1,11 @@
 /*
- * Problem: A. Petya and Strings
- * Url: https://codeforces.com/problemset/problem/112/A
- * Judge: Codeforces
- * Contest: Codeforces Beta Round 85 (Div. 2 Only)
- * Date Created: Thu 02 Jan 2025 13:50:28 +06
- * Memory Limit: 256
- * Time Limit: 2000
+ * Problem: Hacking the random number generator
+ * Url: https://www.spoj.com/problems/HACKRNDM/en/
+ * Judge: SPOJ
+ * Contest: Classical
+ * Date Created: Thu 02 Jan 2025 18:00:07 +06
+ * Memory Limit: 1536
+ * Time Limit: 1000
  * Verdict: Accepted
  */
 
@@ -86,41 +86,23 @@ typedef vector<long long> vl;
 #define EPS 1e-7
 #define MAX 10000007  // 1e7+7
 
-int main2() {
-  ios_base::sync_with_stdio(false);
-  cin.tie(0);
-  cout.tie(0);
-  string str1, str2;
-  cin >> str1 >> str2;
-  transform(str1.begin(), str1.end(), str1.begin(), ::tolower);
-  transform(str2.begin(), str2.end(), str2.begin(), ::tolower);
-  cerr << str1 << ' ' << str2 << endl;
-  int res = !(str1 == str2);
-  if (res == 1) {
-    res = str1 > str2 ? 1 : -1;
-  }
-  cout << res << endl;
-  return 0;
-}
-
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(0);
   cout.tie(0);
-  string str1, str2;
-  cin >> str1 >> str2;
-  bool flag = false;
-  for (int i = 0; i < (int)str1.size(); i++) {
-    if (tolower(str1[i]) > tolower(str2[i])) {
-      flag = true;
-      cout << 1 << endl;
-      break;
-    } else if (tolower(str1[i]) < tolower(str2[i])) {
-      flag = true;
-      cout << -1 << endl;
-      break;
-    }
+  int n, k;
+  cin >> n >> k;
+  set<int> s;
+  for (int i = 0; i < n; i++) {
+    int tmp;
+    cin >> tmp;
+    s.insert(tmp);
   }
-  if (!flag) cout << 0 << endl;
+  int ans = 0;
+  for (auto i : s) {
+    if (s.find(i - k) != s.end()) ans++;
+  }
+  cout << ans << endl;
+
   return 0;
 }

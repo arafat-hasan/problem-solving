@@ -1,9 +1,9 @@
 /*
- * Problem: A. Petya and Strings
- * Url: https://codeforces.com/problemset/problem/112/A
+ * Problem: A. Tom Riddle's Diary
+ * Url: https://codeforces.com/problemset/problem/855/A
  * Judge: Codeforces
- * Contest: Codeforces Beta Round 85 (Div. 2 Only)
- * Date Created: Thu 02 Jan 2025 13:50:28 +06
+ * Contest: Manthan, Codefest 17
+ * Date Created: Thu 02 Jan 2025 14:38:56 +06
  * Memory Limit: 256
  * Time Limit: 2000
  * Verdict: Accepted
@@ -86,41 +86,23 @@ typedef vector<long long> vl;
 #define EPS 1e-7
 #define MAX 10000007  // 1e7+7
 
-int main2() {
-  ios_base::sync_with_stdio(false);
-  cin.tie(0);
-  cout.tie(0);
-  string str1, str2;
-  cin >> str1 >> str2;
-  transform(str1.begin(), str1.end(), str1.begin(), ::tolower);
-  transform(str2.begin(), str2.end(), str2.begin(), ::tolower);
-  cerr << str1 << ' ' << str2 << endl;
-  int res = !(str1 == str2);
-  if (res == 1) {
-    res = str1 > str2 ? 1 : -1;
-  }
-  cout << res << endl;
-  return 0;
-}
-
 int main() {
   ios_base::sync_with_stdio(false);
   cin.tie(0);
   cout.tie(0);
-  string str1, str2;
-  cin >> str1 >> str2;
-  bool flag = false;
-  for (int i = 0; i < (int)str1.size(); i++) {
-    if (tolower(str1[i]) > tolower(str2[i])) {
-      flag = true;
-      cout << 1 << endl;
-      break;
-    } else if (tolower(str1[i]) < tolower(str2[i])) {
-      flag = true;
-      cout << -1 << endl;
-      break;
+  int t;
+  string tmp;
+  set<string> s;
+  cin >> t;
+  while (t--) {
+    cin >> tmp;
+    if (s.find(tmp) == s.end()) {
+      s.insert(tmp);
+      cout << "NO\n";
+    } else {
+      cout << "YES\n";
     }
   }
-  if (!flag) cout << 0 << endl;
+
   return 0;
 }

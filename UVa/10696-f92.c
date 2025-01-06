@@ -1,7 +1,7 @@
 /***********************************************************************
-*   FILE NAME: Birthday Cake Candles.c
+*   FILE NAME: f92-10696.c
 *
-*   PURPOSE:    HackerRank Contest problem.
+*   PURPOSE:
 *
 *   @author: Md. Arafat Hasan Jenin
 *   EMAIL:  OpenDoor.Arafat@gmail.com
@@ -9,21 +9,17 @@
 *   DEVELOPMENT HISTORY:
 *       Date        Change          Version     Description
 * -------------------------------------------------------------------
-*    26 Jul 2016    New             0.0         Completed
+*    03 Aug 2016    New             1.0         Completed, Accepted
 ***********************************************************************/
+
 #include<stdio.h>
 int main() {
-    int n,i,mx=0,cnt;
-    scanf("%d",&n);
-    for(; n>0; n--) {
-        scanf("%d",&i);
-        if(mx<i) {
-            mx=i;
-            cnt=0;
-        }
-        if(mx==i)
-            cnt++;
+    int n;
+    while(scanf("%d",&n)==1&&n!=0) {
+        if(n>100)
+            printf("f91(%d) = %d\n",n,n-10);
+        else
+            printf("f91(%d) = 91\n",n);
     }
-    printf("%d",cnt);
     return 0;
 }

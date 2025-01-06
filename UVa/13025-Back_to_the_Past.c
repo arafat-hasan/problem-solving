@@ -1,5 +1,5 @@
 /***********************************************************************
-*   FILE NAME: Polygon Inside A Circle-10432.c
+*   FILE NAME: Back_to_the_Past-13025.c
 *
 *   PURPOSE:
 *
@@ -9,16 +9,11 @@
 *   DEVELOPMENT HISTORY:
 *       Date        Change          Version     Description
 * -------------------------------------------------------------------
-*    04 Aug 2016    New             1.0         Completed,Accepted
+*    03 Jul 2016    New             1.0         Completed, Accepted
 ***********************************************************************/
 
 #include<stdio.h>
-#include <math.h>
 int main() {
-    double r,n;
-    while(scanf("%lf %lf",&r,&n)==2){
-        printf("%.3lf\n",0.5*r*sin(2*3.1415926535897932384626433832795/n)*r*n);
-    }
-
+    printf("May 29, 2013 Wednesday\n");
     return 0;
 }

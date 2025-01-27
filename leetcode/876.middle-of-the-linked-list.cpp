@@ -23,16 +23,14 @@ struct ListNode {
 class Solution {
  public:
   ListNode* middleNode(ListNode* head) {
-    if (head == nullptr) return head;
-
     ListNode* hare = head;
     ListNode* tortoise = head;
 
-    while (hare->next != nullptr and hare->next->next != nullptr) {
+    while (hare != nullptr and hare->next != nullptr) {
       hare = hare->next->next;
       tortoise = tortoise->next;
     }
-    return hare->next != nullptr ? tortoise->next : tortoise;
+    return tortoise;
   }
 };
 // @leet end

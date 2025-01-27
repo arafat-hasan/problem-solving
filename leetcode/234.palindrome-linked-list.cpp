@@ -89,11 +89,15 @@ class Solution {
   bool isPalindrome(ListNode *head) {
     ListNode *mid = middleNode(head);
     ListNode *rev = reverse(mid);
+    ListNode *lastNode = rev;
+    ListNode *tmp = head;
     while (rev) {
       if (rev->val != head->val) return false;
       rev = rev->next;
       head = head->next;
     }
+
+    rev = reverse(lastNode);  // restore, joins the split, optional
     return true;
   }
 };

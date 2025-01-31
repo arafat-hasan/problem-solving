@@ -28,9 +28,9 @@ class Solution {
 
     ListNode* second;
     second = head->next;
-    second->next = head;
 
     head->next = swapPairs(head->next->next);
+    second->next = head;
     return second;
   }
 };
